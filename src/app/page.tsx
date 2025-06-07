@@ -1,7 +1,8 @@
-
-
 export default function Home() {
   return (
-    <div>Hello World</div>
+    <div>
+      <h1>Hello World!</h1>
+      <p>My name is Patrick Chen. This is my playground!</p>
+    </div>
   );
 }

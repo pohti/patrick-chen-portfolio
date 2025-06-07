@@ -1,13 +1,13 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
-import { ReactNode } from 'react'
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { ReactNode } from 'react';
 
-import './globals.css'
+import './globals.css';
 
 export const metadata: Metadata = {
   title: 'UI Showcase',
   description: 'Showcasing common UI components with React and Next.js',
-}
+};
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -16,23 +16,20 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {/* Top Navbar */}
         <header>
           <nav>
-            <h1>{"Welcome to Patrick's UI Playground"}</h1>
             <div className="nav-link-container">
+              {/* TODO: highlight the link that's currently active */}
               <Link href="/">Home</Link>
               <Link href="/trading">Trading</Link>
-              <Link href="/ecommerce">E-commerce</Link>
             </div>
           </nav>
         </header>
 
-        <main>
-          {children}
-        </main>
+        <main>{children}</main>
 
         <footer>
           © {new Date().getFullYear()} UI Showcase — Built with Next.js
         </footer>
       </body>
     </html>
-  )
+  );
 }

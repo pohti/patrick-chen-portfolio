@@ -1,28 +1,32 @@
-'use client'
+'use client';
 
-import React from 'react'
-import GridLayout from "react-grid-layout";
-import "./styles.css"
-import "react-grid-layout/css/styles.css"
-import "react-resizable/css/styles.css"
+import React from 'react';
+import { Responsive, WidthProvider } from 'react-grid-layout';
+import './styles.css';
+import 'react-grid-layout/css/styles.css';
+import 'react-resizable/css/styles.css';
 
+const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const Trading = () => {
-      const layout = [
-      { i: "a", x: 0, y: 0, w: 1, h: 2, static: true },
-      { i: "b", x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4 },
-      { i: "c", x: 4, y: 0, w: 1, h: 2 }
-    ];
+  const defaultLayouts = {
+    lg: [
+      { i: 'chart', x: 0, y: 0, w: 6, h: 10, minW: 6, maxW: 12 },
+      { i: 'news', x: 7, y: 0, w: 6, h: 10, minW: 6, maxW: 12 },
+      { i: 'watch-list', x: 4, y: 2, w: 12, h: 10 },
+    ],
+  };
   return (
-    <GridLayout
-      layout={layout}
-      cols={12}
-      rowHeight={30}
-      width={1200}
-    >
-      <div key="a">a</div>
-      <div key="b">b</div>
-      <div key="c">c</div>
+    <ResponsiveGridLayout layouts={defaultLayouts} rowHeight={30}>
+      <div className="grid-item" key="chart">
+        chart
+      </div>
+      <div className="grid-item" key="news">
+        news
+      </div>
+      <div className="grid-item" key="watch-list">
+        watch-list
+      </div>
       {/* <div className="top-section">
         <div className="chart-container">
           chart
@@ -39,8 +43,8 @@ const Trading = () => {
           trade tool
         </div>
       </div> */}
-    </GridLayout>
-  )
-}
+    </ResponsiveGridLayout>
+  );
+};
 
-export default Trading
+export default Trading;
