@@ -1,0 +1,23 @@
+
+.top-section, .bottom-section {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.chart-container {
+  border: 1px solid grey;
+  width: 70%;
+}
+.news-container {
+  border: 1px solid grey;
+  width: 30%;
+}
+.chart-container {
+  border: 1px solid grey;
+  width: 70%;
+}
+.news-container {
+  border: 1px solid grey;
+  width: 30%;
+}

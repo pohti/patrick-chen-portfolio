@@ -8,6 +8,11 @@
 
 html, body {
   font-family: var(--font-sans);
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  height: 100%;
 }
 
 /* Optional: border styling for top nav and footer */
@@ -20,7 +25,7 @@ header, footer {
 header {
   border-bottom-width: 1px;
   /* position: fixed; */
-  padding-bottom: 1rem;
+  padding: 1rem;
   width: 100%;
 }
 
@@ -29,6 +34,13 @@ header {
   gap: 1rem;
 }
 
+main {
+  flex: 1;
+  /* background-color: grey; */
+  padding: 1rem;
+}
+
 footer {
   border-top-width: 1px;
+  padding: 1rem;
 }

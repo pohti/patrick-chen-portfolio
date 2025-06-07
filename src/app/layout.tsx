@@ -19,18 +19,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <h1>{"Welcome to Patrick's UI Playground"}</h1>
             <div className="nav-link-container">
               <Link href="/">Home</Link>
-              <Link href="/fintech">Fintech</Link>
+              <Link href="/trading">Trading</Link>
               <Link href="/ecommerce">E-commerce</Link>
             </div>
           </nav>
         </header>
 
-        {/* Main Content */}
         <main>
           {children}
         </main>
 
-        {/* Footer */}
         <footer>
           © {new Date().getFullYear()} UI Showcase — Built with Next.js
         </footer>
