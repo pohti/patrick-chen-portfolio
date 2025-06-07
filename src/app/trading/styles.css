@@ -1,11 +1,11 @@
 
-.top-section, .bottom-section {
+/* .top-section, .bottom-section {
   display: flex;
   flex-direction: row;
   gap: 1rem;
-}
+} */
 
-.chart-container {
+/* .chart-container {
   border: 1px solid grey;
   width: 70%;
 }
@@ -20,4 +20,4 @@
 .news-container {
   border: 1px solid grey;
   width: 30%;
-}
+} */
