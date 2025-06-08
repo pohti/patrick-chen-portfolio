@@ -24,8 +24,8 @@ const columns: ColumnDef<Equity>[] = [
 ];
 
 const WatchList = ({ currentEquity, setCurrentEquity }: Props) => {
-  const table = useReactTable({
-    equities,
+  const table = useReactTable<Equity>({
+    data: mockedEquities,
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
