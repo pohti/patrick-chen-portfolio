@@ -1,12 +1,15 @@
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --font-sans: 'Inter', system-ui, sans-serif;
   --background: #f9fafb; /* light gray background */
-  --border: #e5e7eb;     /* light border color (Tailwind's gray-200) */
+  --border: #e5e7eb; /* light border color (Tailwind's gray-200) */
 }
 
-html, body {
+html,
+body {
   font-family: var(--font-sans);
   /* background-color: red; */
   display: flex;
@@ -16,7 +19,8 @@ html, body {
 }
 
 /* Optional: border styling for top nav and footer */
-header, footer {
+header,
+footer {
   border-color: var(--border);
   border-style: solid;
   border-width: 0;

@@ -13,7 +13,14 @@ interface Props {
 }
 
 const columns: ColumnDef<Equity>[] = [
-  { accessorKey: 'symbol', header: 'Symbol' },
+  {
+    accessorKey: 'symbol',
+    header: 'Symbol',
+    size: 400,
+    minSize: 100,
+    maxSize: 500,
+    enableResizing: true,
+  },
   { accessorKey: 'name', header: 'Name' },
   { accessorKey: 'type', header: 'Type' },
   { accessorKey: 'market', header: 'Market' },
@@ -28,17 +35,19 @@ const WatchList = ({ currentEquity, setCurrentEquity }: Props) => {
     data: mockedEquities,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    columnResizeMode: 'onChange', // or 'onEnd' for snap resize
+    enableColumnResizing: true,
   });
 
   return (
     <div>
       <span>Watchlist</span>
-      <table className="min-w-full border text-sm">
+      <table className="min-w-full border text-sm text-left">
         <thead className="bg-gray-100">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id} className="p-2 border">
+                <th key={header.id} className=" text-left px-6 py-4">
                   {flexRender(
                     header.column.columnDef.header,
                     header.getContext()
@@ -52,7 +61,7 @@ const WatchList = ({ currentEquity, setCurrentEquity }: Props) => {
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="p-2 border">
+                <td key={cell.id} className="p-2 ">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
