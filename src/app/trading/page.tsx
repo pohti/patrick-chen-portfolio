@@ -1,14 +1,17 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import './styles.css';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
+import { equities } from './data';
+import WatchList from './WatchList';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const Trading = () => {
+  const [currentEquity, setCurrentEquity] = useState(equities[0].symbol);
   const defaultLayouts = {
     lg: [
       { i: 'chart', x: 0, y: 0, w: 6, h: 10, minW: 6, maxW: 12 },
@@ -25,24 +28,11 @@ const Trading = () => {
         news
       </div>
       <div className="grid-item" key="watch-list">
-        watch-list
+        <WatchList
+          currentEquity={currentEquity}
+          setCurrentEquity={setCurrentEquity}
+        />
       </div>
-      {/* <div className="top-section">
-        <div className="chart-container">
-          chart
-        </div>
-        <div className="news-container">
-          news
-        </div>
-      </div>
-      <div className="bottom-section">
-        <div className="watch-list-container">
-          watch list
-        </div>
-        <div className="trade-tool-container">
-          trade tool
-        </div>
-      </div> */}
     </ResponsiveGridLayout>
   );
 };
