@@ -22,7 +22,7 @@ export interface Equity {
   lastUpdated: string; // ISO date string
 }
 
-export const equities: Equity[] = [
+export const mockedEquities: Equity[] = [
   {
     symbol: 'AAPL',
     name: 'Apple Inc.',

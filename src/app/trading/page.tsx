@@ -5,13 +5,13 @@ import { Responsive, WidthProvider } from 'react-grid-layout';
 import './styles.css';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
-import { equities } from './data';
+import { mockedEquities } from './data';
 import WatchList from './WatchList';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const Trading = () => {
-  const [currentEquity, setCurrentEquity] = useState(equities[0].symbol);
+  const [currentEquity, setCurrentEquity] = useState(mockedEquities[0].symbol);
   const defaultLayouts = {
     lg: [
       { i: 'chart', x: 0, y: 0, w: 6, h: 10, minW: 6, maxW: 12 },
