@@ -40,14 +40,14 @@ const WatchList = ({ currentEquity, setCurrentEquity }: Props) => {
   });
 
   return (
-    <div>
+    <div className="watch-list">
       <span>Watchlist</span>
-      <table className="min-w-full border text-sm text-left">
-        <thead className="bg-gray-100">
+      <table className="min-w-full text-sm text-left">
+        <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id} className=" text-left px-6 py-4">
+                <th key={header.id} className=" text-left px-6 py-4 ">
                   {flexRender(
                     header.column.columnDef.header,
                     header.getContext()
@@ -61,7 +61,7 @@ const WatchList = ({ currentEquity, setCurrentEquity }: Props) => {
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="p-2 ">
+                <td key={cell.id} className="px-6 py-4">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}

@@ -1,3 +1,16 @@
 .grid-item {
   border: 1px solid grey;
+  /* padding: 0.5rem; */
+}
+
+table > thead {
+  font-weight: bold;
+  /* TODO: use theme color */
+  background-color: gold;
+}
+
+.chart,
+.info,
+.watch-list {
+  padding: 0.5rem;
 }
