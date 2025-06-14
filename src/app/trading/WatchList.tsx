@@ -40,11 +40,13 @@ const WatchList = () => {
     enableColumnResizing: true,
   });
 
+  const handleRowClick = (equity: Equity) => setCurrentEquity(equity);
+
   return (
     <div className="watch-list">
       <DragHandle text="Watchlist" />
       {/* TODO: make the columns resizable */}
-
+      {/* TODO: make the table scrollable */}
       <div>
         <table className="min-w-full text-sm text-left">
           <thead>
@@ -63,7 +65,7 @@ const WatchList = () => {
           </thead>
           <tbody>
             {table.getRowModel().rows.map((row) => (
-              <tr key={row.id}>
+              <tr key={row.id} onClick={() => handleRowClick(row.original)}>
                 {row.getVisibleCells().map((cell) => (
                   <td key={cell.id} className="px-6 py-4">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}

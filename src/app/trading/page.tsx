@@ -32,7 +32,7 @@ const Trading = () => {
       <div className="grid-item" key="info">
         <Info />
       </div>
-      <div className="grid-item" key="watch-list">
+      <div className="grid-item" key="watch-list" style={{ overflow: 'auto' }}>
         <WatchList />
       </div>
     </ResponsiveGridLayout>

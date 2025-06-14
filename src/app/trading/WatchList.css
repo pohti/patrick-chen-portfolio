@@ -3,3 +3,7 @@ table > thead {
   /* TODO: use theme color */
   background-color: var(--bg-secondary);
 }
+
+tr {
+  height: 1.8rem;
+}

@@ -4,7 +4,7 @@ import type { TabsProps } from 'antd';
 import DragHandle from '@/components/DragHandle';
 
 import './Info.css'; // Assuming you have a CSS file for styling
-import News from '@/components/News';
+import News from '@/components/News/News';
 
 const Info = () => {
   const [activeTab, setActiveTab] = useState<string>('1');
@@ -22,7 +22,7 @@ const Info = () => {
     {
       key: '2',
       label: 'Analysis',
-      children: 'Content of Tab Pane 2',
+      children: 'Content of Analysis',
     },
     // {
     //   key: '3',

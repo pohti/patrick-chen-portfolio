@@ -28,9 +28,8 @@ export interface Equity {
 
 type EquityStore = {
   equityList: Equity[];
-  currentEquity: string;
-  setCurrentEquity: (equity: string) => void;
-  getCurrentEquity: () => Equity | null;
+  currentEquity?: Equity;
+  setCurrentEquity: (equity: Equity) => void;
 };
 
 export const mockedEquities: Equity[] = [
@@ -176,10 +175,8 @@ export const mockedEquities: Equity[] = [
   },
 ];
 
-export const useEquityStore = create<EquityStore>((set, get) => ({
+export const useEquityStore = create<EquityStore>((set) => ({
   equityList: mockedEquities,
-  currentEquity: mockedEquities.length > 0 ? mockedEquities[0].symbol : '',
+  currentEquity: mockedEquities.length > 0 ? mockedEquities[0] : undefined,
   setCurrentEquity: (equity) => set({ currentEquity: equity }),
-  getCurrentEquity: () =>
-    mockedEquities.find((e) => e.symbol === get().currentEquity) || null,
 }));

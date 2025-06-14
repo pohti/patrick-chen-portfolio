@@ -51,3 +51,7 @@ footer {
   border-top-width: 1px;
   padding: 1rem;
 }
+
+.grid-item {
+  overflow: auto;
+}
