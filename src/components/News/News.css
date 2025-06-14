@@ -3,7 +3,7 @@
 } */
 
 .news-card {
-  padding: 0.5rem;
+  padding: 1rem;
   border: 1px solid grey;
   border-radius: 0.5rem;
   margin-bottom: 0.5rem;
@@ -18,13 +18,4 @@
 .news-card-header-row > span {
   font-weight: bold;
   font-size: 1.2rem;
-}
-span.sentiment-positive {
-  color: green;
-}
-span.sentiment-negative {
-  color: red;
-}
-span.sentiment-neutral {
-  color: grey;
 }

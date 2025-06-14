@@ -2,6 +2,7 @@
 import { useEquityStore } from '@/store/equity';
 import React from 'react';
 import { mockedNews, type NewsData } from './data';
+import { Tag } from 'antd';
 
 import './News.css';
 
@@ -19,7 +20,17 @@ const NewsCard = ({
         {sentiment && (
           <p>
             Sentiment:{' '}
-            <span className={`sentiment-${sentiment}`}>{sentiment}</span>
+            <Tag
+              color={
+                sentiment === 'positive'
+                  ? 'green'
+                  : sentiment === 'negative'
+                    ? 'red'
+                    : 'blue'
+              }
+            >
+              {sentiment.charAt(0).toUpperCase() + sentiment.slice(1)}
+            </Tag>
           </p>
         )}
       </div>

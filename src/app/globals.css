@@ -31,7 +31,6 @@ footer {
 
 header {
   border-bottom-width: 1px;
-  /* position: fixed; */
   padding: 1rem;
   width: 100%;
 }
@@ -43,7 +42,6 @@ header {
 
 main {
   flex: 1;
-  /* background-color: grey; */
   padding: 1rem;
 }
 
