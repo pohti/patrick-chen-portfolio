@@ -6,7 +6,7 @@ import {
   getCoreRowModel,
   flexRender,
 } from '@tanstack/react-table';
-import { type Equity, mockedEquities } from './data';
+import { type Equity, useEquityStore } from '@/store/equity';
 import DragHandle from '@/components/DragHandle';
 
 import './WatchList.css';
@@ -30,8 +30,10 @@ const columns: ColumnDef<Equity>[] = [
 ];
 
 const WatchList = () => {
+  const { equityList, setCurrentEquity } = useEquityStore();
+
   const table = useReactTable<Equity>({
-    data: mockedEquities,
+    data: equityList,
     columns,
     getCoreRowModel: getCoreRowModel(),
     columnResizeMode: 'onChange', // or 'onEnd' for snap resize
