@@ -22,6 +22,16 @@ export interface Equity {
   lastUpdated: string; // ISO date string
 }
 
+export interface News {
+  symbol: string;
+  title: string;
+  details: string;
+  source: string; // e.g., "Reuters", "Bloomberg"
+  url: string; // Link to the full article
+  publishedAt: string; // ISO date string
+  sentiment?: 'positive' | 'neutral' | 'negative'; // Optional sentiment analysis
+}
+
 export const mockedEquities: Equity[] = [
   {
     symbol: 'AAPL',

@@ -42,6 +42,7 @@ const WatchList = ({ currentEquity, setCurrentEquity }: Props) => {
   return (
     <div className="watch-list">
       <span>Watchlist</span>
+      {/* TODO: make the columns resizable */}
       <table className="min-w-full text-sm text-left">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
