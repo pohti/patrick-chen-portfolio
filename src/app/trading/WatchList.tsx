@@ -8,6 +8,8 @@ import {
 import { type Equity, mockedEquities } from './data';
 import DragHandle from '@/components/DragHandle';
 
+import './WatchList.css';
+
 interface Props {
   currentEquity: string;
   setCurrentEquity: (equity: string) => void;

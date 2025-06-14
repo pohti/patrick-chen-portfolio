@@ -3,6 +3,9 @@ import { Tabs } from 'antd';
 import type { TabsProps } from 'antd';
 import DragHandle from '@/components/DragHandle';
 
+import './Info.css'; // Assuming you have a CSS file for styling
+import News from '@/components/News';
+
 const Info = () => {
   const [activeTab, setActiveTab] = useState<string>('1');
   const onChange = (key: string) => {
@@ -12,25 +15,25 @@ const Info = () => {
 
   const items: TabsProps['items'] = [
     {
-      key: '1',
-      label: 'Tab 1',
-      children: 'Content of Tab Pane 1',
+      key: 'news',
+      label: 'News',
+      children: <News />,
     },
     {
       key: '2',
-      label: 'Tab 2',
+      label: 'Analysis',
       children: 'Content of Tab Pane 2',
     },
-    {
-      key: '3',
-      label: 'Tab 3',
-      children: 'Content of Tab Pane 3',
-    },
+    // {
+    //   key: '3',
+    //   label: 'Tab 3',
+    //   children: 'Content of Tab Pane 3',
+    // },
   ];
   return (
     <div>
       <DragHandle text="Info" />
-      <div>
+      <div className="info-content">
         <Tabs
           defaultActiveKey={activeTab}
           activeKey={activeTab}

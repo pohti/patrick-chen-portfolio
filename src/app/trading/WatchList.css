@@ -1,0 +1,5 @@
+table > thead {
+  font-weight: bold;
+  /* TODO: use theme color */
+  background-color: var(--bg-secondary);
+}
