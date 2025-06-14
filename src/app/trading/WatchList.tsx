@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import {
   ColumnDef,
@@ -9,11 +10,6 @@ import { type Equity, mockedEquities } from './data';
 import DragHandle from '@/components/DragHandle';
 
 import './WatchList.css';
-
-interface Props {
-  currentEquity: string;
-  setCurrentEquity: (equity: string) => void;
-}
 
 const columns: ColumnDef<Equity>[] = [
   {
@@ -33,7 +29,7 @@ const columns: ColumnDef<Equity>[] = [
   { accessorKey: 'marketCap', header: 'Market Cap' },
 ];
 
-const WatchList = ({ currentEquity, setCurrentEquity }: Props) => {
+const WatchList = () => {
   const table = useReactTable<Equity>({
     data: mockedEquities,
     columns,
