@@ -22,7 +22,12 @@ const Trading = () => {
     ],
   };
   return (
-    <ResponsiveGridLayout layouts={defaultLayouts} rowHeight={30}>
+    // TODO: change the color of the grid while being dragged
+    <ResponsiveGridLayout
+      layouts={defaultLayouts}
+      rowHeight={30}
+      draggableHandle=".drag-handle"
+    >
       <div className="grid-item" key="chart">
         <Chart />
       </div>

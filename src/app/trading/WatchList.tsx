@@ -6,6 +6,7 @@ import {
   flexRender,
 } from '@tanstack/react-table';
 import { type Equity, mockedEquities } from './data';
+import DragHandle from '@/components/DragHandle';
 
 interface Props {
   currentEquity: string;
@@ -41,35 +42,38 @@ const WatchList = ({ currentEquity, setCurrentEquity }: Props) => {
 
   return (
     <div className="watch-list">
-      <span>Watchlist</span>
+      <DragHandle text="Watchlist" />
       {/* TODO: make the columns resizable */}
-      <table className="min-w-full text-sm text-left">
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th key={header.id} className=" text-left px-6 py-4 ">
-                  {flexRender(
-                    header.column.columnDef.header,
-                    header.getContext()
-                  )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="px-6 py-4">
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+
+      <div>
+        <table className="min-w-full text-sm text-left">
+          <thead>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <th key={header.id} className=" text-left px-6 py-4 ">
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map((row) => (
+              <tr key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <td key={cell.id} className="px-6 py-4">
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

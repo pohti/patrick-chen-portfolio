@@ -8,9 +8,3 @@ table > thead {
   /* TODO: use theme color */
   background-color: gold;
 }
-
-.chart,
-.info,
-.watch-list {
-  padding: 0.5rem;
-}

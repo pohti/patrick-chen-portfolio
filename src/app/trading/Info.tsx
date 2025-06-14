@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Tabs } from 'antd';
 import type { TabsProps } from 'antd';
+import DragHandle from '@/components/DragHandle';
 
 const Info = () => {
   const [activeTab, setActiveTab] = useState<string>('1');
@@ -28,9 +29,7 @@ const Info = () => {
   ];
   return (
     <div>
-      <div>
-        <span>Info</span>
-      </div>
+      <DragHandle text="Info" />
       <div>
         <Tabs
           defaultActiveKey={activeTab}
