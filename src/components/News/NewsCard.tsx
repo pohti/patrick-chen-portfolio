@@ -15,8 +15,8 @@ const NewsCard = ({
       <div className="news-card-header-row">
         <span>{title}</span>
         {sentiment && (
-          <p>
-            Sentiment:{' '}
+          <div className="d-flex justify-end align-center">
+            <span>Sentiment: </span>
             <Tag
               color={
                 sentiment === 'positive'
@@ -28,7 +28,7 @@ const NewsCard = ({
             >
               {sentiment.charAt(0).toUpperCase() + sentiment.slice(1)}
             </Tag>
-          </p>
+          </div>
         )}
       </div>
       <p>{details}</p>
