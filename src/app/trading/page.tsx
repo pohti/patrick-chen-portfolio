@@ -1,5 +1,4 @@
 'use client';
-
 import React from 'react';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import './page.css';
@@ -8,7 +7,9 @@ import 'react-resizable/css/styles.css';
 import WatchList from './WatchList';
 import Chart from './Chart';
 import Info from './Info';
+import { Input } from 'antd';
 
+const { Search } = Input;
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const Trading = () => {
@@ -21,21 +22,27 @@ const Trading = () => {
   };
   return (
     // TODO: change the color of the grid while being dragged
-    <ResponsiveGridLayout
-      layouts={defaultLayouts}
-      rowHeight={30}
-      draggableHandle=".drag-handle"
-    >
-      <div className="grid-item" key="chart">
-        <Chart />
+    <div>
+      <div className="trading-header">
+        {/* // TODO: implement search logic */}
+        <Search placeholder="Search equities.." style={{ width: '20rem' }} />
       </div>
-      <div className="grid-item" key="info">
-        <Info />
-      </div>
-      <div className="grid-item" key="watch-list">
-        <WatchList />
-      </div>
-    </ResponsiveGridLayout>
+      <ResponsiveGridLayout
+        layouts={defaultLayouts}
+        rowHeight={30}
+        draggableHandle=".drag-handle"
+      >
+        <div className="grid-item" key="chart">
+          <Chart />
+        </div>
+        <div className="grid-item" key="info">
+          <Info />
+        </div>
+        <div className="grid-item" key="watch-list">
+          <WatchList />
+        </div>
+      </ResponsiveGridLayout>
+    </div>
   );
 };
 
