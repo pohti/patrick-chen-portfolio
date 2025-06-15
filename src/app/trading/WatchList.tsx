@@ -30,7 +30,7 @@ const columns: ColumnDef<Equity>[] = [
 ];
 
 const WatchList = () => {
-  const { equityList, setCurrentEquity } = useEquityStore();
+  const { equityList, currentEquity, setCurrentEquity } = useEquityStore();
 
   const table = useReactTable<Equity>({
     data: equityList,
@@ -66,7 +66,7 @@ const WatchList = () => {
           <tbody>
             {table.getRowModel().rows.map((row) => (
               <tr
-                className="equity-row"
+                className={`equity-row ${row.original.symbol === currentEquity?.symbol && 'active'}`}
                 key={row.id}
                 onClick={() => handleRowClick(row.original)}
               >
