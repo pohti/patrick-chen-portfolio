@@ -11,6 +11,14 @@ import DragHandle from '@/components/DragHandle';
 
 import './WatchList.css';
 
+function formatLargeNumber(value: number): string {
+  if (value >= 1_000_000_000_000)
+    return `${(value / 1_000_000_000_000).toFixed(1)}T`;
+  if (value >= 1_000_000_000) return `${(value / 1_000_000_000).toFixed(1)}B`;
+  if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(1)}M`;
+  return value.toLocaleString();
+}
+
 const columns: ColumnDef<Equity>[] = [
   {
     accessorKey: 'symbol',
@@ -25,8 +33,16 @@ const columns: ColumnDef<Equity>[] = [
   { accessorKey: 'market', header: 'Market' },
   { accessorKey: 'price', header: 'Price ($)' },
   { accessorKey: 'changePercent', header: 'Change (%)' },
-  { accessorKey: 'volume', header: 'Volume' },
-  { accessorKey: 'marketCap', header: 'Market Cap' },
+  {
+    accessorKey: 'volume',
+    header: 'Volume',
+    cell: (info) => formatLargeNumber(info.getValue<number>()), // e.g. 28M
+  },
+  {
+    accessorKey: 'marketCap',
+    header: 'Market Cap',
+    cell: (info) => formatLargeNumber(info.getValue<number>()), // e.g. 1.8T
+  },
 ];
 
 const WatchList = () => {

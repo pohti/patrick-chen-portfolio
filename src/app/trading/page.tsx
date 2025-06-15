@@ -20,6 +20,7 @@ const Trading = () => {
       { i: 'watch-list', x: 4, y: 2, w: 12, h: 10, minW: 8 },
     ],
   };
+
   return (
     // TODO: change the color of the grid while being dragged
     <div>
