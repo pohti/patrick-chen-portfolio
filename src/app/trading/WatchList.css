@@ -1,9 +1,24 @@
+table.watch-list {
+  border-spacing: 0;
+}
+
 table > thead {
   font-weight: bold;
   /* TODO: use theme color */
-  background-color: var(--bg-secondary);
+  /* background-color: var(--bg-secondary); */
 }
 
 tr {
   height: 1.8rem;
+}
+tr.equity-row:hover {
+  background-color: var(--bg-secondary);
+}
+
+td {
+  margin: 0;
+  padding: 0;
+}
+td:hover {
+  cursor: pointer;
 }

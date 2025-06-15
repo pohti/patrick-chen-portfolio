@@ -43,12 +43,12 @@ const WatchList = () => {
   const handleRowClick = (equity: Equity) => setCurrentEquity(equity);
 
   return (
-    <div className="watch-list">
+    <div>
       <DragHandle text="Watchlist" />
       {/* TODO: make the columns resizable */}
       {/* TODO: make the table scrollable */}
-      <div>
-        <table className="min-w-full text-sm text-left">
+      <div style={{ padding: '0.5rem' }}>
+        <table className="min-w-full text-sm text-left watch-list">
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
@@ -65,7 +65,11 @@ const WatchList = () => {
           </thead>
           <tbody>
             {table.getRowModel().rows.map((row) => (
-              <tr key={row.id} onClick={() => handleRowClick(row.original)}>
+              <tr
+                className="equity-row"
+                key={row.id}
+                onClick={() => handleRowClick(row.original)}
+              >
                 {row.getVisibleCells().map((cell) => (
                   <td key={cell.id} className="px-6 py-4">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}

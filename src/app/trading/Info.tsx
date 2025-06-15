@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from 'react';
 import { Tabs } from 'antd';
 import type { TabsProps } from 'antd';
@@ -7,11 +8,7 @@ import './Info.css'; // Assuming you have a CSS file for styling
 import News from '@/components/News/News';
 
 const Info = () => {
-  const [activeTab, setActiveTab] = useState<string>('1');
-  const onChange = (key: string) => {
-    console.log(key);
-    setActiveTab(key);
-  };
+  const [activeTab, setActiveTab] = useState<string>('news');
 
   const items: TabsProps['items'] = [
     {
@@ -38,7 +35,7 @@ const Info = () => {
           defaultActiveKey={activeTab}
           activeKey={activeTab}
           items={items}
-          onChange={onChange}
+          onChange={setActiveTab}
         />
       </div>
     </div>
