@@ -5,7 +5,7 @@ import './page.css';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import WatchList from './WatchList';
-import Chart from './Chart';
+import DragHandle from '@/components/DragHandle';
 import Info from './Info';
 import { Input } from 'antd';
 
@@ -34,7 +34,9 @@ const Trading = () => {
         draggableHandle=".drag-handle"
       >
         <div className="grid-item" key="chart">
-          <Chart />
+          <div>
+            <DragHandle text="Chart" />
+          </div>
         </div>
         <div className="grid-item" key="info">
           <Info />

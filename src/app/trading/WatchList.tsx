@@ -32,7 +32,20 @@ const columns: ColumnDef<Equity>[] = [
   { accessorKey: 'type', header: 'Type' },
   { accessorKey: 'market', header: 'Market' },
   { accessorKey: 'price', header: 'Price ($)' },
-  { accessorKey: 'changePercent', header: 'Change (%)' },
+  {
+    accessorKey: 'changePercent',
+    header: 'Change (%)',
+    cell: (info) => {
+      const value = info.getValue<number>();
+      const color = value > 0 ? 'green' : value < 0 ? 'red' : 'inherit';
+      return (
+        <span style={{ color }}>
+          {value > 0 ? '+' : ''}
+          {value}%
+        </span>
+      );
+    },
+  },
   {
     accessorKey: 'volume',
     header: 'Volume',

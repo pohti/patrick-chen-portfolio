@@ -19,7 +19,7 @@ const Info = () => {
     {
       key: '2',
       label: 'Analysis',
-      children: 'Content of Analysis',
+      children: 'Work in progress...',
     },
   ];
   return (

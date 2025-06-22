@@ -9,7 +9,6 @@ import NewsCard from './NewsCard';
 
 const News = () => {
   const { currentEquity } = useEquityStore();
-  console.log('news: currentEquity', currentEquity);
 
   const currentNews = mockedNews.filter(
     (news) => news.symbol === currentEquity?.symbol
