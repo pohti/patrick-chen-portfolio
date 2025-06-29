@@ -6,8 +6,8 @@ export enum EquityType {
   Stock = 'stock',
   ETF = 'etf',
   IndexFund = 'index_fund',
-  REIT = 'reit', // Optional: Real Estate Investment Trust
-  MutualFund = 'mutual_fund', // Optional: Sometimes listed under equities
+  REIT = 'reit',
+  MutualFund = 'mutual_fund',
 }
 
 export interface Equity {

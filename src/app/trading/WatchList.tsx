@@ -65,7 +65,7 @@ const WatchList = () => {
     data: equityList,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    columnResizeMode: 'onChange', // or 'onEnd' for snap resize
+    columnResizeMode: 'onChange',
     enableColumnResizing: true,
   });
 

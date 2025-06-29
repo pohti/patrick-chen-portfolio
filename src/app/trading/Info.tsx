@@ -4,7 +4,7 @@ import { Tabs } from 'antd';
 import type { TabsProps } from 'antd';
 import DragHandle from '@/components/DragHandle';
 
-import './Info.css'; // Assuming you have a CSS file for styling
+import './Info.css';
 import News from '@/components/News/News';
 
 const Info = () => {
