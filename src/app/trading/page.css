@@ -1,9 +1,8 @@
-div.trading-header {
-  padding: 0.5rem;
-}
-
-.grid-item {
+.trading-grid-item {
   border: 1px solid grey;
   /* padding: 0.5rem; */
   border-radius: 0.5rem;
+  overflow: hidden;
+  height: 45vh;
+  overflow-y: auto;
 }

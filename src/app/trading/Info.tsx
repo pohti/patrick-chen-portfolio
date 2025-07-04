@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Tabs } from 'antd';
 import type { TabsProps } from 'antd';
-import DragHandle from '@/components/DragHandle';
+import TradingHeader from '@/components/TradingHeader';
 
 import './Info.css';
 import News from '@/components/News/News';
@@ -23,8 +23,8 @@ const Info = () => {
     },
   ];
   return (
-    <div>
-      <DragHandle text="Info" />
+    <div className="trading-grid-item">
+      <TradingHeader text="Info" />
       <div className="info-content">
         <Tabs
           defaultActiveKey={activeTab}

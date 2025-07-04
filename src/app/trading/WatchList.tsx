@@ -7,7 +7,7 @@ import {
   flexRender,
 } from '@tanstack/react-table';
 import { type Equity, useEquityStore } from '@/store/equity';
-import DragHandle from '@/components/DragHandle';
+import TradingHeader from '@/components/TradingHeader';
 
 import './WatchList.css';
 
@@ -72,10 +72,8 @@ const WatchList = () => {
   const handleRowClick = (equity: Equity) => setCurrentEquity(equity);
 
   return (
-    <div>
-      <DragHandle text="Watchlist" />
-      {/* TODO: make the columns resizable */}
-      {/* TODO: make the table scrollable */}
+    <div className="trading-grid-item">
+      <TradingHeader text="Watchlist" />
       <div style={{ padding: '0.5rem' }}>
         <table className="min-w-full text-sm text-left watch-list">
           <thead>

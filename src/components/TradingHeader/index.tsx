@@ -5,7 +5,7 @@ interface Props {
   text: string;
 }
 
-const DragHandle = ({ text }: Props) => {
+const TradingHeader = ({ text }: Props) => {
   return (
     <div
       className={`drag-handle d-flex align-items-center justify-content-start`}
@@ -15,4 +15,4 @@ const DragHandle = ({ text }: Props) => {
   );
 };
 
-export default DragHandle;
+export default TradingHeader;
