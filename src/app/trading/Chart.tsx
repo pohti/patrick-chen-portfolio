@@ -1,14 +1,19 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { createChart, ColorType, AreaSeries } from 'lightweight-charts';
-import { Radio } from 'antd';
+// import { Radio } from 'antd';
 import TradingHeader from '../../components/TradingHeader';
+import { chartData } from '@/store/chartData';
+import { useEquityStore } from '@/store/equity';
 
-const { Group: RadioGroup, Button: RadioButton } = Radio;
+// const { Group: RadioGroup, Button: RadioButton } = Radio;
 
 const MIN_CHART_HEIGHT = 300; // Minimum height for the chart
 const MIN_CHART_WIDTH = 600; // Minimum width for the chart
 
 const Chart = () => {
+  const { currentEquity } = useEquityStore();
+  const symbol = currentEquity?.symbol || 'AAPL';
+
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const parentContainerRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -65,13 +70,13 @@ const Chart = () => {
       topColor: 'rgba(0, 0, 255, 0.3)',
       bottomColor: 'rgba(0, 0, 255, 0.1)',
     });
-    newSeries.setData(initialData);
+    newSeries.setData(chartData[symbol] || []);
 
     // TODO: understand why this is needed
     return () => {
       chart.remove();
     };
-  }, [chartHeight, chartWidth]);
+  }, [chartHeight, chartWidth, symbol]);
 
   return (
     <div className="trading-grid-item" ref={parentContainerRef}>
@@ -80,31 +85,18 @@ const Chart = () => {
       </div>
 
       <div style={{ margin: '5px' }}>
-        <RadioGroup ref={controlsRef}>
+        {/* <RadioGroup ref={controlsRef}>
           <RadioButton value="1">1D</RadioButton>
           <RadioButton value="5">5D</RadioButton>
           <RadioButton value="1M">1M</RadioButton>
           <RadioButton value="3M">3M</RadioButton>
           <RadioButton value="6M">6M</RadioButton>
           <RadioButton value="1Y">1Y</RadioButton>
-        </RadioGroup>
+        </RadioGroup> */}
         <div ref={chartContainerRef} />
       </div>
     </div>
   );
 };
-
-const initialData = [
-  { time: '2018-12-22', value: 32.51 },
-  { time: '2018-12-23', value: 31.11 },
-  { time: '2018-12-24', value: 27.02 },
-  { time: '2018-12-25', value: 27.32 },
-  { time: '2018-12-26', value: 25.17 },
-  { time: '2018-12-27', value: 28.89 },
-  { time: '2018-12-28', value: 25.46 },
-  { time: '2018-12-29', value: 23.92 },
-  { time: '2018-12-30', value: 22.68 },
-  { time: '2018-12-31', value: 22.67 },
-];
 
 export default Chart;

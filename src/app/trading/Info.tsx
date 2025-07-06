@@ -5,7 +5,8 @@ import type { TabsProps } from 'antd';
 import TradingHeader from '@/components/TradingHeader';
 
 import './Info.css';
-import News from '@/components/News/News';
+import News from '@/app/trading/(components)/News/News';
+import Analysis from './(components)/Analysis/Analysis';
 
 const Info = () => {
   const [activeTab, setActiveTab] = useState<string>('news');
@@ -19,7 +20,7 @@ const Info = () => {
     {
       key: '2',
       label: 'Analysis',
-      children: 'Work in progress...',
+      children: <Analysis />,
     },
   ];
   return (
