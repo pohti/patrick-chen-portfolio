@@ -3,6 +3,12 @@
   /* padding: 0.5rem; */
   border-radius: 0.5rem;
   overflow: hidden;
-  height: 45vh;
+  height: 44vh;
   overflow-y: auto;
+}
+
+@media (max-height: 900px) {
+  .trading-grid-item {
+    height: 39vh;
+  }
 }
