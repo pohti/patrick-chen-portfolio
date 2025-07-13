@@ -4,7 +4,8 @@
   border-radius: 0.5rem;
   overflow: hidden;
   height: 44vh;
-  overflow-y: auto;
+  min-height: 350px;
+  /* overflow-y: auto; */
 }
 
 @media (max-height: 900px) {

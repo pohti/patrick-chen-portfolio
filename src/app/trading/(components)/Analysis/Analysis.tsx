@@ -25,21 +25,13 @@ const Analysis = () => {
   };
 
   return (
-    // <div style={{ width: '100%', height: '100%' }}>
-    //   <PieChart
-    //     chartType="PieChart"
-    //     data={[...headers, ...currentData]}
-    //     options={options}
-    //     width="100%"
-    //     height="100%"
-    //   />
-    // </div>
     <PieChart
       chartType="PieChart"
       data={[...headers, ...currentData]}
       options={options}
       width="100%"
       height="100%"
+      style={{ minHeight: '18rem' }}
     />
   );
 };

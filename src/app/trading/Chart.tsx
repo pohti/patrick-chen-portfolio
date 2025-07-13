@@ -60,18 +60,17 @@ const Chart = () => {
     const chart = createChart(chartContainerRef.current, {
       layout: {
         background: { type: ColorType.Solid, color: 'white' },
-        textColor: 'white',
+        textColor: 'black',
       },
       width: chartWidth,
       height: chartHeight,
     });
     const newSeries = chart.addSeries(AreaSeries, {
-      lineColor: 'blue',
-      topColor: 'rgba(0, 0, 255, 0.3)',
-      bottomColor: 'rgba(0, 0, 255, 0.1)',
+      lineColor: '#2962FF',
+      topColor: '#2962FF',
+      bottomColor: 'rgba(41, 98, 255, 0.28)',
     });
     newSeries.setData(chartData[symbol] || []);
-
     // TODO: understand why this is needed
     return () => {
       chart.remove();
