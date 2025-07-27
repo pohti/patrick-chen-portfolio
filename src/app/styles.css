@@ -1,0 +1,14 @@
+.download-resume-button {
+  color: var(--font-color-primary);
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  background-color: transparent;
+  border-radius: 5px;
+  border: 1px solid var(--font-color-primary);
+}
+
+.download-resume-button:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: var(--font-color-primary);
+}

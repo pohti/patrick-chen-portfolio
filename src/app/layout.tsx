@@ -3,9 +3,10 @@ import { ReactNode } from 'react';
 
 import './globals.css';
 import CustomNavLink from '@/components/CustomNavLink';
+import DownloadResumeButton from './DownloadResumeButton';
 
 export const metadata: Metadata = {
-  title: 'Patrick Chen | Software Engineer Portfolio',
+  title: 'Patrick Chen',
   description: 'Showcasing common UI components with React and Next.js', // TODO: clean up the description
 };
 
@@ -18,13 +19,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <CustomNavLink href="/">Home</CustomNavLink>
             <CustomNavLink href="/trading">Trading</CustomNavLink>
           </nav>
+          <DownloadResumeButton />
         </header>
 
         <main>{children}</main>
 
-        <footer>
+        {/* TODO: embed links to GitHub, LinkedIn and Email */}
+        {/* <footer>
           © {new Date().getFullYear()} UI Showcase — Built with Next.js
-        </footer>
+        </footer> */}
       </body>
     </html>
   );

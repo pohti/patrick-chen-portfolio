@@ -1,5 +1,5 @@
 .drag-handle {
   background-color: var(--bg-primary);
-  color: var(--text-primary);
+  color: var(--font-color-white);
   padding: 0.5rem;
 }
