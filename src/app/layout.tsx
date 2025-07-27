@@ -5,8 +5,8 @@ import './globals.css';
 import CustomNavLink from '@/components/CustomNavLink';
 
 export const metadata: Metadata = {
-  title: 'UI Showcase',
-  description: 'Showcasing common UI components with React and Next.js',
+  title: 'Patrick Chen | Software Engineer Portfolio',
+  description: 'Showcasing common UI components with React and Next.js', // TODO: clean up the description
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
