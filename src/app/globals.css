@@ -28,7 +28,6 @@ body {
 
 body {
   font-family: var(--font-sans);
-  /* background-color: red; */
   display: flex;
   flex-direction: column;
   margin: 0;
