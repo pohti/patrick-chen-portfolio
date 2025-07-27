@@ -1,8 +1,8 @@
 a.nav-link {
-  color: var(--font-color-primary);
+  color: var(--font-color-secondary);
   text-decoration: none;
 }
 
 a.active {
-  color: var(--font-color-secondary);
+  color: var(--font-color-primary);
 }
