@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { ReactNode } from 'react';
 
 import './globals.css';
+import CustomNavLink from '@/components/CustomNavLink';
 
 export const metadata: Metadata = {
   title: 'UI Showcase',
@@ -13,14 +13,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen font-sans bg-gray-50 text-gray-900">
-        {/* Top Navbar */}
         <header>
-          <nav>
-            <div className="nav-link-container">
-              {/* TODO: highlight the link that's currently active */}
-              <Link href="/">Home</Link>
-              <Link href="/trading">Trading</Link>
-            </div>
+          <nav className="nav-link-container">
+            <CustomNavLink href="/">Home</CustomNavLink>
+            <CustomNavLink href="/trading">Trading</CustomNavLink>
           </nav>
         </header>
 

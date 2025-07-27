@@ -4,6 +4,8 @@
 
 :root {
   --font-sans: 'Inter', system-ui, sans-serif;
+  --font-color-primary: #445358;
+  --font-color-secondary: #015d7e; /* dark blue for secondary text */
   --background: #f9fafb; /* light gray background */
   --border: #e5e7eb; /* light border color (Tailwind's gray-200) */
   --bg-primary: #00425a; /* dark background for primary elements */
@@ -35,7 +37,7 @@ header {
   width: 100%;
 }
 
-.nav-link-container {
+nav.nav-link-container {
   display: flex;
   gap: 1rem;
 }
