@@ -32,6 +32,10 @@ const Info = () => {
           activeKey={activeTab}
           items={items}
           onChange={setActiveTab}
+          tabBarStyle={{
+            color: 'var(--font-color-white)',
+            border: 'red',
+          }}
         />
       </div>
     </div>

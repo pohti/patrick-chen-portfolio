@@ -3,6 +3,7 @@
   border: 1px solid grey;
   border-radius: 0.5rem;
   margin-bottom: 0.5rem;
+  color: var(--font-color-white);
 }
 
 .news-card-header-row {

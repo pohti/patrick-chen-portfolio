@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import './styles.css';
+import { DownloadOutlined } from '@ant-design/icons';
 
 const GOOGLE_DRIVE_FILE_ID = '1sZ7xoBjGqVsgLHrSNAgg6Fi45D944smi';
 const DOWNLOAD_URL = `https://drive.google.com/uc?export=download&id=${GOOGLE_DRIVE_FILE_ID}`;
@@ -12,7 +13,7 @@ const DownloadResumeButton = () => {
 
   return (
     <button onClick={handleDownload} className="download-resume-button">
-      Download Resume
+      <DownloadOutlined /> Download Resume
     </button>
   );
 };

@@ -4,13 +4,13 @@
 
 :root {
   --font-sans: 'Inter', system-ui, sans-serif;
-  --font-color-primary: #076588;
-  --font-color-secondary: #445358;
-  --font-color-white: #fff;
-  --background: #f9fafb; /* light gray background */
-  --border: #e5e7eb; /* light border color (Tailwind's gray-200) */
-  --bg-primary: #00425a; /* dark background for primary elements */
-  --bg-secondary: #00a1dc3b; /* TODO: style the grids */
+  --font-color-primary: #2a86a7;
+  --font-color-secondary: #252c2f;
+  --font-color-white: #d4d4d4;
+  --background: #1e1e1e;
+  --border: #8d8d8d70;
+  --bg-primary: #00425a;
+  --bg-secondary: #00a1dc3b;
 }
 
 html,
@@ -19,6 +19,8 @@ body {
   width: 100vw;
   max-width: 100vw;
   overflow-x: hidden;
+  color: var(--font-color-white);
+  background-color: var(--background);
 }
 *,
 *::before,

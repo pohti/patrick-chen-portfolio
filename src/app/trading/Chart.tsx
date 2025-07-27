@@ -23,7 +23,6 @@ const Chart = () => {
 
   const handleResize = useCallback((entries: ResizeObserverEntry[]) => {
     const { height, width } = entries[0].contentRect;
-    console.log('resize event:', { height, width });
 
     // Calculate chart dimensions by subtracting space for header and controls
     const headerHeight = headerRef.current?.offsetHeight || 40; // Approximate height of TradingHeader
@@ -33,13 +32,6 @@ const Chart = () => {
     const newWidth = width - padding;
     const newHeight = height - headerHeight - controlsHeight - padding;
 
-    console.log('calculated chart dimensions:', {
-      height,
-      width,
-      newHeight,
-      newWidth,
-      controlsHeight,
-    });
     // Ensure minimum dimensions
     setChartWidth(Math.max(newWidth, MIN_CHART_WIDTH));
     setChartHeight(Math.max(newHeight, MIN_CHART_HEIGHT));
@@ -59,8 +51,8 @@ const Chart = () => {
 
     const chart = createChart(chartContainerRef.current, {
       layout: {
-        background: { type: ColorType.Solid, color: 'white' },
-        textColor: 'black',
+        background: { type: ColorType.Solid, color: 'var(--background)' },
+        textColor: 'white',
       },
       width: chartWidth,
       height: chartHeight,

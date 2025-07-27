@@ -1,9 +1,11 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import './styles.css';
+// import MyPic from '@/assets/images/me-pixar.png';
+import Image from 'next/image';
 
 // TODO: flash out the content
-const textLines = ["I'm Patrick and I'm a software engineer."];
+const textLines = ["I'm Patrick and I'm a Software Engineer."];
 
 export default function Home() {
   const [displayed, setDisplayed] = useState(['', '']);
@@ -42,17 +44,38 @@ export default function Home() {
           maxWidth: '800px',
         }}
       >
-        <span style={{ fontSize: '2rem', marginBottom: '1rem' }}>
-          Hello World!
-        </span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <span style={{ fontSize: '2rem' }}>Hello World!</span>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginBottom: '1rem',
+            }}
+          >
+            <Image
+              src={'/images/me.png'}
+              alt="Guy waving"
+              width={150}
+              height={150}
+              style={{
+                borderRadius: '50%',
+                objectFit: 'cover',
+                border: '2px solid #ccc',
+                objectPosition: 'center',
+              }}
+            />
+          </div>
+        </div>
         <br />
-        <span style={{ fontSize: '1.5rem' }}>
+        <span style={{ fontSize: '1.5rem', marginTop: '2rem' }}>
           <span>{displayed[0]}</span>
           <span className="blinking-cursor">|</span>
         </span>
 
         <br />
-        <p>
+        <p style={{ fontSize: '1.2rem', marginTop: '1rem' }}>
           I built this website to showcase my work and share my thoughts on
           software development. Feel free to explore the different sections to
           learn more about me and my projects.

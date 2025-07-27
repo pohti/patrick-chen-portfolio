@@ -1,8 +1,26 @@
 a.nav-link {
-  color: var(--font-color-secondary);
+  color: var(--font-color-primary);
   text-decoration: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
 }
 
-a.active {
-  color: var(--font-color-primary);
+a.nav-link.active {
+  color: var(--font-color-white);
+  border-color: var(--font-color-primary);
+  background-color: var(--font-color-primary);
+}
+
+a.nav-link:hover {
+  border-color: var(--font-color-primary);
+}
+
+a.nav-link.disabled {
+  color: var(--font-color-secondary);
+  background-color: var(--font-color-primary);
+  pointer-events: none;
+  cursor: not-allowed;
 }

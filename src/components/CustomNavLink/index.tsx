@@ -8,13 +8,17 @@ import './styles.css';
 interface Props {
   href: string;
   children?: React.ReactNode;
+  disabled?: boolean;
 }
 
-const CustomNavLink = ({ href, children }: Props) => {
+const CustomNavLink = ({ href, children, disabled }: Props) => {
   const pathname = usePathname();
-  const className = 'nav-link' + (pathname === href ? ' active' : '');
+  const className =
+    'nav-link' +
+    (pathname === href ? ' active' : '') +
+    (disabled ? ' disabled' : '');
   return (
-    <Link href={href} className={className}>
+    <Link href={disabled ? '#' : href} className={className}>
       {children}
     </Link>
   );
