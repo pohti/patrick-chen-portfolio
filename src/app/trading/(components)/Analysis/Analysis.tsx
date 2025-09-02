@@ -20,8 +20,12 @@ const Analysis = () => {
 
   const options = {
     title: `Based on ${totalAnalysts} analysts`,
-    // height: 300,
+    titleTextStyle: {
+      color: '#d4d4d4', // Title color
+      fontSize: 18, // Optional: adjust font size
+    },
     colors: ['#4CAF50', '#2196F3', '#FFC107', '#F44336'],
+    backgroundColor: '#1e1e1e',
   };
 
   return (
