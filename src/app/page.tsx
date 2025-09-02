@@ -55,7 +55,7 @@ export default function Home() {
             }}
           >
             <Image
-              src={'/images/me.png'}
+              src={'/images/me.jpg'}
               alt="Guy waving"
               width={150}
               height={150}

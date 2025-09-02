@@ -35,7 +35,7 @@ const Analysis = () => {
       options={options}
       width="100%"
       height="100%"
-      style={{ minHeight: '18rem' }}
+      style={{ minHeight: '300px' }}
     />
   );
 };
