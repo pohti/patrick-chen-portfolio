@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import './styles.css';
 // import MyPic from '@/assets/images/me-pixar.png';
 import Image from 'next/image';
+import Chat from '@/components/Chat/Chat';
 
 // TODO: flash out the content
 const textLines = ["I'm Patrick and I'm a Software Engineer."];
@@ -81,6 +82,8 @@ export default function Home() {
           learn more about me and my projects.
         </p>
       </div>
+
+      <Chat />
     </div>
   );
 }
