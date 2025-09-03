@@ -4,7 +4,11 @@ import { ReactNode } from 'react';
 import './globals.css';
 import CustomNavLink from '@/components/CustomNavLink';
 import DownloadResumeButton from './DownloadResumeButton';
-import { MessageOutlined } from '@ant-design/icons';
+import {
+  HomeOutlined,
+  StockOutlined,
+  MessageOutlined,
+} from '@ant-design/icons';
 
 export const metadata: Metadata = {
   title: 'Patrick Chen',
@@ -17,8 +21,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="flex flex-col min-h-screen font-sans bg-gray-50 text-gray-900">
         <header>
           <nav className="nav-link-container">
-            <CustomNavLink href="/">Home</CustomNavLink>
-            <CustomNavLink href="/trading">Trading</CustomNavLink>
+            <CustomNavLink href="/">
+              <HomeOutlined /> Home
+            </CustomNavLink>
+            <CustomNavLink href="/trading">
+              <StockOutlined /> Trading
+            </CustomNavLink>
           </nav>
 
           <div className="flex" style={{ gap: '1rem' }}>

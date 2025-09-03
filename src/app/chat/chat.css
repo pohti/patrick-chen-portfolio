@@ -2,7 +2,7 @@ textarea.ianepo {
   background-color: #282c2e;
   color: var(--font-color-white);
   border-color: #444;
-  min-height: 50px;
+  max-height: 55px;
   flex: 1;
   resize: none;
   font-size: 1.1rem;
