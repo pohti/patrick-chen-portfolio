@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import './globals.css';
 import CustomNavLink from '@/components/CustomNavLink';
 import DownloadResumeButton from './DownloadResumeButton';
+import { MessageOutlined } from '@ant-design/icons';
 
 export const metadata: Metadata = {
   title: 'Patrick Chen',
@@ -18,9 +19,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <nav className="nav-link-container">
             <CustomNavLink href="/">Home</CustomNavLink>
             <CustomNavLink href="/trading">Trading</CustomNavLink>
-            <CustomNavLink href="/chat">Chat with AI</CustomNavLink>
           </nav>
-          <DownloadResumeButton />
+
+          <div className="flex" style={{ gap: '1rem' }}>
+            <CustomNavLink href="/chat">
+              <MessageOutlined /> Chat
+            </CustomNavLink>
+            <DownloadResumeButton />
+          </div>
         </header>
 
         <main>{children}</main>
