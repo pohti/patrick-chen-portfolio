@@ -1,0 +1,40 @@
+textarea.ianepo {
+  background-color: #282c2e;
+  color: var(--font-color-white);
+  border-color: #444;
+  min-height: 50px;
+  flex: 1;
+  resize: none;
+  font-size: 1.1rem;
+  border-radius: 8px;
+}
+
+textarea.ianepo::placeholder {
+  color: var(--font-color-white);
+}
+
+textarea.ianepo:focus,
+textarea.ianepo:hover {
+  background-color: #282c2e;
+  color: var(--font-color-white);
+}
+textarea.ianepo:disabled {
+  background-color: #1e2123;
+  color: var(--border);
+  border-color: #333;
+}
+
+button.ianepo-submit-btn {
+  font-size: 1.1rem;
+  min-height: 50px;
+  min-width: 90px;
+  background-color: var(--font-color-primary);
+  border: 0;
+  border-radius: 8px;
+  color: var(--font-color-white);
+}
+
+button.ianepo-submit-btn:hover {
+  background-color: #006bb3;
+  cursor: pointer;
+}

@@ -18,6 +18,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <nav className="nav-link-container">
             <CustomNavLink href="/">Home</CustomNavLink>
             <CustomNavLink href="/trading">Trading</CustomNavLink>
+            <CustomNavLink href="/chat">AI Advice</CustomNavLink>
           </nav>
           <DownloadResumeButton />
         </header>
