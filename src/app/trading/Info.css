@@ -4,10 +4,31 @@
   overflow-y: auto;
 }
 
+.ant-tabs-nav-list {
+  border-bottom: 1px solid var(--font-color-white);
+}
+
 /* overriding antd tab styles */
 .ant-tabs-tab {
-  color: var(--font-color-white) !important; /* or any color you want */
+  background: var(--background) !important;
+  color: var(--font-color-primary) !important; /* or any color you want */
+  /* border-bottom: 1px solid #8d8d8d70; */
 }
+
+div.ant-tabs-tab-active .ant-tabs-tab {
+  color: var(--font-color-white) !important; /* active tab text color */
+  background: var(--background) !important;
+  font-weight: bold;
+  /* border: 1px solid red; */
+}
+
+.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: var(--font-color-white) !important; /* active tab text color */
+}
+
+/* .ant-tabs-nav {
+  background: #23272a !important;
+} */
 
 /* TODO: finish converting styling to dark mode */
 .ant-tabs-tab-active {
