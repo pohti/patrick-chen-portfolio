@@ -134,16 +134,6 @@ export default function Chat() {
           width: '100%',
         }}
       >
-        <h2
-          style={{
-            color: '#2a86a7',
-            fontWeight: 'bold',
-            fontSize: '2rem',
-            marginBottom: '1rem',
-          }}
-        >
-          Ia Nepo
-        </h2>
         {messages.map((msg, idx) => (
           <div
             key={idx}
