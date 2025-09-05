@@ -18,7 +18,7 @@ export default function Chat() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const textAreaRef = useRef<HTMLTextAreaElement>(null); // Add this ref
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   async function sendMessage() {
     if (!input.trim()) return;
@@ -28,32 +28,56 @@ export default function Chat() {
     // Add user message
     setMessages((prev) => [...prev, { role: 'user', content: input }]);
 
-    const res = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: input }),
-    });
+    // Prepare for streaming AI response
+    setMessages((prev) => [...prev, { role: 'ai', content: '' }]);
 
-    const data = await res.json();
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: input }),
+      });
 
-    if (res.status === 429) {
-      setError(
-        data.error || 'Daily request limit reached. Try again tomorrow.'
-      );
+      if (res.status === 429) {
+        const data = await res.json();
+        setError(
+          data.error || 'Daily request limit reached. Try again tomorrow.'
+        );
+        setLoading(false);
+        return;
+      }
+
+      if (!res.body) throw new Error('No response body');
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let done = false;
+      let aiContent = '';
+
+      while (!done) {
+        const { value, done: doneReading } = await reader.read();
+        done = doneReading;
+        if (value) {
+          const chunk = decoder.decode(value);
+          aiContent += chunk;
+          setMessages((prev) => {
+            // Update last AI message in array
+            const updated = [...prev];
+            updated[updated.length - 1] = { role: 'ai', content: aiContent };
+            return updated;
+          });
+        }
+      }
+
+      setInput('');
       setLoading(false);
-      return;
+      textAreaRef.current?.focus();
+    } catch (err: any) {
+      setError(err.message || 'Something went wrong.');
+      setLoading(false);
     }
-
-    // Add AI response
-    setMessages((prev) => [...prev, { role: 'ai', content: data.reply }]);
-    setInput('');
-    setLoading(false);
-
-    // Focus back to textarea after response
-    textAreaRef.current?.focus();
   }
 
-  // Scroll to bottom when messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
@@ -105,7 +129,6 @@ export default function Chat() {
           <TextArea
             className="ianepo"
             ref={(el) => {
-              // AntD's TextArea wraps the native textarea in el?.resizableTextArea?.textArea
               if (
                 el &&
                 'resizableTextArea' in el &&
@@ -240,7 +263,6 @@ export default function Chat() {
           <TextArea
             className="ianepo"
             ref={(el) => {
-              // AntD's TextArea wraps the native textarea in el?.resizableTextArea?.textArea
               if (
                 el &&
                 'resizableTextArea' in el &&

@@ -1,7 +1,5 @@
 import OpenAI from 'openai';
-import { NextResponse } from 'next/server';
 
-// This resets on server restart!
 const DAILY_LIMIT = 1000;
 let dailyCount = 0;
 let lastReset = Date.now();
@@ -17,11 +15,10 @@ If a question is unrelated to investments, politely say: "I'm sorry, I only answ
 Always stay on topic and provide accurate, useful information within the investment domain.
 `;
 
-export async function POST(req: Request): Promise<NextResponse> {
+export async function POST(req: Request): Promise<Response> {
   const now = new Date();
   const lastResetDate = new Date(lastReset);
 
-  // If lastReset is not today (UTC), reset the count
   if (
     now.getUTCFullYear() !== lastResetDate.getUTCFullYear() ||
     now.getUTCMonth() !== lastResetDate.getUTCMonth() ||
@@ -32,9 +29,11 @@ export async function POST(req: Request): Promise<NextResponse> {
   }
 
   if (dailyCount >= DAILY_LIMIT) {
-    return NextResponse.json(
-      { error: 'Daily request limit reached. Try again tomorrow.' },
-      { status: 429 }
+    return new Response(
+      JSON.stringify({
+        error: 'Daily request limit reached. Try again tomorrow.',
+      }),
+      { status: 429, headers: { 'Content-Type': 'application/json' } }
     );
   }
 
@@ -42,17 +41,37 @@ export async function POST(req: Request): Promise<NextResponse> {
 
   try {
     const { message } = (await req.json()) as { message: string };
-    const response = await client.chat.completions.create({
+
+    const stream = await client.chat.completions.create({
       model: 'gpt-4o-mini',
+      stream: true,
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
         { role: 'user', content: message },
       ],
     });
 
-    return NextResponse.json({ reply: response.choices[0].message.content });
+    const encoder = new TextEncoder();
+    const readable = new ReadableStream({
+      async start(controller) {
+        for await (const chunk of stream) {
+          const content = chunk.choices[0]?.delta?.content;
+          if (content) {
+            controller.enqueue(encoder.encode(content));
+          }
+        }
+        controller.close();
+      },
+    });
+
+    return new Response(readable, {
+      headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+    });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return new Response(JSON.stringify({ error: error.message }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 }
