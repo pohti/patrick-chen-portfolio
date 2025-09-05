@@ -18,6 +18,7 @@ export default function Chat() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null); // Add this ref
 
   async function sendMessage() {
     if (!input.trim()) return;
@@ -47,12 +48,21 @@ export default function Chat() {
     setMessages((prev) => [...prev, { role: 'ai', content: data.reply }]);
     setInput('');
     setLoading(false);
+
+    // Focus back to textarea after response
+    textAreaRef.current?.focus();
   }
 
   // Scroll to bottom when messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  useEffect(() => {
+    if (!loading) {
+      textAreaRef.current?.focus();
+    }
+  }, [messages, loading]);
 
   // Initial layout: center textarea if no messages
   if (messages.length === 0) {
@@ -94,6 +104,16 @@ export default function Chat() {
           </h2>
           <TextArea
             className="ianepo"
+            ref={(el) => {
+              // AntD's TextArea wraps the native textarea in el?.resizableTextArea?.textArea
+              if (
+                el &&
+                'resizableTextArea' in el &&
+                el.resizableTextArea?.textArea
+              ) {
+                textAreaRef.current = el.resizableTextArea.textArea;
+              }
+            }}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your investment question..."
@@ -219,6 +239,16 @@ export default function Chat() {
         >
           <TextArea
             className="ianepo"
+            ref={(el) => {
+              // AntD's TextArea wraps the native textarea in el?.resizableTextArea?.textArea
+              if (
+                el &&
+                'resizableTextArea' in el &&
+                el.resizableTextArea?.textArea
+              ) {
+                textAreaRef.current = el.resizableTextArea.textArea;
+              }
+            }}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your investment question..."
