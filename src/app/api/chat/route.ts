@@ -1,6 +1,11 @@
 import OpenAI from 'openai';
 import { NextResponse } from 'next/server';
 
+// This resets on server restart!
+const DAILY_LIMIT = 1000;
+let dailyCount = 0;
+let lastReset = Date.now();
+
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY!,
 });
@@ -13,15 +18,34 @@ Always stay on topic and provide accurate, useful information within the investm
 `;
 
 export async function POST(req: Request): Promise<NextResponse> {
+  const now = new Date();
+  const lastResetDate = new Date(lastReset);
+
+  // If lastReset is not today (UTC), reset the count
+  if (
+    now.getUTCFullYear() !== lastResetDate.getUTCFullYear() ||
+    now.getUTCMonth() !== lastResetDate.getUTCMonth() ||
+    now.getUTCDate() !== lastResetDate.getUTCDate()
+  ) {
+    dailyCount = 0;
+    lastReset = now.getTime();
+  }
+
+  if (dailyCount >= DAILY_LIMIT) {
+    return NextResponse.json(
+      { error: 'Daily request limit reached. Try again tomorrow.' },
+      { status: 429 }
+    );
+  }
+
+  dailyCount += 1;
+
   try {
     const { message } = (await req.json()) as { message: string };
     const response = await client.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [
-        {
-          role: 'system',
-          content: SYSTEM_PROMPT,
-        },
+        { role: 'system', content: SYSTEM_PROMPT },
         { role: 'user', content: message },
       ],
     });

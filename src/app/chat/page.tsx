@@ -16,11 +16,13 @@ export default function Chat() {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   async function sendMessage() {
     if (!input.trim()) return;
     setLoading(true);
+    setError(null);
 
     // Add user message
     setMessages((prev) => [...prev, { role: 'user', content: input }]);
@@ -32,6 +34,14 @@ export default function Chat() {
     });
 
     const data = await res.json();
+
+    if (res.status === 429) {
+      setError(
+        data.error || 'Daily request limit reached. Try again tomorrow.'
+      );
+      setLoading(false);
+      return;
+    }
 
     // Add AI response
     setMessages((prev) => [...prev, { role: 'ai', content: data.reply }]);
@@ -98,7 +108,6 @@ export default function Chat() {
               }
             }}
           />
-          {/* <CustomTextArea /> */}
           <button
             className="ianepo-submit-btn"
             type="submit"
@@ -106,6 +115,22 @@ export default function Chat() {
           >
             {loading ? <LoadingOutlined spin /> : 'Send'}
           </button>
+          {error && (
+            <div
+              style={{
+                color: '#ff4d4f',
+                background: '#23272a',
+                border: '1px solid #ff4d4f',
+                borderRadius: '6px',
+                padding: '0.75rem 1rem',
+                marginTop: '1rem',
+                textAlign: 'center',
+                fontWeight: 'bold',
+              }}
+            >
+              {error}
+            </div>
+          )}
         </form>
       </div>
     );
@@ -216,6 +241,24 @@ export default function Chat() {
             {loading ? <LoadingOutlined spin /> : 'Send'}
           </button>
         </form>
+        {error && (
+          <div
+            style={{
+              color: '#ff4d4f',
+              background: '#23272a',
+              border: '1px solid #ff4d4f',
+              borderRadius: '6px',
+              padding: '0.75rem 1rem',
+              marginTop: '1rem',
+              textAlign: 'center',
+              fontWeight: 'bold',
+              maxWidth: '850px',
+              margin: '1rem auto 0 auto',
+            }}
+          >
+            {error}
+          </div>
+        )}
       </div>
     </div>
   );
