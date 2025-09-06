@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { createChart, ColorType, AreaSeries } from 'lightweight-charts';
 // import { Radio } from 'antd';
-import TradingHeader from '../../components/TradingHeader';
 import { chartData } from '@/store/chartData';
 import { useEquityStore } from '@/store/equity';
+import PositionsGridItem from '@/components/PositionsGridItem';
 
 // const { Group: RadioGroup, Button: RadioButton } = Radio;
 
@@ -15,7 +15,9 @@ const Chart = () => {
   const symbol = currentEquity?.symbol || 'AAPL';
 
   const chartContainerRef = useRef<HTMLDivElement>(null);
-  const parentContainerRef = useRef<HTMLDivElement>(null);
+  const parentContainerRef = useRef<HTMLDivElement>(
+    null
+  ) as React.RefObject<HTMLDivElement>;
   const headerRef = useRef<HTMLDivElement>(null);
   const controlsRef = useRef<HTMLDivElement>(null);
   const [chartHeight, setChartHeight] = useState(330);
@@ -70,23 +72,11 @@ const Chart = () => {
   }, [chartHeight, chartWidth, symbol]);
 
   return (
-    <div className="trading-grid-item" ref={parentContainerRef}>
-      <div ref={headerRef}>
-        <TradingHeader text="Chart" />
-      </div>
-
-      <div style={{ margin: '5px' }}>
-        {/* <RadioGroup ref={controlsRef}>
-          <RadioButton value="1">1D</RadioButton>
-          <RadioButton value="5">5D</RadioButton>
-          <RadioButton value="1M">1M</RadioButton>
-          <RadioButton value="3M">3M</RadioButton>
-          <RadioButton value="6M">6M</RadioButton>
-          <RadioButton value="1Y">1Y</RadioButton>
-        </RadioGroup> */}
-        <div ref={chartContainerRef} />
-      </div>
-    </div>
+    <PositionsGridItem
+      title="Chart"
+      ref={parentContainerRef}
+      content={<div ref={chartContainerRef} />}
+    />
   );
 };
 

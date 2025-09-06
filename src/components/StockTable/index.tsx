@@ -7,9 +7,7 @@ import {
   flexRender,
 } from '@tanstack/react-table';
 import { type Equity, useEquityStore } from '@/store/equity';
-import TradingHeader from '@/components/TradingHeader';
-
-import './WatchList.css';
+import './styles.css';
 
 function formatLargeNumber(value: number): string {
   if (value >= 1_000_000_000_000)
@@ -58,7 +56,7 @@ const columns: ColumnDef<Equity>[] = [
   },
 ];
 
-const WatchList = () => {
+const StockTable = () => {
   const { equityList, currentEquity, setCurrentEquity } = useEquityStore();
 
   const table = useReactTable<Equity>({
@@ -72,43 +70,40 @@ const WatchList = () => {
   const handleRowClick = (equity: Equity) => setCurrentEquity(equity);
 
   return (
-    <div className="trading-grid-item">
-      <TradingHeader text="Watchlist" />
-      <div style={{ padding: '0.5rem' }}>
-        <table className="min-w-full text-sm text-left watch-list">
-          <thead>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <th key={header.id} className=" text-left px-6 py-4 ">
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody>
-            {table.getRowModel().rows.map((row) => (
-              <tr
-                className={`equity-row ${row.original.symbol === currentEquity?.symbol && 'active'}`}
-                key={row.id}
-                onClick={() => handleRowClick(row.original)}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className="px-6 py-4">
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+    <div>
+      <table className="min-w-full text-sm text-left watch-list">
+        <thead>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <th key={header.id} className=" text-left px-6 py-4 ">
+                  {flexRender(
+                    header.column.columnDef.header,
+                    header.getContext()
+                  )}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody>
+          {table.getRowModel().rows.map((row) => (
+            <tr
+              className={`equity-row ${row.original.symbol === currentEquity?.symbol && 'active'}`}
+              key={row.id}
+              onClick={() => handleRowClick(row.original)}
+            >
+              {row.getVisibleCells().map((cell) => (
+                <td key={cell.id} className="px-6 py-4">
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
 
-export default WatchList;
+export default StockTable;

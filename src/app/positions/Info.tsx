@@ -2,11 +2,11 @@
 import React, { useState } from 'react';
 import { Tabs } from 'antd';
 import type { TabsProps } from 'antd';
-import TradingHeader from '@/components/TradingHeader';
 
 import './Info.css';
-import News from '@/app/trading/(components)/News/News';
+import News from '@/app/positions/(components)/News/News';
 import Analysis from './(components)/Analysis/Analysis';
+import PositionsGridItem from '@/components/PositionsGridItem';
 
 const Info = () => {
   const [activeTab, setActiveTab] = useState<string>('news');
@@ -24,9 +24,9 @@ const Info = () => {
     },
   ];
   return (
-    <div className="trading-grid-item">
-      <TradingHeader text="Info" />
-      <div className="info-content">
+    <PositionsGridItem
+      title="Info"
+      content={
         <Tabs
           defaultActiveKey={activeTab}
           activeKey={activeTab}
@@ -37,8 +37,9 @@ const Info = () => {
             border: 'red',
           }}
         />
-      </div>
-    </div>
+      }
+      contentStyle={{ overflowY: 'auto', height: '100%' }}
+    />
   );
 };
 

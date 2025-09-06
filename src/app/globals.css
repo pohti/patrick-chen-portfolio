@@ -50,6 +50,11 @@ header {
   border-bottom-width: 1px;
   padding: 1rem;
   width: 100%;
+  position: fixed; /* Make header fixed */
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background: var(--background); /* Ensure header has background */
 }
 
 nav.nav-link-container {
@@ -61,6 +66,7 @@ main {
   flex: 1;
   padding: 1rem;
   min-height: 90vh;
+  margin-top: 72px; /* Add margin to prevent content under header (adjust as needed) */
 }
 
 footer {

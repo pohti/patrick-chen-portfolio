@@ -76,9 +76,12 @@ export default function Home() {
 
         <br />
         <p style={{ fontSize: '1.2rem', marginTop: '1rem' }}>
-          I built this website to showcase my work and share my thoughts on
-          software development. Feel free to explore the different sections to
-          learn more about me and my projects.
+          I built this website to showcase my frontend development skills. It
+          simulates a trading dashboard with interactive features such as
+          charts, news, investor sentiment, and portfolio positions. It also
+          includes a chat feature powered by OpenAI for investment advice. The
+          application is developed using Next.js, React, TypeScript, Zustand and
+          Ant Design.
         </p>
       </div>
     </div>
