@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 
 import './globals.css';
 import CustomNavLink from '@/components/CustomNavLink';
-import DownloadResumeButton from './DownloadResumeButton';
+import DownloadResumeButton from '../components/DownloadResumeButton';
 import {
   HomeOutlined,
   StockOutlined,
@@ -11,7 +11,6 @@ import {
   GithubOutlined,
   LinkedinOutlined,
   MailOutlined,
-  PhoneOutlined,
 } from '@ant-design/icons';
 
 export const metadata: Metadata = {
@@ -64,11 +63,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <a href="mailto:patrickchen.mmo@gmail.com" className="footer-link">
               <MailOutlined style={{ marginRight: 8 }} />
             </a>
-
-            <span className="footer-contact">
-              <PhoneOutlined style={{ marginRight: 8 }} />
-              (+46) 760 9310 92
-            </span>
           </div>
         </footer>
       </body>

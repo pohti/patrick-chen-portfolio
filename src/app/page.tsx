@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import './styles.css';
 // import MyPic from '@/assets/images/me-pixar.png';
 import Image from 'next/image';
+import TechTags from './trading/(components)/TechTags';
 
 // TODO: flash out the content
 const textLines = ["I'm Patrick and I'm a Software Engineer."];
@@ -35,12 +36,25 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       <div
         style={{
           whiteSpace: 'pre-line',
           display: 'flex',
           flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '100%',
+          textAlign: 'center',
+          padding: '1rem',
           maxWidth: '800px',
         }}
       >
@@ -76,6 +90,12 @@ export default function Home() {
 
         <br />
 
+        <p style={{ fontSize: '1.2rem' }}>
+          {
+            "I'm passionate about building products that solve real-world problems."
+          }
+        </p>
+
         <br />
         <p style={{ fontSize: '1.2rem', marginTop: '1rem' }}>
           I built this website to showcase my frontend development skills. It
@@ -84,87 +104,7 @@ export default function Home() {
           includes a chat feature powered by OpenAI for investment advice.
         </p>
         <div style={{ marginTop: '2rem' }}>
-          <h3
-            style={{
-              fontSize: '1.2rem',
-              fontWeight: 'bold',
-              marginBottom: '0.5rem',
-            }}
-          >
-            Technologies Used
-          </h3>
-          <ul
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '1rem',
-              listStyle: 'none',
-              padding: 0,
-              margin: 0,
-              fontSize: '1.1rem',
-            }}
-          >
-            <li
-              style={{
-                background: '#23272a',
-                color: '#d4d4d4',
-                borderRadius: '6px',
-                padding: '0.5rem 1rem',
-              }}
-            >
-              Next.js
-            </li>
-            <li
-              style={{
-                background: '#23272a',
-                color: '#d4d4d4',
-                borderRadius: '6px',
-                padding: '0.5rem 1rem',
-              }}
-            >
-              React
-            </li>
-            <li
-              style={{
-                background: '#23272a',
-                color: '#d4d4d4',
-                borderRadius: '6px',
-                padding: '0.5rem 1rem',
-              }}
-            >
-              TypeScript
-            </li>
-            <li
-              style={{
-                background: '#23272a',
-                color: '#d4d4d4',
-                borderRadius: '6px',
-                padding: '0.5rem 1rem',
-              }}
-            >
-              Zustand
-            </li>
-            <li
-              style={{
-                background: '#23272a',
-                color: '#d4d4d4',
-                borderRadius: '6px',
-                padding: '0.5rem 1rem',
-              }}
-            >
-              Ant Design
-            </li>
-            <li
-              style={{
-                background: '#23272a',
-                color: '#d4d4d4',
-                borderRadius: '6px',
-                padding: '0.5rem 1rem',
-              }}
-            >
-              OpenAI API
-            </li>
-          </ul>
+          <TechTags />
         </div>
       </div>
     </div>
