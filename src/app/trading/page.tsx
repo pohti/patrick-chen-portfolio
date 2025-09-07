@@ -1,19 +1,19 @@
 'use client';
-import Info from './Info';
+import Info from './(components)/Info';
 import { Col, Row } from 'antd';
-import Positions from './Positions';
-import Instruments from './Instruments';
+import Positions from './(components)/Positions';
+import Instruments from './(components)/Instruments';
 
 const Page = () => {
   return (
     <Row gutter={[16, 16]}>
-      <Col md={12} key="stocks-table">
+      <Col md={12} key="instruments">
         <Instruments />
       </Col>
       <Col md={12} key="info">
         <Info />
       </Col>
-      <Col span={24} key="watch-list">
+      <Col span={24} key="positions">
         <Positions />
       </Col>
     </Row>

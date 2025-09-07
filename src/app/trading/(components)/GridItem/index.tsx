@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import TradingHeader from '../TradingHeader';
+import Header from './TradingHeader';
 import './styles.css';
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 const PositionsGridItem = ({ title, content, contentStyle, ref }: Props) => {
   return (
     <div className="trading-grid-item" ref={ref}>
-      <TradingHeader text={title} />
+      <Header text={title} />
       <div style={{ padding: '5px', ...(contentStyle || {}) }}>{content}</div>
     </div>
   );

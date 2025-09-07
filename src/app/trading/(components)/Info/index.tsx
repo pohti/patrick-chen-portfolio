@@ -4,10 +4,10 @@ import { Tabs } from 'antd';
 import type { TabsProps } from 'antd';
 
 import './Info.css';
-import News from '@/app/trading/(components)/News/News';
-import Analysis from './(components)/Analysis/Analysis';
-import PositionsGridItem from '@/app/trading/(components)/PositionsGridItem';
-import Chart from './(components)/Chart/Chart';
+import News from '@/app/trading/(components)/Info/News/News';
+import Analysis from './Analysis/Analysis';
+import GridItem from '@/app/trading/(components)/GridItem';
+import Chart from './Chart/Chart';
 
 const Info = () => {
   const [activeTab, setActiveTab] = useState<string>('chart');
@@ -30,7 +30,7 @@ const Info = () => {
     },
   ];
   return (
-    <PositionsGridItem
+    <GridItem
       title="Info"
       content={
         <Tabs

@@ -9,7 +9,7 @@ import {
   SortingState,
 } from '@tanstack/react-table';
 import { type Equity, useEquityStore } from '@/store/equity';
-import './styles.css';
+import './Table.css';
 
 function formatLargeNumber(value: number): string {
   if (value >= 1_000_000_000_000)

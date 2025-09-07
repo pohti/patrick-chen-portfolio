@@ -2,6 +2,7 @@
   border: 1px solid grey;
   border-radius: 0.5rem;
   height: 44vh;
+  overflow: hidden;
 }
 
 /* @media (max-height: 900px) {
@@ -9,3 +10,9 @@
     height: 39vh;
   }
 } */
+
+.drag-handle {
+  background-color: var(--bg-primary);
+  color: var(--font-color-white);
+  padding: 0.5rem;
+}
