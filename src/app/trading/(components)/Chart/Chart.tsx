@@ -3,7 +3,6 @@ import { createChart, ColorType, AreaSeries } from 'lightweight-charts';
 // import { Radio } from 'antd';
 import { chartData } from '@/store/chartData';
 import { useEquityStore } from '@/store/equity';
-import PositionsGridItem from '@/components/PositionsGridItem';
 
 // const { Group: RadioGroup, Button: RadioButton } = Radio;
 
@@ -72,11 +71,9 @@ const Chart = () => {
   }, [chartHeight, chartWidth, symbol]);
 
   return (
-    <PositionsGridItem
-      title="Chart"
-      ref={parentContainerRef}
-      content={<div ref={chartContainerRef} />}
-    />
+    <div ref={parentContainerRef}>
+      <div ref={chartContainerRef} />
+    </div>
   );
 };
 
