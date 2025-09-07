@@ -1,15 +1,12 @@
 .trading-grid-item {
   border: 1px solid grey;
-  /* padding: 0.5rem; */
   border-radius: 0.5rem;
-  overflow: hidden;
   height: 44vh;
   min-height: 350px;
-  /* overflow-y: auto; */
 }
 
-@media (max-height: 900px) {
+/* @media (max-height: 900px) {
   .trading-grid-item {
     height: 39vh;
   }
-}
+} */

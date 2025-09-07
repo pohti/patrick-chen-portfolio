@@ -80,7 +80,13 @@ const StockTable = () => {
   const handleRowClick = (equity: Equity) => setCurrentEquity(equity);
 
   return (
-    <div className="w-full overflow-x-scroll">
+    <div
+      className="w-full overflow-x-auto"
+      style={{
+        maxHeight: '39vh',
+        overflowY: 'auto', // Enable vertical scroll
+      }}
+    >
       <table className="min-w-[1200px] text-sm text-left watch-list">
         <thead>
           {reactTable.getHeaderGroups().map((headerGroup) => (

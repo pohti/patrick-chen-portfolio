@@ -1,5 +1,4 @@
 'use client';
-import './page.css';
 import Info from './Info';
 import { Col, Row } from 'antd';
 import Positions from './Positions';

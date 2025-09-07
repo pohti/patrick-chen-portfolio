@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import TradingHeader from '../TradingHeader';
+import './styles.css';
 
 interface Props {
   title: string;
