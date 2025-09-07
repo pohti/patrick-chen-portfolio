@@ -44,7 +44,7 @@ const Info = () => {
           }}
         />
       }
-      contentStyle={{ overflowY: 'auto', height: '100%' }}
+      contentStyle={{ overflowY: 'auto', height: '90%' }}
     />
   );
 };

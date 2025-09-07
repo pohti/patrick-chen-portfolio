@@ -16,17 +16,7 @@ div.ant-tabs-tab-active .ant-tabs-tab {
   /* border: 1px solid red; */
 }
 
+/* TODO: tweak font color */
 .ant-tabs-tab-active .ant-tabs-tab-btn {
   color: var(--font-color-white) !important;
-}
-
-/* .ant-tabs-nav {
-  background: #23272a !important;
-} */
-
-/* TODO: finish converting styling to dark mode */
-.ant-tabs-tab-active {
-  color: var(--font-color-white) !important; /* highlight color */
-  /* background-color: var(--font-color-primary) !important; */
-  /* border-color: var(--font-color-primary) !important; */
 }
