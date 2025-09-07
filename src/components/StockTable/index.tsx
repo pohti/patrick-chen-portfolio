@@ -5,6 +5,8 @@ import {
   useReactTable,
   getCoreRowModel,
   flexRender,
+  getSortedRowModel,
+  SortingState,
 } from '@tanstack/react-table';
 import { type Equity, useEquityStore } from '@/store/equity';
 import './styles.css';
@@ -25,14 +27,16 @@ const columns: ColumnDef<Equity>[] = [
     minSize: 100,
     maxSize: 500,
     enableResizing: true,
+    enableSorting: true,
   },
-  { accessorKey: 'name', header: 'Name' },
-  { accessorKey: 'type', header: 'Type' },
-  { accessorKey: 'market', header: 'Market' },
-  { accessorKey: 'price', header: 'Price ($)' },
+  { accessorKey: 'name', header: 'Name', enableSorting: true },
+  { accessorKey: 'type', header: 'Type', enableSorting: true },
+  { accessorKey: 'market', header: 'Market', enableSorting: true },
+  { accessorKey: 'price', header: 'Price ($)', enableSorting: true },
   {
     accessorKey: 'changePercent',
     header: 'Change (%)',
+    enableSorting: true,
     cell: (info) => {
       const value = info.getValue<number>();
       const color = value > 0 ? 'green' : value < 0 ? 'red' : 'inherit';
@@ -47,39 +51,65 @@ const columns: ColumnDef<Equity>[] = [
   {
     accessorKey: 'volume',
     header: 'Volume',
+    enableSorting: true,
     cell: (info) => formatLargeNumber(info.getValue<number>()), // e.g. 28M
   },
   {
     accessorKey: 'marketCap',
     header: 'Market Cap',
+    enableSorting: true,
     cell: (info) => formatLargeNumber(info.getValue<number>()), // e.g. 1.8T
   },
 ];
 
 const StockTable = () => {
   const { equityList, currentEquity, setCurrentEquity } = useEquityStore();
+  const [sorting, setSorting] = React.useState<SortingState>([]);
 
-  const table = useReactTable<Equity>({
+  const reactTable = useReactTable<Equity>({
     data: equityList,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
     columnResizeMode: 'onChange',
     enableColumnResizing: true,
+    state: { sorting },
+    onSortingChange: setSorting,
   });
 
   const handleRowClick = (equity: Equity) => setCurrentEquity(equity);
 
   return (
-    <div>
-      <table className="min-w-full text-sm text-left watch-list">
+    <div className="w-full overflow-x-scroll">
+      <table className="min-w-[1200px] text-sm text-left watch-list">
         <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
+          {reactTable.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id} className=" text-left px-6 py-4 ">
+                <th
+                  key={header.id}
+                  className="text-left px-6 py-4 cursor-pointer select-none"
+                  onClick={
+                    header.column.getCanSort()
+                      ? header.column.getToggleSortingHandler()
+                      : undefined
+                  }
+                  style={{
+                    userSelect: 'none',
+                  }}
+                >
                   {flexRender(
                     header.column.columnDef.header,
                     header.getContext()
+                  )}
+                  {header.column.getCanSort() && (
+                    <span style={{ marginLeft: 6 }}>
+                      {header.column.getIsSorted() === 'asc'
+                        ? '▲'
+                        : header.column.getIsSorted() === 'desc'
+                          ? '▼'
+                          : ''}
+                    </span>
                   )}
                 </th>
               ))}
@@ -87,9 +117,11 @@ const StockTable = () => {
           ))}
         </thead>
         <tbody>
-          {table.getRowModel().rows.map((row) => (
+          {reactTable.getRowModel().rows.map((row) => (
             <tr
-              className={`equity-row ${row.original.symbol === currentEquity?.symbol && 'active'}`}
+              className={`equity-row ${
+                row.original.symbol === currentEquity?.symbol && 'active'
+              }`}
               key={row.id}
               onClick={() => handleRowClick(row.original)}
             >

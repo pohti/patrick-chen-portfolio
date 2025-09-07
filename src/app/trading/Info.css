@@ -11,14 +11,13 @@
 }
 
 div.ant-tabs-tab-active .ant-tabs-tab {
-  color: var(--font-color-white) !important; /* active tab text color */
   background: var(--background) !important;
   font-weight: bold;
   /* border: 1px solid red; */
 }
 
 .ant-tabs-tab-active .ant-tabs-tab-btn {
-  color: var(--font-color-white) !important; /* active tab text color */
+  color: var(--font-color-white) !important;
 }
 
 /* .ant-tabs-nav {

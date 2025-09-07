@@ -8,6 +8,14 @@ table > thead {
   /* background-color: var(--bg-secondary); */
 }
 
+th.cursor-pointer {
+  transition: background 0.2s;
+}
+
+th.cursor-pointer:hover {
+  background: #23272a; /* or use a softer color like #2a2d32 or #22262a */
+}
+
 tr {
   height: 1.8rem;
 }
