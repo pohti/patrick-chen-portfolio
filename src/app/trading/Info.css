@@ -1,5 +1,6 @@
 .ant-tabs-nav-list {
   border-bottom: 1px solid var(--font-color-white);
+  height: 30px;
 }
 
 /* overriding antd tab styles */
@@ -27,6 +28,6 @@ div.ant-tabs-tab-active .ant-tabs-tab {
 /* TODO: finish converting styling to dark mode */
 .ant-tabs-tab-active {
   color: var(--font-color-white) !important; /* highlight color */
-  background-color: var(--font-color-primary) !important;
-  border-color: var(--font-color-primary) !important;
+  /* background-color: var(--font-color-primary) !important; */
+  /* border-color: var(--font-color-primary) !important; */
 }

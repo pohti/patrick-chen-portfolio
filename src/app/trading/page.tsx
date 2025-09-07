@@ -3,12 +3,13 @@ import './page.css';
 import Info from './Info';
 import { Col, Row } from 'antd';
 import Positions from './Positions';
+import Instruments from './Instruments';
 
 const Page = () => {
   return (
     <Row gutter={[16, 16]}>
       <Col md={12} key="stocks-table">
-        <div>Stocks Table...</div>
+        <Instruments />
       </Col>
       <Col md={12} key="info">
         <Info />

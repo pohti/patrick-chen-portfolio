@@ -1,6 +1,6 @@
 import React from 'react';
 import StockTable from '@/components/StockTable';
-import PositionsGridItem from '@/components/PositionsGridItem';
+import PositionsGridItem from '@/app/trading/(components)/PositionsGridItem';
 
 const Positions = () => {
   return <PositionsGridItem title="Watchlist" content={<StockTable />} />;

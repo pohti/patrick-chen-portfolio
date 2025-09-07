@@ -6,27 +6,27 @@ import type { TabsProps } from 'antd';
 import './Info.css';
 import News from '@/app/trading/(components)/News/News';
 import Analysis from './(components)/Analysis/Analysis';
-import PositionsGridItem from '@/components/PositionsGridItem';
+import PositionsGridItem from '@/app/trading/(components)/PositionsGridItem';
 import Chart from './(components)/Chart/Chart';
 
 const Info = () => {
-  const [activeTab, setActiveTab] = useState<string>('news');
+  const [activeTab, setActiveTab] = useState<string>('chart');
 
   const items: TabsProps['items'] = [
+    {
+      key: 'chart',
+      label: 'Chart',
+      children: <Chart />,
+    },
     {
       key: 'news',
       label: 'News',
       children: <News />,
     },
     {
-      key: '2',
+      key: 'analysis',
       label: 'Analysis',
       children: <Analysis />,
-    },
-    {
-      key: '3',
-      label: 'Chart',
-      children: <Chart />,
     },
   ];
   return (
