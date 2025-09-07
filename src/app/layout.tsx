@@ -8,6 +8,10 @@ import {
   HomeOutlined,
   StockOutlined,
   MessageOutlined,
+  GithubOutlined,
+  LinkedinOutlined,
+  MailOutlined,
+  PhoneOutlined,
 } from '@ant-design/icons';
 
 export const metadata: Metadata = {
@@ -25,13 +29,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <HomeOutlined /> Home
             </CustomNavLink>
             <CustomNavLink href="/trading">
-              <StockOutlined /> Trading
+              <StockOutlined /> Trading Demo
             </CustomNavLink>
           </nav>
 
           <div className="flex" style={{ gap: '1rem' }}>
             <CustomNavLink href="/chat">
-              <MessageOutlined /> Chat
+              <MessageOutlined /> Investor AI
             </CustomNavLink>
             <DownloadResumeButton />
           </div>
@@ -39,10 +43,34 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
         <main>{children}</main>
 
-        {/* TODO: embed links to GitHub, LinkedIn and Email */}
-        {/* <footer>
-          © {new Date().getFullYear()} UI Showcase — Built with Next.js
-        </footer> */}
+        <footer>
+          <div className="footer-links">
+            <a
+              href="https://github.com/pohti"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-link"
+            >
+              <GithubOutlined style={{ marginRight: 8 }} />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/minmarnoo/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-link"
+            >
+              <LinkedinOutlined style={{ marginRight: 8 }} />
+            </a>
+            <a href="mailto:patrickchen.mmo@gmail.com" className="footer-link">
+              <MailOutlined style={{ marginRight: 8 }} />
+            </a>
+
+            <span className="footer-contact">
+              <PhoneOutlined style={{ marginRight: 8 }} />
+              (+46) 760 9310 92
+            </span>
+          </div>
+        </footer>
       </body>
     </html>
   );

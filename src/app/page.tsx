@@ -75,14 +75,97 @@ export default function Home() {
         </span>
 
         <br />
+
+        <br />
         <p style={{ fontSize: '1.2rem', marginTop: '1rem' }}>
           I built this website to showcase my frontend development skills. It
           simulates a trading dashboard with interactive features such as
           charts, news, investor sentiment, and portfolio positions. It also
-          includes a chat feature powered by OpenAI for investment advice. The
-          application is developed using Next.js, React, TypeScript, Zustand and
-          Ant Design.
+          includes a chat feature powered by OpenAI for investment advice.
         </p>
+        <div style={{ marginTop: '2rem' }}>
+          <h3
+            style={{
+              fontSize: '1.2rem',
+              fontWeight: 'bold',
+              marginBottom: '0.5rem',
+            }}
+          >
+            Technologies Used
+          </h3>
+          <ul
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '1rem',
+              listStyle: 'none',
+              padding: 0,
+              margin: 0,
+              fontSize: '1.1rem',
+            }}
+          >
+            <li
+              style={{
+                background: '#23272a',
+                color: '#d4d4d4',
+                borderRadius: '6px',
+                padding: '0.5rem 1rem',
+              }}
+            >
+              Next.js
+            </li>
+            <li
+              style={{
+                background: '#23272a',
+                color: '#d4d4d4',
+                borderRadius: '6px',
+                padding: '0.5rem 1rem',
+              }}
+            >
+              React
+            </li>
+            <li
+              style={{
+                background: '#23272a',
+                color: '#d4d4d4',
+                borderRadius: '6px',
+                padding: '0.5rem 1rem',
+              }}
+            >
+              TypeScript
+            </li>
+            <li
+              style={{
+                background: '#23272a',
+                color: '#d4d4d4',
+                borderRadius: '6px',
+                padding: '0.5rem 1rem',
+              }}
+            >
+              Zustand
+            </li>
+            <li
+              style={{
+                background: '#23272a',
+                color: '#d4d4d4',
+                borderRadius: '6px',
+                padding: '0.5rem 1rem',
+              }}
+            >
+              Ant Design
+            </li>
+            <li
+              style={{
+                background: '#23272a',
+                color: '#d4d4d4',
+                borderRadius: '6px',
+                padding: '0.5rem 1rem',
+              }}
+            >
+              OpenAI API
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );
