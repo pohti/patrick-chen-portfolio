@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import Header from './TradingHeader';
+import Header from './Header';
 import './styles.css';
 
 interface Props {

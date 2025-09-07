@@ -77,7 +77,7 @@ const StockTable = () => {
     onSortingChange: setSorting,
   });
 
-  const handleRowClick = (equity: Equity) => setCurrentEquity(equity);
+  const handleRowClick = (symbol: string) => setCurrentEquity(symbol);
 
   return (
     <div
@@ -131,7 +131,7 @@ const StockTable = () => {
                 row.original.symbol === currentEquity?.symbol && 'active'
               }`}
               key={row.id}
-              onClick={() => handleRowClick(row.original)}
+              onClick={() => handleRowClick(row.original.symbol)}
             >
               {row.getVisibleCells().map((cell, colIdx) => (
                 <td
