@@ -31,3 +31,10 @@ td {
 td:hover {
   cursor: pointer;
 }
+
+.sticky-col {
+  position: sticky;
+  left: 0;
+  background: #1e1e1e; /* Match your table background */
+  box-shadow: 2px 0 8px -2px rgba(0, 0, 0, 0.04);
+}

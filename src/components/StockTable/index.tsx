@@ -85,10 +85,10 @@ const StockTable = () => {
         <thead>
           {reactTable.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
+              {headerGroup.headers.map((header, colIdx) => (
                 <th
                   key={header.id}
-                  className="text-left px-6 py-4 cursor-pointer select-none"
+                  className={`text-left px-6 py-4 cursor-pointer select-none${colIdx === 0 ? ' sticky-col' : ''}`}
                   onClick={
                     header.column.getCanSort()
                       ? header.column.getToggleSortingHandler()
@@ -96,6 +96,8 @@ const StockTable = () => {
                   }
                   style={{
                     userSelect: 'none',
+                    left: colIdx === 0 ? 0 : undefined, // Needed for sticky
+                    zIndex: colIdx === 0 ? 2 : undefined, // Ensure header stays above
                   }}
                 >
                   {flexRender(
@@ -125,8 +127,16 @@ const StockTable = () => {
               key={row.id}
               onClick={() => handleRowClick(row.original)}
             >
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="px-6 py-4">
+              {row.getVisibleCells().map((cell, colIdx) => (
+                <td
+                  key={cell.id}
+                  className={`px-6 py-4${colIdx === 0 ? ' sticky-col' : ''}`}
+                  style={{
+                    left: colIdx === 0 ? 0 : undefined,
+                    zIndex: colIdx === 0 ? 1 : undefined,
+                    background: colIdx === 0 ? '#1e1e1e' : undefined, // Optional: match table bg
+                  }}
+                >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
