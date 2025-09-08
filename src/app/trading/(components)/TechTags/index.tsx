@@ -12,6 +12,8 @@ const technologies = [
   'SQL',
   'Docker',
   'AWS',
+  'Terraform',
+  'MongoDB',
 ];
 
 const TechTags = () => {
