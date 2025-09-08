@@ -49,7 +49,18 @@ const columns: ColumnDef<Position>[] = [
       );
     },
   },
-  { accessorKey: 'lastUpdated', header: 'Last Updated' },
+  {
+    accessorKey: 'lastUpdated',
+    header: 'Last Updated',
+    cell: (info) => {
+      const value = info.getValue<string>();
+      const date = new Date(value);
+      const day = date.getUTCDate().toString().padStart(2, '0');
+      const month = date.toLocaleString('en-US', { month: 'short' });
+      const year = date.getUTCFullYear();
+      return `${day}-${month}-${year}`;
+    },
+  },
 ];
 
 const Table = () => {

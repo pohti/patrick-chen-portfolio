@@ -98,10 +98,10 @@ export default function Home() {
 
         <br />
         <p style={{ fontSize: '1.2rem', marginTop: '1rem' }}>
-          I built this website to showcase my frontend development skills. It
-          simulates a trading dashboard with interactive features such as
-          charts, news, investor sentiment, and portfolio positions. It also
-          includes a chat feature powered by OpenAI for investment advice.
+          I built this website using Next.js to showcase my frontend development
+          skills. It simulates a trading dashboard with interactive features
+          such as charts, news, investor sentiment, and portfolio positions. It
+          also includes a chat feature powered by OpenAI for investment advice.
         </p>
         <div style={{ marginTop: '2rem' }}>
           <TechTags />
