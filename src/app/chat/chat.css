@@ -27,7 +27,7 @@ textarea.warren:disabled {
 button.warren-submit-btn {
   font-size: 1.1rem;
   min-height: 50px;
-  min-width: 90px;
+  min-width: 70px;
   background-color: var(--font-color-primary);
   border: 0;
   border-radius: 8px;

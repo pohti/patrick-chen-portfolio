@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Input } from 'antd';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { LoadingOutlined } from '@ant-design/icons';
+import { StopOutlined, SendOutlined, LoadingOutlined } from '@ant-design/icons';
 import './chat.css';
 
 const { TextArea } = Input;
@@ -19,6 +19,8 @@ export default function Chat() {
   const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const [abortController, setAbortController] =
+    useState<AbortController | null>(null);
 
   const examplePrompts = [
     'Is it better to invest in S&P 500 index funds or pick individual stocks?',
@@ -34,10 +36,12 @@ export default function Chat() {
     setLoading(true);
     setError(null);
 
+    const controller = new AbortController();
+    setAbortController(controller);
+
     // Add user message
     setMessages((prev) => [...prev, { role: 'user', content: messageToSend }]);
-
-    // Prepare for streaming AI response
+    // Add placeholder AI message
     setMessages((prev) => [...prev, { role: 'ai', content: '' }]);
 
     try {
@@ -45,6 +49,7 @@ export default function Chat() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: messageToSend }),
+        signal: controller.signal, // attach abort signal
       });
 
       if (res.status === 429) {
@@ -79,14 +84,19 @@ export default function Chat() {
 
       setInput('');
       setLoading(false);
+      setAbortController(null);
       textAreaRef.current?.focus();
-    } catch (err) {
-      if (err instanceof Error) {
+    } catch (err: any) {
+      if (err.name === 'AbortError') {
+        // User canceled
+        setError('Request was stopped.');
+      } else if (err instanceof Error) {
         setError(err.message);
       } else {
         setError('Something went wrong.');
       }
       setLoading(false);
+      setAbortController(null);
     }
   }
 
@@ -99,6 +109,12 @@ export default function Chat() {
       textAreaRef.current?.focus();
     }
   }, [messages, loading]);
+
+  function stopRequest() {
+    if (abortController) {
+      abortController.abort();
+    }
+  }
 
   // Initial layout: center textarea if no messages
   if (messages.length === 0) {
@@ -171,38 +187,40 @@ export default function Chat() {
             ))}
           </div>
 
-          <TextArea
-            className="warren"
-            ref={(el) => {
-              if (
-                el &&
-                'resizableTextArea' in el &&
-                el.resizableTextArea?.textArea
-              ) {
-                textAreaRef.current = el.resizableTextArea.textArea;
-              }
-            }}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Type your investment question..."
-            disabled={loading}
-            autoFocus
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                if (!loading && input.trim()) {
-                  sendMessage();
+          <div style={{ display: 'flex', width: '100%', gap: '1rem' }}>
+            <TextArea
+              className="warren"
+              ref={(el) => {
+                if (
+                  el &&
+                  'resizableTextArea' in el &&
+                  el.resizableTextArea?.textArea
+                ) {
+                  textAreaRef.current = el.resizableTextArea.textArea;
                 }
-              }
-            }}
-          />
-          <button
-            className="warren-submit-btn"
-            type="submit"
-            disabled={loading || !input.trim()}
-          >
-            {loading ? <LoadingOutlined spin /> : 'Send'}
-          </button>
+              }}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Type your investment question..."
+              disabled={loading}
+              autoFocus
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  if (!loading && input.trim()) {
+                    sendMessage();
+                  }
+                }
+              }}
+            />
+            <button
+              className="warren-submit-btn"
+              type="submit"
+              disabled={loading || !input.trim()}
+            >
+              {loading ? <LoadingOutlined spin /> : <SendOutlined />}
+            </button>
+          </div>
           {error && (
             <div
               style={{
@@ -338,13 +356,23 @@ export default function Chat() {
               }
             }}
           />
-          <button
-            className="warren-submit-btn"
-            type="submit"
-            disabled={loading || !input.trim()}
-          >
-            {loading ? <LoadingOutlined spin /> : 'Send'}
-          </button>
+          {loading ? (
+            <button
+              className="warren-submit-btn"
+              type="button"
+              onClick={stopRequest}
+            >
+              <StopOutlined />
+            </button>
+          ) : (
+            <button
+              className="warren-submit-btn"
+              type="submit"
+              disabled={!input.trim()}
+            >
+              <SendOutlined />
+            </button>
+          )}
         </form>
         {error && (
           <div
