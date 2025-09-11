@@ -20,13 +20,22 @@ export default function Chat() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
-  async function sendMessage() {
-    if (!input.trim()) return;
+  const examplePrompts = [
+    'Is it better to invest in S&P 500 index funds or pick individual stocks?',
+    'Should I invest in rental property or REITs?',
+    'Is Bitcoin a good hedge against inflation?',
+    'What are the risks of government bonds?',
+    'How should a beginner diversify their portfolio?',
+  ];
+
+  async function sendMessage(customMessage?: string) {
+    const messageToSend = customMessage ?? input;
+    if (!messageToSend.trim()) return;
     setLoading(true);
     setError(null);
 
     // Add user message
-    setMessages((prev) => [...prev, { role: 'user', content: input }]);
+    setMessages((prev) => [...prev, { role: 'user', content: messageToSend }]);
 
     // Prepare for streaming AI response
     setMessages((prev) => [...prev, { role: 'ai', content: '' }]);
@@ -35,7 +44,7 @@ export default function Chat() {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify({ message: messageToSend }),
       });
 
       if (res.status === 429) {
@@ -61,7 +70,6 @@ export default function Chat() {
           const chunk = decoder.decode(value);
           aiContent += chunk;
           setMessages((prev) => {
-            // Update last AI message in array
             const updated = [...prev];
             updated[updated.length - 1] = { role: 'ai', content: aiContent };
             return updated;
@@ -130,8 +138,41 @@ export default function Chat() {
           >
             What do you want to learn about investing?
           </h2>
+
+          {/* Example Prompts */}
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '0.5rem',
+              justifyContent: 'center',
+              marginBottom: '1rem',
+            }}
+          >
+            {examplePrompts.map((prompt, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => sendMessage(prompt)}
+                style={{
+                  background: '#2a86a7',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '1rem',
+                  padding: '0.5rem 1rem',
+                  cursor: 'pointer',
+                  fontSize: '0.9rem',
+                  boxShadow: '0 2px 6px rgba(42,134,167,0.3)',
+                  transition: 'background 0.2s',
+                }}
+              >
+                {prompt}
+              </button>
+            ))}
+          </div>
+
           <TextArea
-            className="ianepo"
+            className="warren"
             ref={(el) => {
               if (
                 el &&
@@ -156,7 +197,7 @@ export default function Chat() {
             }}
           />
           <button
-            className="ianepo-submit-btn"
+            className="warren-submit-btn"
             type="submit"
             disabled={loading || !input.trim()}
           >
@@ -230,9 +271,17 @@ export default function Chat() {
                     : '0 2px 8px rgba(30,30,30,0.08)',
               }}
             >
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                {msg.content}
-              </ReactMarkdown>
+              {msg.role === 'ai' && msg.content === '' && loading ? (
+                <div className="typing">
+                  <span className="typing-dot"></span>
+                  <span className="typing-dot"></span>
+                  <span className="typing-dot"></span>
+                </div>
+              ) : (
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {msg.content}
+                </ReactMarkdown>
+              )}
             </div>
           </div>
         ))}
@@ -265,7 +314,7 @@ export default function Chat() {
           }}
         >
           <TextArea
-            className="ianepo"
+            className="warren"
             ref={(el) => {
               if (
                 el &&
@@ -290,7 +339,7 @@ export default function Chat() {
             }}
           />
           <button
-            className="ianepo-submit-btn"
+            className="warren-submit-btn"
             type="submit"
             disabled={loading || !input.trim()}
           >
