@@ -30,7 +30,22 @@ const columns: ColumnDef<Equity>[] = [
     enableSorting: true,
   },
   { accessorKey: 'name', header: 'Name', enableSorting: true },
-  { accessorKey: 'type', header: 'Type', enableSorting: true },
+  {
+    accessorKey: 'type',
+    header: 'Type',
+    enableSorting: true,
+    cell: (info) => {
+      const value = info.getValue<string>();
+      const typeMap: Record<string, string> = {
+        stock: 'Stock',
+        etf: 'ETF',
+        index_fund: 'Index Fund',
+        reit: 'REIT',
+        mutual_fund: 'Mutual Fund',
+      };
+      return typeMap[value] || value;
+    },
+  },
   { accessorKey: 'market', header: 'Market', enableSorting: true },
   { accessorKey: 'price', header: 'Price ($)', enableSorting: true },
   {
