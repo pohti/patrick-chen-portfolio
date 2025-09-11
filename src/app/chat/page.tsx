@@ -86,6 +86,7 @@ export default function Chat() {
       setLoading(false);
       setAbortController(null);
       textAreaRef.current?.focus();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       if (err.name === 'AbortError') {
         // User canceled
