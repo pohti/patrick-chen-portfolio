@@ -19,8 +19,8 @@ const Chart = () => {
   ) as React.RefObject<HTMLDivElement>;
   const headerRef = useRef<HTMLDivElement>(null);
   const controlsRef = useRef<HTMLDivElement>(null);
-  const [chartHeight, setChartHeight] = useState(330);
-  const [chartWidth, setChartWidth] = useState(800);
+  const [chartHeight, setChartHeight] = useState(MIN_CHART_HEIGHT);
+  const [chartWidth, setChartWidth] = useState(MIN_CHART_WIDTH);
 
   const handleResize = useCallback((entries: ResizeObserverEntry[]) => {
     const { height, width } = entries[0].contentRect;
@@ -71,8 +71,24 @@ const Chart = () => {
   }, [chartHeight, chartWidth, symbol]);
 
   return (
-    <div ref={parentContainerRef}>
-      <div ref={chartContainerRef} />
+    <div
+      ref={parentContainerRef}
+      style={{
+        height: '100%',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
+      {/* Chart container fills all available space */}
+      <div
+        ref={chartContainerRef}
+        style={{
+          flex: 1,
+          height: '100%',
+          width: '100%',
+        }}
+      />
     </div>
   );
 };
