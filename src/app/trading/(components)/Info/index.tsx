@@ -33,18 +33,21 @@ const Info = () => {
     <GridItem
       title="Info"
       content={
-        <Tabs
-          defaultActiveKey={activeTab}
-          activeKey={activeTab}
-          items={items}
-          onChange={setActiveTab}
-          tabBarStyle={{
-            color: 'var(--font-color-white)',
-            border: 'red',
-          }}
-        />
+        <div style={{ height: '100%', width: '100%' }}>
+          <Tabs
+            defaultActiveKey={activeTab}
+            activeKey={activeTab}
+            items={items}
+            onChange={setActiveTab}
+            tabBarStyle={{
+              color: 'var(--font-color-white)',
+              border: 'red',
+            }}
+            style={{ height: '100%' }}
+          />
+        </div>
       }
-      contentStyle={{ overflowY: 'auto', height: '90%' }}
+      contentStyle={{ height: '100%', width: '100%' }}
     />
   );
 };
