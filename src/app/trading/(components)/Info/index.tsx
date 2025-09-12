@@ -26,7 +26,7 @@ const Info = () => {
     {
       key: 'analysis',
       label: 'Analysis',
-      children: <Analysis />,
+      children: <Analysis active={activeTab === 'analysis'} />,
     },
   ];
   return (
