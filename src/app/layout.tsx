@@ -11,6 +11,7 @@ import {
   GithubOutlined,
   LinkedinOutlined,
   MailOutlined,
+  CompassOutlined,
 } from '@ant-design/icons';
 
 export const metadata: Metadata = {
@@ -29,6 +30,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             </CustomNavLink>
             <CustomNavLink href="/trading">
               <StockOutlined /> Trading Demo
+            </CustomNavLink>
+            <CustomNavLink href="/flight-plan">
+              <CompassOutlined /> Flight Plan
             </CustomNavLink>
           </nav>
 
