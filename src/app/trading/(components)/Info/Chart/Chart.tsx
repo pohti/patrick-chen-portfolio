@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { createChart, ColorType, AreaSeries } from 'lightweight-charts';
 // import { Radio } from 'antd';
-import { chartData } from '@/store/chartData';
+import { chartData } from '@/store/instrumentHistory';
 import { useEquityStore } from '@/store/equity';
 
 // const { Group: RadioGroup, Button: RadioButton } = Radio;
