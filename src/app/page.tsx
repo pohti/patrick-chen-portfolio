@@ -6,7 +6,7 @@ import Image from 'next/image';
 import TechTags from './trading/(components)/TechTags';
 
 // TODO: flash out the content
-const textLines = ["I'm Patrick and I'm a Software Engineer."];
+const textLines = ["I'm Patrick and I'm a Fullstack Developer."];
 
 export default function Home() {
   const [displayed, setDisplayed] = useState(['', '']);
