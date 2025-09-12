@@ -50,7 +50,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               rel="noopener noreferrer"
               className="footer-link"
             >
-              <GithubOutlined style={{ marginRight: 8 }} />
+              <GithubOutlined style={{ marginRight: 8, fontSize: '1.5rem' }} />
             </a>
             <a
               href="https://www.linkedin.com/in/minmarnoo/"
@@ -58,10 +58,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               rel="noopener noreferrer"
               className="footer-link"
             >
-              <LinkedinOutlined style={{ marginRight: 8 }} />
+              <LinkedinOutlined
+                style={{ marginRight: 8, fontSize: '1.5rem' }}
+              />
             </a>
             <a href="mailto:patrickchen.mmo@gmail.com" className="footer-link">
-              <MailOutlined style={{ marginRight: 8 }} />
+              <MailOutlined style={{ marginRight: 8, fontSize: '1.5rem' }} />
             </a>
           </div>
         </footer>
