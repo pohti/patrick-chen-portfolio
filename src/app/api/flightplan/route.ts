@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { parseStringPromise } from 'xml2js';
 
 /**
  * Server-side function to fetch the latest flight plan from SimBrief.
@@ -15,90 +16,94 @@ export async function GET() {
   }
 
   try {
-    const response = await fetch(
+    // Step 1: Fetch the initial response to get the URL(s) for the full OFP file(s).
+    const initialResponse = await fetch(
       `https://www.simbrief.com/api/xml.fetcher.php?username=${USERNAME}`
     );
 
-    if (!response.ok) {
-      throw new Error(`SimBrief API error! Status: ${response.status}`);
+    if (!initialResponse.ok) {
+      throw new Error(`SimBrief API error! Status: ${initialResponse.status}`);
     }
 
-    const xmlText = await response.text();
+    const initialXmlText = await initialResponse.text();
+    const initialResult = await parseStringPromise(initialXmlText, {
+      explicitArray: false,
+      mergeAttrs: true,
+    });
 
-    // Server-safe XML extraction helpers (avoid DOMParser in Node)
-    const extractTag = (xml: string, tag: string) => {
-      const re = new RegExp(`<${tag}[^>]*>([\\s\\S]*?)</${tag}>`, 'i');
-      const m = xml.match(re);
-      return m ? m[1].trim() : null;
-    };
+    // The response may contain multiple <OFP> entries. Normalize to an array.
+    const ofpEntries = initialResult?.OFP
+      ? Array.isArray(initialResult.OFP)
+        ? initialResult.OFP
+        : [initialResult.OFP]
+      : [];
 
-    const extractAll = (xml: string, tag: string) => {
-      const re = new RegExp(`<${tag}[^>]*>([\\s\\S]*?)</${tag}>`, 'gi');
-      const matches = [];
-      let m;
-      while ((m = re.exec(xml))) {
-        matches.push(m[1].trim());
+    // Find the first successful OFP entry and return only that plan
+    let selectedOfpUrl: string | null = null;
+    for (const entry of ofpEntries) {
+      const status = entry?.fetch?.status;
+      const url = entry?.params?.xml_file;
+      if (status === 'Success' && url) {
+        selectedOfpUrl = url;
+        break; // only take the first successful one
       }
-      return matches;
-    };
+    }
 
-    // Find the OFP block; fall back to full xml if not wrapped
-    const ofpText = extractTag(xmlText, 'OFP') || xmlText;
-
-    // Check status under OFP > fetch > status
-    const fetchBlock = extractTag(ofpText, 'fetch');
-    const status = fetchBlock ? extractTag(fetchBlock, 'status') : null;
-    if (status !== 'Success') {
+    if (!selectedOfpUrl) {
       const errorMsg =
-        (fetchBlock && extractTag(fetchBlock, 'error')) || 'Unknown API error.';
+        initialResult?.OFP?.fetch?.error ||
+        'No flight plans found for this user.';
       return NextResponse.json({ error: errorMsg }, { status: 500 });
     }
 
-    // Extract main nodes
-    const generalText = extractTag(ofpText, 'general');
-    const originText = extractTag(ofpText, 'origin');
-    const destText = extractTag(ofpText, 'destination');
-    const navlogText = extractTag(ofpText, 'navlog') || '';
-
-    if (!generalText || !originText || !destText) {
-      return NextResponse.json(
-        { error: 'Failed to parse flight plan data.' },
-        { status: 500 }
-      );
+    // Fetch and parse the single OFP XML
+    const ofpResp = await fetch(selectedOfpUrl);
+    if (!ofpResp.ok) {
+      throw new Error(`Failed to fetch OFP XML: ${selectedOfpUrl}`);
     }
+    const ofpXmlText = await ofpResp.text();
+    const parsed = await parseStringPromise(ofpXmlText, {
+      explicitArray: false,
+      mergeAttrs: true,
+    });
 
-    const toNumber = (s: string | null) => {
-      if (!s) return NaN;
-      const n = Number(s.trim());
-      return Number.isFinite(n) ? n : NaN;
-    };
+    const ofp = parsed?.OFP || {};
+    const originData = ofp.origin || {};
+    const destinationData = ofp.destination || {};
+    const generalData = ofp.general || {};
+    const navlogData = ofp.navlog || {};
+
+    const rawWaypoints = navlogData?.fix;
+    const waypointsArray = rawWaypoints
+      ? Array.isArray(rawWaypoints)
+        ? rawWaypoints
+        : [rawWaypoints]
+      : [];
 
     const flightPlan = {
-      id:
-        (extractTag(ofpText, 'params') &&
-          extractTag(extractTag(ofpText, 'params')!, 'request_id')) ||
-        '',
+      id: ofp.params?.request_id || '',
       origin: {
-        lat: toNumber(extractTag(originText, 'lat')),
-        lon: toNumber(extractTag(originText, 'lon')),
-        ident: extractTag(originText, 'icao_code') || '',
+        lat: Number(originData.lat) || 0,
+        lon: Number(originData.lon) || 0,
+        ident: originData.icao_code || '',
       },
       destination: {
-        lat: toNumber(extractTag(destText, 'lat')),
-        lon: toNumber(extractTag(destText, 'lon')),
-        ident: extractTag(destText, 'icao_code') || '',
+        lat: Number(destinationData.lat) || 0,
+        lon: Number(destinationData.lon) || 0,
+        ident: destinationData.icao_code || '',
       },
-      route: extractAll(navlogText, 'waypoint').map((wpText) => ({
-        lat: toNumber(extractTag(wpText, 'lat')),
-        lon: toNumber(extractTag(wpText, 'lon')),
-        ident: extractTag(wpText, 'ident') || '',
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      route: waypointsArray.map((wp: any) => ({
+        lat: Number(wp.pos_lat) || 0,
+        lon: Number(wp.pos_long) || 0,
+        ident: wp.ident || '',
       })),
-      flightNumber: extractTag(generalText, 'flight_number') || '',
-      departure: extractTag(originText, 'icao_code') || '',
-      arrival: extractTag(destText, 'icao_code') || '',
+      flightNumber: generalData.flight_number || '',
+      departure: originData.icao_code || '',
+      arrival: destinationData.icao_code || '',
     };
 
-    return NextResponse.json([flightPlan]);
+    return NextResponse.json(flightPlan);
   } catch (err) {
     console.error('API Route Error:', err);
     return NextResponse.json(
