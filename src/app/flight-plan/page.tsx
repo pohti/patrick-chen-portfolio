@@ -40,7 +40,7 @@ const Home = () => {
   const [error, setError] = useState<string | null>(null);
 
   // Collapsible waypoints state
-  const [showWaypoints, setShowWaypoints] = useState<boolean>(true);
+  const [showWaypoints, setShowWaypoints] = useState<boolean>(false);
 
   // Fetch all flight plans for the user
   useEffect(() => {

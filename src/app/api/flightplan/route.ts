@@ -83,13 +83,13 @@ export async function GET() {
     const flightPlan = {
       id: ofp.params?.request_id || '',
       origin: {
-        lat: Number(originData.lat) || 0,
-        lon: Number(originData.lon) || 0,
+        lat: Number(originData.pos_lat) || 0,
+        lon: Number(originData.pos_long) || 0,
         ident: originData.icao_code || '',
       },
       destination: {
-        lat: Number(destinationData.lat) || 0,
-        lon: Number(destinationData.lon) || 0,
+        lat: Number(destinationData.pos_lat) || 0,
+        lon: Number(destinationData.pos_long) || 0,
         ident: destinationData.icao_code || '',
       },
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
