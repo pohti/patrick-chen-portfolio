@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import FlightInfoHeader from './FlightInfoHeader';
+import FlightInfo from './FlightInfo';
 import styles from './flightplan.module.css';
 
 // Remove this line from imports:
@@ -128,7 +128,7 @@ const Home = () => {
       <div className="w-full max-w-5xl rounded-xl overflow-hidden shadow-lg h-[60vh] md:h-[70vh] flex-grow flex flex-col gap-4">
         {flightPlan ? (
           <div className={styles.mainContainer}>
-            <FlightInfoHeader flightPlan={flightPlan} />
+            <FlightInfo flightPlan={flightPlan} />
 
             <Map
               center={mapCenter || [0, 0]}

@@ -6,7 +6,7 @@ interface Props {
   flightPlan: FlightPlanData;
 }
 
-const FlightInfoHeader = ({ flightPlan }: Props) => {
+const FlightInfo = ({ flightPlan }: Props) => {
   // Collapsible waypoints state
   const [showWaypoints, setShowWaypoints] = useState<boolean>(false);
 
@@ -103,4 +103,4 @@ const FlightInfoHeader = ({ flightPlan }: Props) => {
   );
 };
 
-export default FlightInfoHeader;
+export default FlightInfo;
