@@ -30,6 +30,23 @@ interface MapProps {
 }
 
 const MapComponent = ({ center, zoom, route }: MapProps) => {
+  // Validate center: ensure it's two finite numbers
+  const isValidCenter =
+    Array.isArray(center) &&
+    center.length === 2 &&
+    Number.isFinite(center[0]) &&
+    Number.isFinite(center[1]);
+  const safeCenter: [number, number] = isValidCenter ? center : [0, 0];
+
+  // Prepare validated positions for polyline/markers
+  const positions: LatLngExpression[] = route
+    .map((p) => [Number(p.lat), Number(p.lon)] as LatLngExpression)
+    .filter(
+      (pt) =>
+        Array.isArray(pt) &&
+        Number.isFinite(pt[0] as number) &&
+        Number.isFinite(pt[1] as number)
+    );
   // Child component to recenter the map when `center` or `zoom` change.
   const Recenter = ({
     center,
@@ -49,7 +66,7 @@ const MapComponent = ({ center, zoom, route }: MapProps) => {
   };
   return (
     <MapContainer
-      center={center}
+      center={safeCenter}
       zoom={zoom}
       scrollWheelZoom={true}
       style={{ height: '100%', width: '100%' }}
@@ -58,18 +75,12 @@ const MapComponent = ({ center, zoom, route }: MapProps) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      <Recenter center={center} zoom={zoom} />
-      <Polyline
-        positions={route.map((p) => [p.lat, p.lon]) as LatLngExpression[]}
-        color="#3b82f6"
-        weight={4}
-      />
-      {route.map((p, index) => (
-        <Marker
-          key={index}
-          position={[p.lat, p.lon] as LatLngExpression}
-          title={p.ident}
-        />
+      <Recenter center={safeCenter} zoom={zoom} />
+      {positions.length > 0 && (
+        <Polyline positions={positions} color="#3b82f6" weight={4} />
+      )}
+      {positions.map((pos, index) => (
+        <Marker key={index} position={pos} />
       ))}
     </MapContainer>
   );
