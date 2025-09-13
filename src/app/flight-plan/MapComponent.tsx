@@ -1,4 +1,11 @@
-import { MapContainer, TileLayer, Polyline, Marker } from 'react-leaflet';
+import React from 'react';
+import {
+  MapContainer,
+  TileLayer,
+  Polyline,
+  Marker,
+  useMap,
+} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { LatLngExpression } from 'leaflet';
@@ -23,6 +30,23 @@ interface MapProps {
 }
 
 const MapComponent = ({ center, zoom, route }: MapProps) => {
+  // Child component to recenter the map when `center` or `zoom` change.
+  const Recenter = ({
+    center,
+    zoom,
+  }: {
+    center: [number, number];
+    zoom: number;
+  }) => {
+    const map = useMap();
+    // setView will move the map even after initial mount
+    React.useEffect(() => {
+      if (center && Array.isArray(center) && center.length === 2) {
+        map.setView(center as LatLngExpression, zoom);
+      }
+    }, [center, zoom, map]);
+    return null;
+  };
   return (
     <MapContainer
       center={center}
@@ -34,6 +58,7 @@ const MapComponent = ({ center, zoom, route }: MapProps) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
+      <Recenter center={center} zoom={zoom} />
       <Polyline
         positions={route.map((p) => [p.lat, p.lon]) as LatLngExpression[]}
         color="#3b82f6"

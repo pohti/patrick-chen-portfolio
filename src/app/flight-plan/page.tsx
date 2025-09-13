@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import styles from './flightplan.module.css';
 
 // Remove this line from imports:
 // import { fetchLatestFlightPlan, FlightPlanData } from './flightplanApi';
@@ -94,7 +95,26 @@ const Home = () => {
       const centerLat = (minLat + maxLat) / 2;
       const centerLon = (minLon + maxLon) / 2;
       setMapCenter([centerLat, centerLon]);
-      setMapZoom(6);
+
+      console.log('Map Center:', centerLat, centerLon);
+      console.log('Lat Range:', minLat, maxLat);
+      console.log('Lon Range:', minLon, maxLon);
+
+      // Determine a reasonable zoom based on span of the route
+      const latSpan = maxLat - minLat;
+      const lonSpan = Math.abs(maxLon - minLon);
+      const maxSpan = Math.max(latSpan, lonSpan);
+
+      // Rough heuristics for zoom (Leaflet-like): larger span -> smaller zoom
+      let zoom = 10;
+      if (maxSpan > 40) zoom = 3;
+      else if (maxSpan > 20) zoom = 4;
+      else if (maxSpan > 10) zoom = 5;
+      else if (maxSpan > 5) zoom = 6;
+      else if (maxSpan > 2) zoom = 7;
+      else zoom = 9;
+
+      setMapZoom(zoom);
     }
   }, [flightPlan]);
 
@@ -109,61 +129,61 @@ const Home = () => {
             {error}
           </div>
         )}
-        {flightPlan && (
-          <div className="p-3 rounded-lg border bg-gray-50 text-gray-800">
-            <div className="font-bold">
-              {flightPlan.flightNumber ? `${flightPlan.flightNumber}: ` : ''}
-              {flightPlan.departure} → {flightPlan.arrival}
-            </div>
-            <div className="text-sm text-gray-600 mt-1">
-              {flightPlan.origin.ident} → {flightPlan.destination.ident}
-            </div>
-          </div>
-        )}
       </div>
       {/* Map Container */}
       <div className="w-full max-w-5xl rounded-xl overflow-hidden shadow-lg h-[60vh] md:h-[70vh] flex-grow flex flex-col gap-4">
         {flightPlan ? (
           <>
-            <div className="bg-white rounded-xl shadow-md p-6 mb-2 w-full max-w-2xl mx-auto">
-              <h3 className="text-2xl font-bold text-blue-700 mb-2">
+            <div
+              className={`${styles.detailCard} rounded-xl p-6 mb-2 w-full max-w-2xl mx-auto`}
+            >
+              <h3 className={`${styles.flightHeading} text-2xl mb-2`}>
                 {flightPlan.flightNumber
                   ? `Flight ${flightPlan.flightNumber}`
                   : 'Flight Plan'}
               </h3>
               <div className="flex flex-row items-center gap-4 mb-2">
-                <span className="font-semibold text-gray-700">Origin:</span>
-                <span className="px-2 py-1 bg-blue-100 rounded text-blue-800 font-mono">
-                  {flightPlan.origin.ident}
-                </span>
-                <span className="text-gray-500">
-                  ({flightPlan.origin.lat}, {flightPlan.origin.lon})
-                </span>
+                <div className={styles.infoRow}>
+                  <span className={styles.badge}>Origin</span>
+                  <div className="ml-2">
+                    <div className="font-semibold">
+                      {flightPlan.origin.ident}
+                    </div>
+                    <div className={styles.meta}>
+                      ({flightPlan.origin.lat}, {flightPlan.origin.lon})
+                    </div>
+                  </div>
+                </div>
                 <span className="mx-2 text-gray-400">→</span>
-                <span className="font-semibold text-gray-700">
-                  Destination:
-                </span>
-                <span className="px-2 py-1 bg-green-100 rounded text-green-800 font-mono">
-                  {flightPlan.destination.ident}
-                </span>
-                <span className="text-gray-500">
-                  ({flightPlan.destination.lat}, {flightPlan.destination.lon})
-                </span>
+                <div className={styles.infoRow}>
+                  <span className={styles.badge}>Destination</span>
+                  <div className="ml-2">
+                    <div className="font-semibold">
+                      {flightPlan.destination.ident}
+                    </div>
+                    <div className={styles.meta}>
+                      ({flightPlan.destination.lat},{' '}
+                      {flightPlan.destination.lon})
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className="flex gap-6 mb-4">
                 <div>
-                  <span className="font-semibold text-gray-700">
-                    Departure:
-                  </span>
-                  <span className="ml-2 text-gray-800">
-                    {flightPlan.departure}
-                  </span>
+                  <div className={styles.infoRow}>
+                    <span className={styles.badge}>Departure</span>
+                    <div className="ml-2 font-semibold">
+                      {flightPlan.departure}
+                    </div>
+                  </div>
                 </div>
                 <div>
-                  <span className="font-semibold text-gray-700">Arrival:</span>
-                  <span className="ml-2 text-gray-800">
-                    {flightPlan.arrival}
-                  </span>
+                  <div className={styles.infoRow}>
+                    <span className={styles.badge}>Arrival</span>
+                    <div className="ml-2 font-semibold">
+                      {flightPlan.arrival}
+                    </div>
+                  </div>
                 </div>
               </div>
               <div>
@@ -182,12 +202,12 @@ const Home = () => {
 
                 {showWaypoints && (
                   <div className="overflow-x-auto">
-                    <table className="min-w-full text-xs border border-gray-200 rounded">
+                    <table className={styles.waypointsTable}>
                       <thead>
-                        <tr className="bg-gray-100">
-                          <th className="px-2 py-1 text-left">Ident</th>
-                          <th className="px-2 py-1 text-left">Latitude</th>
-                          <th className="px-2 py-1 text-left">Longitude</th>
+                        <tr>
+                          <th>Ident</th>
+                          <th>Latitude</th>
+                          <th>Longitude</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -196,15 +216,15 @@ const Home = () => {
                             key={idx}
                             className={
                               idx === 0
-                                ? 'bg-blue-50'
+                                ? styles.rowFirst
                                 : idx === flightPlan.route.length - 1
-                                  ? 'bg-green-50'
+                                  ? styles.rowLast
                                   : ''
                             }
                           >
-                            <td className="px-2 py-1 font-mono">{wp.ident}</td>
-                            <td className="px-2 py-1">{wp.lat}</td>
-                            <td className="px-2 py-1">{wp.lon}</td>
+                            <td className="font-mono">{wp.ident}</td>
+                            <td>{wp.lat}</td>
+                            <td>{wp.lon}</td>
                           </tr>
                         ))}
                       </tbody>

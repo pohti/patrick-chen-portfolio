@@ -1,0 +1,79 @@
+.summary {
+  background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+  color: var(--font-color-white);
+  border: 1px solid var(--border);
+}
+
+.summary .title {
+  font-weight: 700;
+  color: var(--font-color-white);
+}
+
+.summary .sub {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+}
+
+.detailCard {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  border: 1px solid var(--border);
+  color: var(--font-color-white);
+}
+
+.flightHeading {
+  color: var(--font-color-primary);
+  font-weight: 700;
+}
+
+.infoRow {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  color: var(--font-color-white);
+}
+
+.badge {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--font-color-white);
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+}
+
+.meta {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.9rem;
+}
+
+.waypointsTable {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+.waypointsTable thead th {
+  text-align: left;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--font-color-primary);
+  font-weight: 700;
+}
+
+.waypointsTable tbody td {
+  padding: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  color: var(--font-color-white);
+}
+
+.rowFirst {
+  background: rgba(59, 130, 246, 0.06);
+}
+
+.rowLast {
+  background: rgba(16, 185, 129, 0.04);
+}
