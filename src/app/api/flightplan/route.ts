@@ -71,7 +71,27 @@ export async function GET() {
     const originData = ofp.origin || {};
     const destinationData = ofp.destination || {};
     const generalData = ofp.general || {};
+    const aircraftData = ofp.aircraft || {};
+    const timesData = ofp.times || {};
+    const releaseData = ofp.release || {};
+    const advancedData = ofp.advanced || {};
+    const paramsData = ofp.params || {};
     const navlogData = ofp.navlog || {};
+    const statsData = ofp.stats || {};
+    const fuelData = ofp.fuel || {};
+    const altPlanData = ofp.alternate || {};
+
+    // Helper to safely pick string values
+    const pick = <T extends Record<string, unknown>>(
+      obj: T | undefined,
+      key: string
+    ): string => {
+      if (!obj) return '';
+      const val = obj[key];
+      return typeof val === 'string' || typeof val === 'number'
+        ? String(val)
+        : '';
+    };
 
     const rawWaypoints = navlogData?.fix;
     const waypointsArray = rawWaypoints
@@ -81,16 +101,22 @@ export async function GET() {
       : [];
 
     const flightPlan = {
-      id: ofp.params?.request_id || '',
+      id: paramsData?.request_id || '',
       origin: {
         lat: Number(originData.pos_lat) || 0,
         lon: Number(originData.pos_long) || 0,
         ident: originData.icao_code || '',
+        name: originData.name || '',
       },
       destination: {
         lat: Number(destinationData.pos_lat) || 0,
         lon: Number(destinationData.pos_long) || 0,
         ident: destinationData.icao_code || '',
+        name: destinationData.name || '',
+      },
+      alternate: {
+        ident: altPlanData?.icao_code || '',
+        name: altPlanData?.name || '',
       },
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       route: waypointsArray.map((wp: any) => ({
@@ -99,8 +125,35 @@ export async function GET() {
         ident: wp.ident || '',
       })),
       flightNumber: generalData.flight_number || '',
+      callsign: generalData.callsign || generalData.flight_number || '',
       departure: originData.icao_code || '',
       arrival: destinationData.icao_code || '',
+      departureDate: generalData.date || '',
+      aircraftIcao: aircraftData.icao_code || '',
+      aircraftRegistration: aircraftData.reg || '',
+      airframe: aircraftData.name || '',
+      initialAltitude:
+        pick(generalData, 'initial_altitude') ||
+        pick(advancedData, 'initial_altitude') ||
+        '',
+      cruiseProfile:
+        pick(generalData, 'cruise_profile') ||
+        pick(advancedData, 'cruise_profile') ||
+        '',
+      routeDistance:
+        statsData?.plan_rte_distance || statsData?.plan_distance || '',
+      avgWind: statsData?.avg_wind || '',
+      windComponent: statsData?.wind_component || '',
+      isaDeviation: statsData?.isa_dev || '',
+      releaseNumber: releaseData?.release_number || '',
+      airacCycle: paramsData?.airac_cycle || '',
+      ofpLayout: paramsData?.layout || '',
+      units: paramsData?.units || '',
+      navlogRemarks: navlogData?.remarks || '',
+      etops: advancedData?.etops ? 'Yes' : 'No',
+      blockTime: timesData?.blocktime || '',
+      airTime: timesData?.air_time || timesData?.airtime || '',
+      fuelPlan: fuelData?.plan_ramp || '',
     };
 
     return NextResponse.json(flightPlan);

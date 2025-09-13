@@ -30,29 +30,39 @@ const FlightInfoCard = ({ title, data }: Props) => {
         {title}
       </span>
       <hr style={{ borderColor: '#d4d4d42a' }} />
-      <Row gutter={[16, 28]} style={{ marginTop: '15px' }}>
+      <Row gutter={[16, 18]} style={{ marginTop: '15px' }}>
         {data.map((item, index) => (
-          <Col className="gutter-row" span={4} key={index}>
+          <Col key={index} xs={12} sm={8} md={6} lg={6} xl={4}>
             <div
-              className="d-flex flex-column mb-2"
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                textAlign: 'center',
-                gap: '10px',
+                alignItems: 'flex-start',
+                textAlign: 'left',
+                gap: '6px',
+                minHeight: '68px',
               }}
             >
               <div
                 style={{
                   color: '#d4d4d487',
+                  fontSize: '0.65rem',
+                  letterSpacing: '0.6px',
+                  textTransform: 'uppercase',
+                  fontWeight: 500,
                 }}
               >
                 {item.label}
               </div>
-              <div>
-                <b>{item.value}</b>
+              <div
+                style={{
+                  fontWeight: 600,
+                  wordBreak: 'break-word',
+                  fontSize: '0.9rem',
+                  lineHeight: 1.2,
+                }}
+              >
+                {item.value || '—'}
               </div>
             </div>
           </Col>

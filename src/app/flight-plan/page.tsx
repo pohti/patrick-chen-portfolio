@@ -16,12 +16,33 @@ type Waypoint = {
 
 export type FlightPlanData = {
   id: string;
-  origin: { lat: number; lon: number; ident: string };
-  destination: { lat: number; lon: number; ident: string };
+  origin: { lat: number; lon: number; ident: string; name?: string };
+  destination: { lat: number; lon: number; ident: string; name?: string };
+  alternate?: { ident: string; name?: string };
   route: Waypoint[];
   flightNumber: string;
-  departure: string;
-  arrival: string;
+  callsign: string;
+  departure: string; // ICAO
+  arrival: string; // ICAO
+  departureDate?: string;
+  aircraftIcao?: string;
+  aircraftRegistration?: string;
+  airframe?: string;
+  initialAltitude?: string;
+  cruiseProfile?: string;
+  routeDistance?: string;
+  avgWind?: string;
+  windComponent?: string;
+  isaDeviation?: string;
+  releaseNumber?: string;
+  airacCycle?: string;
+  ofpLayout?: string;
+  units?: string;
+  navlogRemarks?: string;
+  etops?: string; // Yes/No
+  blockTime?: string;
+  airTime?: string;
+  fuelPlan?: string;
 };
 
 const fetchLatestFlightPlan = async (): Promise<FlightPlanData> => {

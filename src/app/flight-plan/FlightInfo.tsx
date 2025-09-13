@@ -107,34 +107,40 @@ const FlightInfo = ({ flightPlan }: Props) => {
         title="Flight Info"
         data={[
           { label: 'Flight Number', value: flightPlan.flightNumber || 'N/A' },
-          { label: 'Callsign', value: 'ABCD' },
-          { label: 'Departure', value: flightPlan.departure },
-          { label: 'Arrival', value: flightPlan.arrival },
-          { label: 'Alternate', value: 'ABCD' },
-          { label: 'Aircraft', value: 'ABCD' },
-          { label: 'Departure Date', value: 'ABCD' },
-          { label: 'Departure', value: 'ABCD' },
-          { label: 'Arrival', value: 'ABCD' },
-          { label: 'Air Time', value: 'ABCD' },
-          { label: 'Block Time', value: 'ABCD' },
-          { label: 'Air Frame', value: 'ABCD' },
+          { label: 'Callsign', value: flightPlan.callsign || '—' },
+          { label: 'Departure', value: flightPlan.departure || '—' },
+          { label: 'Arrival', value: flightPlan.arrival || '—' },
+          { label: 'Alternate', value: flightPlan.alternate?.ident || '—' },
+          { label: 'Aircraft ICAO', value: flightPlan.aircraftIcao || '—' },
+          {
+            label: 'Registration',
+            value: flightPlan.aircraftRegistration || '—',
+          },
+          { label: 'Departure Date', value: flightPlan.departureDate || '—' },
+          { label: 'Air Time', value: flightPlan.airTime || '—' },
+          { label: 'Block Time', value: flightPlan.blockTime || '—' },
+          { label: 'Air Frame', value: flightPlan.airframe || '—' },
+          { label: 'Fuel Plan (Ramp)', value: flightPlan.fuelPlan || '—' },
         ]}
       />
       <FlightInfoCard
         title="Flight Plan Summary"
         data={[
-          { label: 'Initial Altitude', value: 'ABCD' },
-          { label: 'Cruise Profile', value: 'ABCD' },
-          { label: 'Route Distance', value: 'ABCD' },
-          { label: 'Average Wind', value: 'ABCD' },
-          { label: 'Wind Component', value: 'ABCD' },
-          { label: 'ISA Deviation', value: 'ABCD' },
-          { label: 'Release Number', value: 'ABCD' },
-          { label: 'AIRAC Cycle', value: 'ABCD' },
-          { label: 'OFP Layout', value: 'ABCD' },
-          { label: 'Units', value: 'ABCD' },
-          { label: 'Navlog', value: 'ABCD' },
-          { label: 'ETOPS', value: 'ABCD' },
+          {
+            label: 'Initial Altitude',
+            value: flightPlan.initialAltitude || '—',
+          },
+          { label: 'Cruise Profile', value: flightPlan.cruiseProfile || '—' },
+          { label: 'Route Distance', value: flightPlan.routeDistance || '—' },
+          { label: 'Average Wind', value: flightPlan.avgWind || '—' },
+          { label: 'Wind Component', value: flightPlan.windComponent || '—' },
+          { label: 'ISA Deviation', value: flightPlan.isaDeviation || '—' },
+          { label: 'Release Number', value: flightPlan.releaseNumber || '—' },
+          { label: 'AIRAC Cycle', value: flightPlan.airacCycle || '—' },
+          { label: 'OFP Layout', value: flightPlan.ofpLayout || '—' },
+          { label: 'Units', value: flightPlan.units || '—' },
+          { label: 'Navlog Remarks', value: flightPlan.navlogRemarks || '—' },
+          { label: 'ETOPS', value: flightPlan.etops || '—' },
         ]}
       />
     </div>
