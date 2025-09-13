@@ -4,6 +4,7 @@ import {
   TileLayer,
   Polyline,
   Marker,
+  Popup,
   useMap,
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -87,6 +88,15 @@ const MapComponent = ({ center, zoom, route }: MapProps) => {
       </div>
     );
   }
+  // create svgIcon once
+  const svgHtml = `<img src="/square.svg" style="width:18px;height:18px;display:block;"/>`;
+  const svgIcon = L.divIcon({
+    html: svgHtml,
+    className: '',
+    iconSize: [18, 18],
+    iconAnchor: [9, 9],
+  });
+
   return (
     <MapContainer
       center={safeCenter}
@@ -103,15 +113,21 @@ const MapComponent = ({ center, zoom, route }: MapProps) => {
         <Polyline positions={positions} color="#1e1e1e" weight={2} />
       )}
       {/* Use a custom SVG marker (no shadow box). Place your square.svg in `public/` and reference it below. */}
-      {positions.map((pos, index) => {
-        const svgHtml = `<img src="/square.svg" style="width:18px;height:18px;display:block;"/>`;
-        const svgIcon = L.divIcon({
-          html: svgHtml,
-          className: '',
-          iconSize: [18, 18],
-          iconAnchor: [9, 9],
-        });
-        return <Marker key={index} position={pos} icon={svgIcon} />;
+      {route.map((wp, index) => {
+        const lat = Number(wp.lat);
+        const lon = Number(wp.lon);
+        if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+        const pos: LatLngExpression = [lat, lon];
+        return (
+          <Marker key={index} position={pos} icon={svgIcon}>
+            <Popup>
+              <div style={{ fontFamily: 'var(--font-sans)', fontSize: 13 }}>
+                <div style={{ fontWeight: 700 }}>{wp.ident}</div>
+                <div>{`${lat.toFixed(6)}, ${lon.toFixed(6)}`}</div>
+              </div>
+            </Popup>
+          </Marker>
+        );
       })}
     </MapContainer>
   );
