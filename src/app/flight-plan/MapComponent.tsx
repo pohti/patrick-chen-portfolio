@@ -10,12 +10,7 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { LatLngExpression } from 'leaflet';
 
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl:
-    'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png',
-  iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
-});
+// Don't override the global default icon — we'll use a custom SVG divIcon per marker.
 
 interface Waypoint {
   lat: number;
@@ -105,11 +100,19 @@ const MapComponent = ({ center, zoom, route }: MapProps) => {
       />
       <Recenter center={safeCenter} zoom={zoom} />
       {positions.length > 0 && (
-        <Polyline positions={positions} color="#3b82f6" weight={4} />
+        <Polyline positions={positions} color="#1e1e1e" weight={2} />
       )}
-      {positions.map((pos, index) => (
-        <Marker key={index} position={pos} />
-      ))}
+      {/* Use a custom SVG marker (no shadow box). Place your square.svg in `public/` and reference it below. */}
+      {positions.map((pos, index) => {
+        const svgHtml = `<img src="/square.svg" style="width:18px;height:18px;display:block;"/>`;
+        const svgIcon = L.divIcon({
+          html: svgHtml,
+          className: '',
+          iconSize: [18, 18],
+          iconAnchor: [9, 9],
+        });
+        return <Marker key={index} position={pos} icon={svgIcon} />;
+      })}
     </MapContainer>
   );
 };
