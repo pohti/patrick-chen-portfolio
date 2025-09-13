@@ -58,12 +58,40 @@ const MapComponent = ({ center, zoom, route }: MapProps) => {
     const map = useMap();
     // setView will move the map even after initial mount
     React.useEffect(() => {
-      if (center && Array.isArray(center) && center.length === 2) {
-        map.setView(center as LatLngExpression, zoom);
+      try {
+        if (
+          center &&
+          Array.isArray(center) &&
+          center.length === 2 &&
+          Number.isFinite(center[0]) &&
+          Number.isFinite(center[1])
+        ) {
+          map.setView(center as LatLngExpression, zoom);
+        }
+      } catch (err) {
+        // Swallow mapping errors to avoid breaking the page
+        console.error('Map setView error', err);
       }
     }, [center, zoom, map]);
     return null;
   };
+
+  // If we don't have a valid center and no valid positions, avoid mounting Leaflet
+  if (!isValidCenter && positions.length === 0) {
+    return (
+      <div
+        style={{
+          height: '100%',
+          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <div style={{ color: '#999' }}>Map unavailable</div>
+      </div>
+    );
+  }
   return (
     <MapContainer
       center={safeCenter}

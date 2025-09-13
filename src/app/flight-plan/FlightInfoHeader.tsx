@@ -12,7 +12,7 @@ const FlightInfoHeader = ({ flightPlan }: Props) => {
 
   return (
     <div
-      className={`${styles.detailCard} rounded-xl p-6 mb-2 w-full max-w-2xl mx-auto`}
+      className={`${styles.detailCard} rounded-xl mb-2 w-full max-w-2xl mx-auto`}
     >
       <h3 className={`${styles.flightHeading} text-2xl mb-2`}>
         {flightPlan.flightNumber

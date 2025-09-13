@@ -1,3 +1,13 @@
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: var(--bg);
+  min-height: 100vh;
+  font-family: var(--font-sans);
+}
+
 .summary {
   background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
   color: var(--font-color-white);

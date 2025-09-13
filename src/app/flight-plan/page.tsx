@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import FlightInfoHeader from './FlightInfoHeader';
+import styles from './flightplan.module.css';
 
 // Remove this line from imports:
 // import { fetchLatestFlightPlan, FlightPlanData } from './flightplanApi';
@@ -115,22 +116,18 @@ const Home = () => {
     }
   }, [flightPlan]);
 
+  if (error) {
+    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded-lg mb-2">
+      {error}
+    </div>;
+  }
+
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row items-stretch justify-center p-4 gap-4">
-      {/* Sidebar for flight plan selection */}
-      <div className="bg-white rounded-xl shadow-lg p-4 w-full md:w-80 mb-4 md:mb-0 flex-shrink-0">
-        <h2 className="text-xl font-bold mb-4 text-gray-800">Flight Plan</h2>
-        {isLoading && <div className="text-gray-500">Loading...</div>}
-        {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded-lg mb-2">
-            {error}
-          </div>
-        )}
-      </div>
+    <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row items-stretch justify-center p-2 gap-4">
       {/* Map Container */}
       <div className="w-full max-w-5xl rounded-xl overflow-hidden shadow-lg h-[60vh] md:h-[70vh] flex-grow flex flex-col gap-4">
         {flightPlan ? (
-          <>
+          <div className={styles.mainContainer}>
             <FlightInfoHeader flightPlan={flightPlan} />
 
             <Map
@@ -138,7 +135,7 @@ const Home = () => {
               zoom={mapZoom}
               route={flightPlan?.route || []}
             />
-          </>
+          </div>
         ) : (
           <div className="bg-white h-full w-full flex items-center justify-center text-gray-500 text-lg">
             {isLoading ? 'Fetching data...' : 'No flight plan available.'}
