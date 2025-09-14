@@ -19,11 +19,7 @@ const TechTags = () => {
   return (
     <div>
       {technologies.map((cur) => {
-        return (
-          <Tag key={cur} color="orange">
-            {cur}
-          </Tag>
-        );
+        return <Tag key={cur}>{cur}</Tag>;
       })}
     </div>
   );
