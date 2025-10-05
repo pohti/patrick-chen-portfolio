@@ -4,7 +4,6 @@ import React from 'react';
 import { mockedNews } from './data';
 import { Empty } from 'antd';
 
-import './News.css';
 import NewsCard from './NewsCard';
 
 const News = () => {
@@ -16,7 +15,7 @@ const News = () => {
 
   return (
     // show something if no news available
-    <div className="news-container">
+    <div>
       {currentNews.length > 0 ? (
         currentNews.map((newsItem) => (
           <NewsCard key={newsItem.url} {...newsItem} />

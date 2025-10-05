@@ -3,6 +3,8 @@
 import { Tag } from 'antd';
 import { type NewsData } from './data';
 
+import styles from './News.module.css';
+
 const NewsCard = ({
   title,
   details,
@@ -11,8 +13,8 @@ const NewsCard = ({
   sentiment,
 }: NewsData) => {
   return (
-    <div className="news-card">
-      <div className="news-card-header-row">
+    <div className={styles.newsCard}>
+      <div className={styles.newsCardHeaderRow}>
         <span>{title}</span>
         {sentiment && (
           <div className="d-flex justify-end align-center">
