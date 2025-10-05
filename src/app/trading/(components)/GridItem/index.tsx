@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
-import Header from './Header';
-import './styles.css';
+import styles from './GridItem.module.css';
 
 interface Props {
   title: string;
@@ -11,8 +10,12 @@ interface Props {
 
 const PositionsGridItem = ({ title, content, contentStyle, ref }: Props) => {
   return (
-    <div className="trading-grid-item" ref={ref}>
-      <Header text={title} />
+    <div className={styles.tradingGridItem} ref={ref}>
+      <div
+        className={`${styles.gridItemHeader} d-flex align-items-center justify-content-start`}
+      >
+        <span>{title}</span>
+      </div>
       <div style={{ padding: '5px', ...(contentStyle || {}) }}>{content}</div>
     </div>
   );

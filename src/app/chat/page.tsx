@@ -4,7 +4,7 @@ import { Input } from 'antd';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { StopOutlined, SendOutlined, LoadingOutlined } from '@ant-design/icons';
-import './chat.css';
+import styles from './Chat.module.css';
 
 const { TextArea } = Input;
 type Message = {
@@ -190,7 +190,7 @@ export default function Chat() {
 
           <div style={{ display: 'flex', width: '100%', gap: '1rem' }}>
             <TextArea
-              className="warren"
+              className={styles.textArea}
               ref={(el) => {
                 if (
                   el &&
@@ -215,7 +215,7 @@ export default function Chat() {
               }}
             />
             <button
-              className="warren-submit-btn"
+              className={styles.warrenSubmitBtn}
               type="submit"
               disabled={loading || !input.trim()}
             >
@@ -291,10 +291,10 @@ export default function Chat() {
               }}
             >
               {msg.role === 'ai' && msg.content === '' && loading ? (
-                <div className="typing">
-                  <span className="typing-dot"></span>
-                  <span className="typing-dot"></span>
-                  <span className="typing-dot"></span>
+                <div className={styles.typing}>
+                  <span className={styles.typingDot}></span>
+                  <span className={styles.typingDot}></span>
+                  <span className={styles.typingDot}></span>
                 </div>
               ) : (
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
@@ -333,7 +333,7 @@ export default function Chat() {
           }}
         >
           <TextArea
-            className="warren"
+            className={styles.textArea}
             ref={(el) => {
               if (
                 el &&
@@ -359,7 +359,7 @@ export default function Chat() {
           />
           {loading ? (
             <button
-              className="warren-submit-btn"
+              className={styles.warrenSubmitBtn}
               type="button"
               onClick={stopRequest}
             >
@@ -367,7 +367,7 @@ export default function Chat() {
             </button>
           ) : (
             <button
-              className="warren-submit-btn"
+              className={styles.warrenSubmitBtn}
               type="submit"
               disabled={!input.trim()}
             >

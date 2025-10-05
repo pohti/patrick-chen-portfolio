@@ -1,4 +1,4 @@
-.trading-grid-item {
+.tradingGridItem {
   border: 1px solid grey;
   border-radius: 0.5rem;
   height: 44vh;
@@ -11,7 +11,7 @@
   }
 } */
 
-.drag-handle {
+.gridItemHeader {
   background-color: var(--bg-primary);
   color: var(--font-color-white);
   padding: 0.5rem;
