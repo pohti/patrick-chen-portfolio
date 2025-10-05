@@ -5,7 +5,7 @@ import './Info.css';
 import News from '@/app/trading/(components)/Info/News/News';
 import Analysis from './Analysis/Analysis';
 import Chart from './Chart/Chart';
-import Tab, { type TabItem } from '@/components/CustomTab';
+import Tab, { type TabItem } from '../CustomTab';
 
 const Info = () => {
   const items: TabItem[] = [

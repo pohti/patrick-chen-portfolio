@@ -1,7 +1,8 @@
 .tradingGridItem {
   border: 1px solid grey;
   border-radius: 0.5rem;
-  height: 44vh;
+  height: 41vh;
+  min-height: 320px;
   overflow: hidden;
   overflow-y: auto;
 }

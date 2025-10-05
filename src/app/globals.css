@@ -70,6 +70,7 @@ main {
 }
 
 footer {
+  display: flex;
   width: 100%;
   background: var(--background);
   color: var(--font-color-white);
@@ -78,13 +79,16 @@ footer {
   text-align: center;
   align-content: center;
   padding: 1.5rem 0;
+
+  justify-content: center;
+  height: 5vh;
+  /* max-height: 50px; */
 }
 
 .footer-links {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  flex-wrap: wrap;
   align-items: center;
 }
 

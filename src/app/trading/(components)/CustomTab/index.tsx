@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import GridItem from '../../app/trading/(components)/GridItem';
+import GridItem from '../GridItem';
 import styles from './CustomTab.module.css';
 
 export interface TabItem {
@@ -20,7 +20,7 @@ const Tab = ({ tabItems }: Props) => {
       <button
         key={index}
         className={item === selectedTab ? styles.selectedTabBtn : styles.tabBtn}
-        style={{ marginRight: '8px', cursor: 'pointer' }}
+        style={{ marginRight: '1rem', cursor: 'pointer' }}
         onClick={() => setSelectedTab(item)}
       >
         {item.label}
