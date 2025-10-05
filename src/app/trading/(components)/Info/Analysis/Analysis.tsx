@@ -5,10 +5,8 @@ import { analysisData } from './data';
 
 const headers = [['Sentiment', 'No. of Analysts']];
 
-const Analysis = ({ active }: { active: boolean }) => {
+const Analysis = () => {
   const { currentEquity } = useEquityStore();
-
-  if (!active) return null;
 
   if (!currentEquity) {
     return (
