@@ -1,55 +1,32 @@
 'use client';
-import React, { useState } from 'react';
-import { Tabs } from 'antd';
-import type { TabsProps } from 'antd';
+import React from 'react';
 
 import './Info.css';
 import News from '@/app/trading/(components)/Info/News/News';
-import Analysis from './Analysis/Analysis';
-import GridItem from '@/app/trading/(components)/GridItem';
+// import Analysis from './Analysis/Analysis';
 import Chart from './Chart/Chart';
+import Tab, { type TabItem } from '@/components/CustomTab';
 
 const Info = () => {
-  const [activeTab, setActiveTab] = useState<string>('chart');
-
-  const items: TabsProps['items'] = [
+  const items: TabItem[] = [
     {
       key: 'chart',
       label: 'Chart',
-      children: <Chart />,
+      content: <Chart />,
     },
     {
       key: 'news',
       label: 'News',
-      children: <News />,
+      content: <News />,
     },
-    {
-      key: 'analysis',
-      label: 'Analysis',
-      children: <Analysis active={activeTab === 'analysis'} />,
-    },
+    // TODO: re-enable analysis tab when prop is fixed
+    // {
+    //   key: 'analysis',
+    //   label: 'Analysis',
+    //   content: <Analysis />,
+    // },
   ];
-  return (
-    <GridItem
-      title="Info"
-      content={
-        <div style={{ height: '100%', width: '100%' }}>
-          <Tabs
-            defaultActiveKey={activeTab}
-            activeKey={activeTab}
-            items={items}
-            onChange={setActiveTab}
-            tabBarStyle={{
-              color: 'var(--font-color-white)',
-              border: 'red',
-            }}
-            style={{ height: '100%' }}
-          />
-        </div>
-      }
-      contentStyle={{ height: '100%', width: '100%' }}
-    />
-  );
+  return <Tab tabItems={items} />;
 };
 
 export default Info;

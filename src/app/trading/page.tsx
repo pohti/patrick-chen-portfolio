@@ -1,8 +1,9 @@
 'use client';
-import Info from './(components)/Info';
+// import Info from './(components)/Info';
 import { Col, Row } from 'antd';
 import Positions from './(components)/Positions';
 import Instruments from './(components)/Instruments';
+import Info from './(components)/Info';
 
 const Page = () => {
   return (

@@ -3,6 +3,7 @@
   border-radius: 0.5rem;
   height: 44vh;
   overflow: hidden;
+  overflow-y: auto;
 }
 
 /* @media (max-height: 900px) {
@@ -15,4 +16,5 @@
   background-color: var(--bg-primary);
   color: var(--font-color-white);
   padding: 0.5rem;
+  height: 2.2rem;
 }

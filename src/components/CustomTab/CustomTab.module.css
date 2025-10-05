@@ -1,0 +1,14 @@
+.selectedTabBtn {
+  background-color: var(--font-color-secondary);
+  color: var(--font-color-white);
+  border-radius: 4px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+}
+
+.tabBtn {
+  background-color: transparent;
+  border: none;
+  color: var(--font-color-white);
+}
