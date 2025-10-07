@@ -28,6 +28,7 @@ export default function Chat() {
     'Is Bitcoin a good hedge against inflation?',
     'What are the risks of government bonds?',
     'How should a beginner diversify their portfolio?',
+    'What do you think about this article? [insert URL here]',
   ];
 
   async function sendMessage(customMessage?: string) {
