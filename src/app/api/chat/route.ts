@@ -1,10 +1,19 @@
 import OpenAI from 'openai';
 
+interface ChatMessage {
+  role: 'system' | 'user' | 'assistant';
+  content: string;
+}
+
+interface ChatRequest {
+  messages: ChatMessage[];
+}
+
 const DAILY_LIMIT = 1000;
 let dailyCount = 0;
 let lastReset = Date.now();
 
-const client = new OpenAI({
+const openAiClient = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY!,
 });
 
@@ -50,15 +59,12 @@ export async function POST(req: Request): Promise<Response> {
   dailyCount += 1;
 
   try {
-    const { message } = (await req.json()) as { message: string };
+    const { messages }: ChatRequest = await req.json();
 
-    const stream = await client.chat.completions.create({
+    const stream = await openAiClient.chat.completions.create({
       model: 'gpt-4o-mini',
       stream: true,
-      messages: [
-        { role: 'system', content: SYSTEM_PROMPT },
-        { role: 'user', content: message },
-      ],
+      messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...messages],
     });
 
     const encoder = new TextEncoder();

@@ -8,7 +8,7 @@ import styles from './Chat.module.css';
 
 const { TextArea } = Input;
 type Message = {
-  role: 'user' | 'ai';
+  role: 'user' | 'assistant';
   content: string;
 };
 
@@ -40,15 +40,18 @@ export default function Chat() {
     setAbortController(controller);
 
     // Add user message
-    setMessages((prev) => [...prev, { role: 'user', content: messageToSend }]);
+    const newUserMessage = { role: 'user' as const, content: messageToSend };
+    const updatedMessages = [...messages, newUserMessage];
+    setMessages((prev) => [...prev, newUserMessage]);
     // Add placeholder AI message
-    setMessages((prev) => [...prev, { role: 'ai', content: '' }]);
+    // necessary to provide immediate visual feedback, loading state indication and prevents UI jump
+    setMessages((prev) => [...prev, { role: 'assistant', content: '' }]);
 
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: messageToSend }),
+        body: JSON.stringify({ messages: updatedMessages }),
         signal: controller.signal, // attach abort signal
       });
 
@@ -76,7 +79,10 @@ export default function Chat() {
           aiContent += chunk;
           setMessages((prev) => {
             const updated = [...prev];
-            updated[updated.length - 1] = { role: 'ai', content: aiContent };
+            updated[updated.length - 1] = {
+              role: 'assistant',
+              content: aiContent,
+            };
             return updated;
           });
         }
@@ -290,7 +296,7 @@ export default function Chat() {
                     : '0 2px 8px rgba(30,30,30,0.08)',
               }}
             >
-              {msg.role === 'ai' && msg.content === '' && loading ? (
+              {msg.role === 'assistant' && msg.content === '' && loading ? (
                 <div className={styles.typing}>
                   <span className={styles.typingDot}></span>
                   <span className={styles.typingDot}></span>
