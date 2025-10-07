@@ -4,7 +4,6 @@
   height: 41vh;
   min-height: 320px;
   overflow: hidden;
-  overflow-y: auto;
 }
 
 /* @media (max-height: 900px) {
@@ -18,4 +17,15 @@
   color: var(--font-color-white);
   padding: 0.5rem;
   height: 2.2rem;
+}
+
+.gridItemContent {
+  padding: 5px;
+  height: inherit;
+  overflow-y: auto;
+  scrollbar-width: thin; /* For Firefox */
+}
+
+.gridItemContent::-webkit-scrollbar {
+  width: 5px; /* For Chrome, Safari, Edge */
 }

@@ -16,7 +16,9 @@ const PositionsGridItem = ({ title, content, contentStyle, ref }: Props) => {
       >
         {title}
       </div>
-      <div style={{ padding: '5px', ...(contentStyle || {}) }}>{content}</div>
+      <div className={styles.gridItemContent} style={contentStyle}>
+        {content}
+      </div>
     </div>
   );
 };

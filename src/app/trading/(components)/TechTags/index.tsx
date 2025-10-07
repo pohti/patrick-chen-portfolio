@@ -17,7 +17,14 @@ const technologies = [
 
 const TechTags = () => {
   return (
-    <div>
+    <div
+      style={{
+        display: 'flex',
+        gap: '8px',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+      }}
+    >
       {technologies.map((cur) => {
         return <Tag key={cur}>{cur}</Tag>;
       })}
