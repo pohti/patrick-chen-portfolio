@@ -2,7 +2,6 @@
 
 import { type City, majorCities } from './cities';
 import weatherCache from './cache';
-import { cache } from 'react';
 
 // OpenWeatherMap API configuration (server-side only)
 const API_KEY = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;

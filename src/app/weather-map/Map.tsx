@@ -28,7 +28,9 @@ export default function Map({ cities }: MapProps) {
     // Initialize map
     const map = L.map(mapContainerRef.current, {
       center: [20, 0],
-      zoom: 2,
+      zoom: 3,
+      minZoom: 3, // Prevent zooming out beyond level 3
+      maxZoom: 18, // Optional: also limit zoom in
       zoomControl: true,
       attributionControl: true,
     });
@@ -55,38 +57,61 @@ export default function Map({ cities }: MapProps) {
     // Get temperature color based on value
     const getTemperatureColor = (temp?: number): string => {
       if (!temp) return '#808080';
-      if (temp < 10) return '#3B82F6'; // Blue
+      if (temp < 0) return '#287aedff'; // Blue
+      if (temp < 10) return '#3bf6e0ff'; // Blue
       if (temp < 20) return '#10B981'; // Green
+      if (temp < 25) return '#c4e025ff'; // Green
       if (temp < 30) return '#F59E0B'; // Yellow
       return '#EF4444'; // Red
     };
 
     // Create custom icon for city markers
     const createCityIcon = (city: City) => {
-      const color = getTemperatureColor(city.temperature);
-      const temp = city.temperature ? `${city.temperature}°C` : 'N/A';
+      const temperatureColor = getTemperatureColor(city.temperature);
+      const temp = city.temperature ? `${city.temperature}°` : 'N/A';
+
+      // Calculate approximate width based on content
+      const tempWidth = temp.length * 7 + 10; // ~7px per char + padding
+      const nameWidth = city.name.length * 5 + 8; // ~6px per char + padding
+      const totalWidth = tempWidth + nameWidth + 8; // extra margin
+      console.log({ tempWidth, nameWidth, totalWidth });
+
+      // Set minimum and maximum width constraints
+      const minWidth = 60;
+      const maxWidth = 200;
+      const dynamicWidth = Math.max(minWidth, Math.min(maxWidth, totalWidth));
 
       return L.divIcon({
         className: 'custom-marker',
         html: `
           <div style="
-            background: white;
-            border: 2px solid ${color};
-            border-radius: 8px;
-            padding: 4px 8px;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            font-size: 12px;
-            font-weight: bold;
+            display: flex;
+            align-items: center;
+            padding: 1.5px;
+            font-family: system-ui, -apple-system, sans-serif;
+            font-weight: 500;
             white-space: nowrap;
-            min-width: 60px;
+            overflow: hidden;
           ">
-            <div style="color: ${color}; font-size: 11px;">${city.name}</div>
-            <div style="color: ${color}; font-size: 10px;">${temp}</div>
+            <div style="
+              color: #fff;
+              background-color: #1e1e1e;
+              padding: 2px 4px;
+              font-size: 11px;
+              border-radius: 5px 0 0 5px;
+            ">${temp}</div>
+            <div style="
+              background: ${temperatureColor};
+              padding: 2px 4px;
+              color: white;
+              font-size: 11px;
+              border-radius: 0 5px 5px 0;
+              text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            ">${city.name}</div>
           </div>
         `,
-        iconSize: [60, 40],
-        iconAnchor: [30, 40],
+        iconSize: [dynamicWidth, 24], // Dynamic width based on content
+        iconAnchor: [dynamicWidth / 2, 24], // Center horizontally, bottom vertically
       });
     };
 
@@ -97,6 +122,7 @@ export default function Map({ cities }: MapProps) {
       }
     });
 
+    // TODO: improve the popup design and details
     // Add city markers
     cities.forEach((city) => {
       if (mapRef.current) {
