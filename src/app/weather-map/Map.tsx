@@ -6,6 +6,7 @@ import 'leaflet/dist/leaflet.css';
 import { City } from '@/lib/cities';
 
 // Fix for default markers in Leaflet with Next.js
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: '/leaflet-images/marker-icon-2x.png',
@@ -64,7 +65,7 @@ export default function Map({ cities }: MapProps) {
     const createCityIcon = (city: City) => {
       const color = getTemperatureColor(city.temperature);
       const temp = city.temperature ? `${city.temperature}°C` : 'N/A';
-      
+
       return L.divIcon({
         className: 'custom-marker',
         html: `
@@ -103,7 +104,9 @@ export default function Map({ cities }: MapProps) {
           icon: createCityIcon(city),
         });
 
-        const temp = city.temperature ? `${city.temperature}°C` : 'Temperature unavailable';
+        const temp = city.temperature
+          ? `${city.temperature}°C`
+          : 'Temperature unavailable';
         marker.bindPopup(`
           <div style="text-align: center; font-family: sans-serif;">
             <h3 style="margin: 0 0 8px 0; color: #333;">${city.name}, ${city.country}</h3>

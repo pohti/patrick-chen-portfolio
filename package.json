@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@tanstack/react-table": "^8.21.3",
+    "@types/ioredis": "^4.28.10",
     "@types/leaflet": "^1.9.20",
     "antd": "^5.27.4",
+    "ioredis": "^5.8.1",
     "leaflet": "^1.9.4",
     "lightweight-charts": "^5.0.9",
     "next": "15.5.4",

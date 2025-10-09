@@ -3,8 +3,7 @@
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { City } from '@/lib/cities';
-import { addTemperatureVariation } from '@/lib/weather';
-import { fetchWeatherForAllCitiesServer } from '@/lib/weather-server';
+import { fetchWeatherForAllCitiesServer } from '@/lib/weather';
 import ServerCacheMonitor from './ServerCacheMonitor';
 
 // Dynamically import the map to avoid SSR issues
@@ -23,13 +22,12 @@ const DynamicMap = dynamic(() => import('./Map'), {
 export default function WeatherMap() {
   const [cities, setCities] = useState<City[]>([]);
   const [loading, setLoading] = useState(true);
-  // const [lastUpdated, setLastUpdated] = useState<Date>(new Date());
 
   const loadWeatherData = async () => {
     try {
       const citiesWithWeather = await fetchWeatherForAllCitiesServer();
       setCities(citiesWithWeather);
-      setLastUpdated(new Date());
+      // setLastUpdated(new Date()); // Can be used for showing last refresh time
     } catch (error) {
       console.error('Failed to load weather data:', error);
     } finally {
@@ -42,12 +40,10 @@ export default function WeatherMap() {
     setCities((prevCities) =>
       prevCities.map((city) => ({
         ...city,
-        temperature: city.temperature
-          ? addTemperatureVariation(city.temperature)
-          : undefined,
+        temperature: city.temperature,
       }))
     );
-    setLastUpdated(new Date());
+    // setLastUpdated(new Date()); // Can be used for showing last refresh time
   };
 
   useEffect(() => {

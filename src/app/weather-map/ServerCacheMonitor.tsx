@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { getCacheStatsServer } from '@/lib/weather-server';
+import { getCacheStatsServer } from '@/lib/weather';
 
 interface CacheStats {
   total: number;
@@ -43,8 +43,8 @@ export default function ServerCacheMonitor() {
       <button
         onClick={() => setIsVisible(!isVisible)}
         className={`fixed bottom-4 right-4 z-[1001] px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-          isEfficient 
-            ? 'bg-green-500 text-white hover:bg-green-600' 
+          isEfficient
+            ? 'bg-green-500 text-white hover:bg-green-600'
             : 'bg-orange-500 text-white hover:bg-orange-600'
         }`}
       >
@@ -55,54 +55,59 @@ export default function ServerCacheMonitor() {
       {isVisible && (
         <div className="fixed bottom-16 right-4 z-[1001] bg-white/95 backdrop-blur-sm rounded-lg p-4 shadow-lg border max-w-sm">
           <h3 className="font-semibold text-gray-900 mb-3 flex items-center">
-            <span className={`w-2 h-2 ${isEfficient ? 'bg-green-500' : 'bg-orange-500'} rounded-full mr-2`}></span>
+            <span
+              className={`w-2 h-2 ${isEfficient ? 'bg-green-500' : 'bg-orange-500'} rounded-full mr-2`}
+            ></span>
             Server Cache Status
           </h3>
-          
+
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-gray-600">Cache Entries:</span>
               <span className="font-medium">{stats.total}</span>
             </div>
-            
+
             <div className="flex justify-between">
               <span className="text-gray-600">Valid/Expired:</span>
               <span className="font-medium">
-                <span className="text-green-600">{stats.valid}</span>
-                /
+                <span className="text-green-600">{stats.valid}</span>/
                 <span className="text-red-600">{stats.expired}</span>
               </span>
             </div>
-            
+
             <div className="flex justify-between">
               <span className="text-gray-600">Hit Rate:</span>
-              <span className={`font-medium ${isEfficient ? 'text-green-600' : 'text-orange-600'}`}>
+              <span
+                className={`font-medium ${isEfficient ? 'text-green-600' : 'text-orange-600'}`}
+              >
                 {stats.cacheHitRate}
               </span>
             </div>
-            
+
             <div className="border-t pt-2 mt-2">
               <div className="flex justify-between mb-1">
                 <span className="text-gray-600">Est. Daily Calls:</span>
-                <span className={`font-medium ${quotaUsage > 80 ? 'text-red-600' : 'text-blue-600'}`}>
+                <span
+                  className={`font-medium ${quotaUsage > 80 ? 'text-red-600' : 'text-blue-600'}`}
+                >
                   {stats.estimatedDailyCalls} / 1000
                 </span>
               </div>
-              
+
               <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
-                <div 
+                <div
                   className={`h-2 rounded-full transition-all ${
                     quotaUsage > 80 ? 'bg-red-500' : 'bg-blue-500'
                   }`}
                   style={{ width: `${Math.min(quotaUsage, 100)}%` }}
                 ></div>
               </div>
-              
+
               <div className="text-xs text-gray-500">
                 Quota usage: {quotaUsage.toFixed(1)}%
               </div>
             </div>
-            
+
             {stats.valid === stats.totalCities && (
               <div className="bg-green-50 border border-green-200 rounded p-2 mt-2">
                 <p className="text-green-700 text-xs">
@@ -110,7 +115,7 @@ export default function ServerCacheMonitor() {
                 </p>
               </div>
             )}
-            
+
             {quotaUsage > 80 && (
               <div className="bg-red-50 border border-red-200 rounded p-2 mt-2">
                 <p className="text-red-700 text-xs">
