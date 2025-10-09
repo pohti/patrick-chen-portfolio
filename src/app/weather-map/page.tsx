@@ -3,8 +3,7 @@
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { City } from '@/lib/cities';
-import { fetchWeatherForAllCitiesServer } from '@/lib/weather';
-import ServerCacheMonitor from './ServerCacheMonitor';
+import { fetchWeatherForAllCities } from '@/lib/weather';
 
 // Dynamically import the map to avoid SSR issues
 const DynamicMap = dynamic(() => import('./Map'), {
@@ -25,7 +24,7 @@ export default function WeatherMap() {
 
   const loadWeatherData = async () => {
     try {
-      const citiesWithWeather = await fetchWeatherForAllCitiesServer();
+      const citiesWithWeather = await fetchWeatherForAllCities();
       setCities(citiesWithWeather);
       // setLastUpdated(new Date()); // Can be used for showing last refresh time
     } catch (error) {
@@ -74,9 +73,6 @@ export default function WeatherMap() {
       </div>
 
       {/* TODO: legend for temperature colors */}
-
-      {/* Server Cache Monitor */}
-      <ServerCacheMonitor />
     </div>
   );
 }
