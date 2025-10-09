@@ -70,17 +70,6 @@ export default function Map({ cities }: MapProps) {
       const temperatureColor = getTemperatureColor(city.temperature);
       const temp = city.temperature ? `${city.temperature}°` : 'N/A';
 
-      // Calculate approximate width based on content
-      const tempWidth = temp.length * 7 + 10; // ~7px per char + padding
-      const nameWidth = city.name.length * 5 + 8; // ~6px per char + padding
-      const totalWidth = tempWidth + nameWidth + 8; // extra margin
-      console.log({ tempWidth, nameWidth, totalWidth });
-
-      // Set minimum and maximum width constraints
-      const minWidth = 60;
-      const maxWidth = 200;
-      const dynamicWidth = Math.max(minWidth, Math.min(maxWidth, totalWidth));
-
       return L.divIcon({
         className: 'custom-marker',
         html: `
@@ -110,8 +99,8 @@ export default function Map({ cities }: MapProps) {
             ">${city.name}</div>
           </div>
         `,
-        iconSize: [dynamicWidth, 24], // Dynamic width based on content
-        iconAnchor: [dynamicWidth / 2, 24], // Center horizontally, bottom vertically
+        iconSize: [120, 24],
+        iconAnchor: [60, 24],
       });
     };
 
