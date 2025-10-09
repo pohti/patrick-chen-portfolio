@@ -30,6 +30,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <CustomNavLink href="/trading">
               <StockOutlined /> Trading Demo
             </CustomNavLink>
+            <CustomNavLink href="/weather-map">
+              <StockOutlined /> Weather Map
+            </CustomNavLink>
           </nav>
 
           <div className="flex" style={{ gap: '1rem' }}>
