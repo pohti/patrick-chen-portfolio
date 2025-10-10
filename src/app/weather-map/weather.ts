@@ -59,6 +59,7 @@ export async function fetchWeatherForAllCities(): Promise<City[]> {
       majorCities[i] = {
         ...city,
         temperature: Math.round(curData.main.temp),
+        humidity: curData.main.humidity,
         description: curData.weather[0]?.description,
         feels_like: Math.round(curData.main.feels_like),
         pressure: curData.main.pressure,

@@ -50,6 +50,7 @@ export interface City {
   lat: number;
   lng: number;
   temperature?: number;
+  humidity?: number;
   description?: string;
   feels_like?: number;
   pressure?: number;
