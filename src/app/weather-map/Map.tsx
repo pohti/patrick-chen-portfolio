@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { City } from '@/lib/cities';
+import { type City } from './types';
 
 // Fix for default markers in Leaflet with Next.js
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -1,12 +1,6 @@
-// Major cities around the world with their coordinates
-export interface City {
-  id: string;
-  name: string;
-  country: string;
-  lat: number;
-  lng: number;
-  temperature?: number;
-}
+// TODO: update this interface to contain more weather info
+
+import { type City } from './types';
 
 export const majorCities: City[] = [
   // North America

@@ -1,56 +1,12 @@
 'use server';
 
-import { type City, majorCities } from './cities';
+import { majorCities } from './cities';
 import weatherCache from './cache';
+import { OpenWeatherMapResponse, type City } from './types';
 
 // OpenWeatherMap API configuration (server-side only)
 const API_KEY = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
 const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
-
-export interface OpenWeatherMapResponse {
-  coord: {
-    lon: number;
-    lat: number;
-  };
-  weather: Array<{
-    id: number;
-    main: string;
-    description: string;
-    icon: string;
-  }>;
-  base: string;
-  main: {
-    temp: number;
-    feels_like: number;
-    temp_min: number;
-    temp_max: number;
-    pressure: number;
-    humidity: number;
-    sea_level?: number;
-    grnd_level?: number;
-  };
-  visibility: number;
-  wind: {
-    speed: number;
-    deg: number;
-    gust?: number;
-  };
-  clouds: {
-    all: number;
-  };
-  dt: number;
-  sys: {
-    type?: number;
-    id?: number;
-    country: string;
-    sunrise: number;
-    sunset: number;
-  };
-  timezone: number;
-  id: number;
-  name: string;
-  cod: number;
-}
 
 // Server action to fetch weather for a single city
 async function fetchWeatherForCity(
@@ -62,10 +18,9 @@ async function fetchWeatherForCity(
   const cachedData = await weatherCache.get<OpenWeatherMapResponse>(cacheKey);
 
   console.log(
-    `🔍 Cache lookup for ${city.name}: key="${cacheKey}", hit=${!!cachedData}`
+    `🔍 Cache lookup for ${city.name} \t hit=${cachedData ? '✅' : '❌'}`
   );
   if (cachedData) {
-    console.log(`Cache hit for ${city.name}`);
     return cachedData;
   }
 
@@ -103,24 +58,16 @@ async function fetchWeatherForCity(
 
 // Server action to fetch weather for all cities with smart batching
 export async function fetchWeatherForAllCities(): Promise<City[]> {
-  const citiesWithWeather: City[] = [];
-
-  for (const city of majorCities) {
+  for (let i = 0; i < majorCities.length; i++) {
+    const city = majorCities[i];
     let curData = await weatherCache.get<OpenWeatherMapResponse>(city.id);
+    curData = await fetchWeatherForCity(city);
     if (curData) {
-      console.log(`✅ Cache hit for ${city.name}`);
-    } else {
-      curData = await fetchWeatherForCity(city);
-    }
-
-    if (curData) {
-      city.temperature = Math.round(curData.main.temp);
-      citiesWithWeather.push(city);
+      majorCities[i] = {
+        ...city,
+        temperature: Math.round(curData.main.temp),
+      };
     }
   }
-  console.log(
-    `Total cities: ${majorCities.length} | Total cache hits: ${citiesWithWeather.length}`
-  );
-
-  return citiesWithWeather;
+  return majorCities;
 }

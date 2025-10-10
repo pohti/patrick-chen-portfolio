@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { City } from '@/lib/cities';
-import { fetchWeatherForAllCities } from '@/lib/weather';
+import { fetchWeatherForAllCities } from '@/app/weather-map/weather';
+import { type City } from './types';
 
 // Dynamically import the map to avoid SSR issues
 const DynamicMap = dynamic(() => import('./Map'), {
@@ -22,36 +22,19 @@ export default function WeatherMap() {
   const [cities, setCities] = useState<City[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const loadWeatherData = async () => {
-    try {
-      const citiesWithWeather = await fetchWeatherForAllCities();
-      setCities(citiesWithWeather);
-      // setLastUpdated(new Date()); // Can be used for showing last refresh time
-    } catch (error) {
-      console.error('Failed to load weather data:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Simulate real-time updates by adding small variations
-  const updateTemperatures = () => {
-    setCities((prevCities) =>
-      prevCities.map((city) => ({
-        ...city,
-        temperature: city.temperature,
-      }))
-    );
-    // setLastUpdated(new Date()); // Can be used for showing last refresh time
-  };
-
   useEffect(() => {
+    const loadWeatherData = async () => {
+      try {
+        const citiesWithWeather = await fetchWeatherForAllCities();
+        setCities(citiesWithWeather);
+        // setLastUpdated(new Date()); // Can be used for showing last refresh time
+      } catch (error) {
+        console.error('Failed to load weather data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
     loadWeatherData();
-
-    // Update temperatures every 30 seconds for demo purposes
-    const interval = setInterval(updateTemperatures, 30000);
-
-    return () => clearInterval(interval);
   }, []);
 
   if (loading) {
@@ -67,7 +50,6 @@ export default function WeatherMap() {
 
   return (
     <div className="relative w-full h-screen">
-      {/* Map */}
       <div className="pt-20 h-full">
         <DynamicMap cities={cities} />
       </div>
