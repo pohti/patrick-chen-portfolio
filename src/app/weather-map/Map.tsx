@@ -1,9 +1,12 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { createRoot } from 'react-dom/client';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import './WeatherPopup.css';
 import { type City } from './types';
+import WeatherPopup from './WeatherPopup';
 
 // Fix for default markers in Leaflet with Next.js
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -21,6 +24,14 @@ interface MapProps {
 export default function Map({ cities }: MapProps) {
   const mapRef = useRef<L.Map | null>(null);
   const mapContainerRef = useRef<HTMLDivElement>(null);
+
+  // Helper function to create React popup content
+  const createPopupContent = (city: City): HTMLElement => {
+    const div = document.createElement('div');
+    const root = createRoot(div);
+    root.render(<WeatherPopup city={city} />);
+    return div;
+  };
 
   useEffect(() => {
     if (!mapContainerRef.current || mapRef.current) return;
@@ -119,20 +130,12 @@ export default function Map({ cities }: MapProps) {
           icon: createCityIcon(city),
         });
 
-        // const temp = city.temperature
-        //   ? `${city.temperature}°C`
-        //   : 'Temperature unavailable';
-        // marker.bindPopup(`
-        //   <div style="text-align: center; font-family: sans-serif;">
-        //     <h3 style="margin: 0 0 8px 0; color: #333;">${city.name}, ${city.country}</h3>
-        //     <p style="margin: 0; font-size: 18px; font-weight: bold; color: ${getTemperatureColor(city.temperature)};">
-        //       ${temp}
-        //     </p>
-        //     <p style="margin: 4px 0 0 0; font-size: 12px; color: #666;">
-        //       ${city.lat.toFixed(2)}°, ${city.lng.toFixed(2)}°
-        //     </p>
-        //   </div>
-        // `);
+        // Create popup with React component
+        const popupContent = createPopupContent(city);
+        marker.bindPopup(popupContent, {
+          maxWidth: 350,
+          className: 'weather-popup',
+        });
 
         marker.addTo(mapRef.current);
       }

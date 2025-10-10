@@ -2,7 +2,7 @@
 
 import { majorCities } from './cities';
 import weatherCache from './cache';
-import { OpenWeatherMapResponse, type City } from './types';
+import { type OpenWeatherMapResponse, type City } from './types';
 
 // OpenWeatherMap API configuration (server-side only)
 const API_KEY = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
@@ -12,7 +12,6 @@ const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
 async function fetchWeatherForCity(
   city: City
 ): Promise<OpenWeatherMapResponse | null> {
-  //If API key is available, use real API
   if (API_KEY) {
     try {
       console.log(`🌐 Making API call for ${city.name}`);
@@ -60,6 +59,11 @@ export async function fetchWeatherForAllCities(): Promise<City[]> {
       majorCities[i] = {
         ...city,
         temperature: Math.round(curData.main.temp),
+        description: curData.weather[0]?.description,
+        feels_like: Math.round(curData.main.feels_like),
+        pressure: curData.main.pressure,
+        wind_speed: curData.wind.speed,
+        wind_deg: curData.wind.deg,
       };
     }
   }

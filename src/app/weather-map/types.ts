@@ -50,4 +50,9 @@ export interface City {
   lat: number;
   lng: number;
   temperature?: number;
+  description?: string;
+  feels_like?: number;
+  pressure?: number;
+  wind_speed?: number;
+  wind_deg?: number;
 }
