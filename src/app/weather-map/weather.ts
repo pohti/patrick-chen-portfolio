@@ -51,9 +51,10 @@ async function fetchWeatherForCity(
 
       return null;
     }
+  } else {
+    console.warn('⚠️ OPENWEATHER_API_KEY is not set. Returning null.');
+    return null;
   }
-
-  return null;
 }
 
 // Server action to fetch weather for all cities with smart batching

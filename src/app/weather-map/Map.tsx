@@ -119,20 +119,20 @@ export default function Map({ cities }: MapProps) {
           icon: createCityIcon(city),
         });
 
-        const temp = city.temperature
-          ? `${city.temperature}°C`
-          : 'Temperature unavailable';
-        marker.bindPopup(`
-          <div style="text-align: center; font-family: sans-serif;">
-            <h3 style="margin: 0 0 8px 0; color: #333;">${city.name}, ${city.country}</h3>
-            <p style="margin: 0; font-size: 18px; font-weight: bold; color: ${getTemperatureColor(city.temperature)};">
-              ${temp}
-            </p>
-            <p style="margin: 4px 0 0 0; font-size: 12px; color: #666;">
-              ${city.lat.toFixed(2)}°, ${city.lng.toFixed(2)}°
-            </p>
-          </div>
-        `);
+        // const temp = city.temperature
+        //   ? `${city.temperature}°C`
+        //   : 'Temperature unavailable';
+        // marker.bindPopup(`
+        //   <div style="text-align: center; font-family: sans-serif;">
+        //     <h3 style="margin: 0 0 8px 0; color: #333;">${city.name}, ${city.country}</h3>
+        //     <p style="margin: 0; font-size: 18px; font-weight: bold; color: ${getTemperatureColor(city.temperature)};">
+        //       ${temp}
+        //     </p>
+        //     <p style="margin: 4px 0 0 0; font-size: 12px; color: #666;">
+        //       ${city.lat.toFixed(2)}°, ${city.lng.toFixed(2)}°
+        //     </p>
+        //   </div>
+        // `);
 
         marker.addTo(mapRef.current);
       }
@@ -142,8 +142,104 @@ export default function Map({ cities }: MapProps) {
   return (
     <div
       ref={mapContainerRef}
-      className="w-full h-full"
+      className="w-full h-full relative"
       style={{ minHeight: '400px' }}
-    />
+    >
+      {/* Temperature Legend */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '20px',
+          right: '20px',
+          background: 'white',
+          borderRadius: '8px',
+          boxShadow: '0 2px 10px rgba(0,0,0,0.15)',
+          padding: '12px',
+          zIndex: 1000,
+          fontFamily: 'system-ui, -apple-system, sans-serif',
+          fontSize: '12px',
+          minWidth: '140px',
+        }}
+      >
+        <div
+          style={{
+            fontWeight: 'bold',
+            marginBottom: '8px',
+            color: '#333',
+            textAlign: 'center',
+          }}
+        >
+          Temperature (°C)
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div
+              style={{
+                width: '16px',
+                height: '16px',
+                backgroundColor: '#EF4444',
+                borderRadius: '3px',
+              }}
+            />
+            <span>30°+ Hot</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div
+              style={{
+                width: '16px',
+                height: '16px',
+                backgroundColor: '#F59E0B',
+                borderRadius: '3px',
+              }}
+            />
+            <span>25° - 30° Warm</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div
+              style={{
+                width: '16px',
+                height: '16px',
+                backgroundColor: '#c4e025ff',
+                borderRadius: '3px',
+              }}
+            />
+            <span>20° - 25° Mild</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div
+              style={{
+                width: '16px',
+                height: '16px',
+                backgroundColor: '#10B981',
+                borderRadius: '3px',
+              }}
+            />
+            <span>10° - 20° Cool</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div
+              style={{
+                width: '16px',
+                height: '16px',
+                backgroundColor: '#3bf6e0ff',
+                borderRadius: '3px',
+              }}
+            />
+            <span>0° - 10° Cold</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div
+              style={{
+                width: '16px',
+                height: '16px',
+                backgroundColor: '#287aedff',
+                borderRadius: '3px',
+              }}
+            />
+            <span>&lt; 0° Freezing</span>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
