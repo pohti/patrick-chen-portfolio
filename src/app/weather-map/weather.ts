@@ -12,18 +12,6 @@ const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
 async function fetchWeatherForCity(
   city: City
 ): Promise<OpenWeatherMapResponse | null> {
-  const cacheKey = city.id;
-
-  // Check server-side cache first
-  const cachedData = await weatherCache.get<OpenWeatherMapResponse>(cacheKey);
-
-  console.log(
-    `🔍 Cache lookup for ${city.name} \t hit=${cachedData ? '✅' : '❌'}`
-  );
-  if (cachedData) {
-    return cachedData;
-  }
-
   //If API key is available, use real API
   if (API_KEY) {
     try {
@@ -39,12 +27,6 @@ async function fetchWeatherForCity(
 
       const data: OpenWeatherMapResponse = await response.json();
 
-      // Cache the response for 120 minutes on the server
-      weatherCache.set(cacheKey, data, { ex: 7200 });
-      console.log(
-        `💾 Cached weather for ${city.name}: key="${cacheKey}", temp=${Math.round(data.main.temp)}°C`
-      );
-
       return data;
     } catch (error) {
       console.error(`Failed to fetch weather for ${city.name}:`, error);
@@ -59,10 +41,21 @@ async function fetchWeatherForCity(
 
 // Server action to fetch weather for all cities with smart batching
 export async function fetchWeatherForAllCities(): Promise<City[]> {
+  const cacheKey = 'weather-data';
+
+  // Check server-side cache first
+  const cachedData = await weatherCache.get<City[]>(cacheKey);
+
+  console.log(
+    `🔍 Cache lookup for weather data \t hit=${cachedData ? '✅' : '❌'}`
+  );
+  if (cachedData) {
+    return cachedData;
+  }
+
   for (let i = 0; i < majorCities.length; i++) {
     const city = majorCities[i];
-    let curData = await weatherCache.get<OpenWeatherMapResponse>(city.id);
-    curData = await fetchWeatherForCity(city);
+    const curData = await fetchWeatherForCity(city);
     if (curData) {
       majorCities[i] = {
         ...city,
@@ -70,5 +63,9 @@ export async function fetchWeatherForAllCities(): Promise<City[]> {
       };
     }
   }
+
+  await weatherCache.set(cacheKey, majorCities, { ex: 7200 }); // Cache for 2 hours
+  console.log('💾 Weather data cached for 2 hours');
+
   return majorCities;
 }
