@@ -154,7 +154,6 @@ export default function Map({ cities }: MapProps) {
           position: 'absolute',
           bottom: '20px',
           right: '20px',
-          background: 'white',
           borderRadius: '8px',
           boxShadow: '0 2px 10px rgba(0,0,0,0.15)',
           padding: '12px',
@@ -162,6 +161,7 @@ export default function Map({ cities }: MapProps) {
           fontFamily: 'system-ui, -apple-system, sans-serif',
           fontSize: '12px',
           minWidth: '140px',
+          background: 'rgba(255,255,255,0.75)',
         }}
       >
         <div
@@ -174,7 +174,14 @@ export default function Map({ cities }: MapProps) {
         >
           Temperature (°C)
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '4px',
+            color: '#3f3f3fff',
+          }}
+        >
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <div
               style={{
