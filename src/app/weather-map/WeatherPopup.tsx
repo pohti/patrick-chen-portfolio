@@ -49,6 +49,7 @@ export default function WeatherPopup({ city }: WeatherPopupProps) {
   const windSpeed = city.wind_speed ? `${city.wind_speed} m/s` : 'N/A';
   const windDirection = getWindDirection(city.wind_deg);
   const windDeg = city.wind_deg ? `${city.wind_deg}°` : 'N/A';
+  const humidity = city.humidity ? `${city.humidity}%` : 'N/A';
 
   const fontSizeSmall = '10px';
   const fontSizeMedium = '12px';
@@ -59,7 +60,7 @@ export default function WeatherPopup({ city }: WeatherPopupProps) {
       style={{
         fontFamily: 'system-ui, -apple-system, sans-serif',
         minWidth: '250px',
-        maxWidth: '300px',
+        maxWidth: '280px',
       }}
     >
       {/* Header */}
@@ -145,6 +146,27 @@ export default function WeatherPopup({ city }: WeatherPopupProps) {
                 marginBottom: '2px',
               }}
             >
+              Humidity
+            </div>
+            <div
+              style={{
+                fontSize: fontSizeBig,
+                fontWeight: '600',
+                color: '#333',
+              }}
+            >
+              {humidity}
+            </div>
+          </div>
+
+          <div style={{ textAlign: 'center' }}>
+            <div
+              style={{
+                fontSize: fontSizeSmall,
+                color: '#666',
+                marginBottom: '2px',
+              }}
+            >
               Wind Speed
             </div>
             <div
@@ -179,7 +201,7 @@ export default function WeatherPopup({ city }: WeatherPopupProps) {
             </div>
           </div>
 
-          <div style={{ textAlign: 'center' }}>
+          <div style={{ textAlign: 'center', gridColumn: 'span 2' }}>
             <div
               style={{
                 fontSize: fontSizeSmall,
