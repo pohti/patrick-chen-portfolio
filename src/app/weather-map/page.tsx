@@ -49,12 +49,14 @@ export default function WeatherMap() {
   }
 
   return (
-    <div className="relative w-full h-screen">
-      <div className="pt-20 h-full">
-        <DynamicMap cities={cities} />
-      </div>
-
-      {/* TODO: legend for temperature colors */}
+    <div
+      style={{
+        height: '91vh',
+        minHeight: '600px',
+        width: '100%',
+      }}
+    >
+      <DynamicMap cities={cities} />
     </div>
   );
 }

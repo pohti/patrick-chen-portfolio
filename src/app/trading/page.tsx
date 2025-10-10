@@ -7,7 +7,7 @@ import Info from './(components)/Info';
 
 const Page = () => {
   return (
-    <Row gutter={[16, 16]}>
+    <Row gutter={[16, 16]} style={{ padding: '0.5rem' }}>
       <Col md={12} key="instruments">
         <Instruments />
       </Col>

@@ -64,7 +64,6 @@ nav.nav-link-container {
 
 main {
   flex: 1;
-  padding: 1rem;
   height: 80vh;
   margin-top: 72px; /* Add margin to prevent content under header (adjust as needed) */
 }
