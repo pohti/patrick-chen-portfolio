@@ -25,6 +25,21 @@
   border-color: #333;
 }
 
+.examplePromptBtn {
+  background: var(--font-color-primary);
+  color: var(--font-color-secondary);
+  border: none;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 6px rgba(42, 134, 167, 0.3);
+  transition: background 0.2s;
+}
+.examplePromptBtn:hover {
+  background: #39b1dd;
+}
+
 .warrenSubmitBtn {
   font-size: 1.1rem;
   min-height: 50px;

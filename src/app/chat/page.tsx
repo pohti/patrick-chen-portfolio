@@ -154,7 +154,7 @@ export default function Chat() {
         >
           <h2
             style={{
-              color: '#2a86a7',
+              color: 'var(--font-color-primary)',
               fontWeight: 'bold',
               fontSize: '2rem',
               marginBottom: '1rem',
@@ -178,17 +178,7 @@ export default function Chat() {
                 key={idx}
                 type="button"
                 onClick={() => sendMessage(prompt)}
-                style={{
-                  background: '#2a86a7',
-                  color: 'var(--font-color-secondary)',
-                  border: 'none',
-                  borderRadius: '1rem',
-                  padding: '0.5rem 1rem',
-                  cursor: 'pointer',
-                  fontSize: '0.9rem',
-                  boxShadow: '0 2px 6px rgba(42,134,167,0.3)',
-                  transition: 'background 0.2s',
-                }}
+                className={styles.examplePromptBtn}
               >
                 {prompt}
               </button>

@@ -9,6 +9,6 @@
 
 .download-resume-button:hover {
   cursor: pointer;
-  color: #fff;
+  color: var(--font-color-secondary);
   background-color: var(--font-color-primary);
 }
