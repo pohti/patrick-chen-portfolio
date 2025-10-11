@@ -32,12 +32,12 @@
   background-color: var(--font-color-primary);
   border: 0;
   border-radius: 8px;
-  color: var(--font-color-white);
+  color: var(--font-color-secondary);
+  cursor: pointer;
 }
 
 .warrenSubmitBtn:hover {
-  background-color: #006bb3;
-  cursor: pointer;
+  background-color: #39b1dd;
 }
 
 /* Typing animation */

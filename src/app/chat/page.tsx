@@ -180,7 +180,7 @@ export default function Chat() {
                 onClick={() => sendMessage(prompt)}
                 style={{
                   background: '#2a86a7',
-                  color: '#fff',
+                  color: 'var(--font-color-secondary)',
                   border: 'none',
                   borderRadius: '1rem',
                   padding: '0.5rem 1rem',
