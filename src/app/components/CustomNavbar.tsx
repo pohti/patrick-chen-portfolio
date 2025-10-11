@@ -10,8 +10,9 @@ import {
   MenuOutlined,
   CloseOutlined,
 } from '@ant-design/icons';
+import styles from './CustomNavbar.module.css';
 
-export default function MobileFriendlyNavbar() {
+export default function CustomNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -25,8 +26,8 @@ export default function MobileFriendlyNavbar() {
   return (
     <header>
       {/* Desktop Navigation */}
-      <div className="desktop-nav">
-        <nav className="nav-link-container">
+      <div className={styles.desktopNav}>
+        <nav className={styles.navLinkContainer}>
           <CustomNavLink href="/">
             <HomeOutlined /> Home
           </CustomNavLink>
@@ -47,8 +48,8 @@ export default function MobileFriendlyNavbar() {
       </div>
 
       {/* Mobile Navigation */}
-      <div className="mobile-nav">
-        <div className="mobile-nav-header">
+      <div className={styles.mobileNav}>
+        <div className={styles.mobileNavHeader}>
           <span
             style={{
               color: 'var(--font-color-primary)',
@@ -59,7 +60,7 @@ export default function MobileFriendlyNavbar() {
             Patrick Chen
           </span>
           <button
-            className="mobile-menu-button"
+            className={styles.mobileMenuBtn}
             onClick={toggleMenu}
             aria-label="Toggle menu"
           >
@@ -69,12 +70,12 @@ export default function MobileFriendlyNavbar() {
 
         {/* Mobile Menu Overlay */}
         {isMenuOpen && (
-          <div className="mobile-menu-overlay" onClick={closeMenu}>
+          <div className={styles.mobileMenuOverlay} onClick={closeMenu}>
             <div
-              className="mobile-menu-content"
+              className={styles.mobileMenuContent}
               onClick={(e) => e.stopPropagation()}
             >
-              <nav className="mobile-nav-links">
+              <nav className={styles.mobileNavLinks}>
                 <div onClick={closeMenu}>
                   <CustomNavLink href="/">
                     <HomeOutlined /> Home

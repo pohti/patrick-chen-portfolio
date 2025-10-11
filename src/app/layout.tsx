@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { ReactNode } from 'react';
 
 import './globals.css';
-import MobileFriendlyNavbar from './components/MobileFriendlyNavbar';
+import CustomNavbar from './components/CustomNavbar';
 import ConditionalFooter from './ConditionalFooter';
 
 export const metadata: Metadata = {
@@ -14,7 +14,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen font-sans bg-gray-50 text-gray-900">
-        <MobileFriendlyNavbar />
+        <CustomNavbar />
 
         <main>
           <>{children}</>

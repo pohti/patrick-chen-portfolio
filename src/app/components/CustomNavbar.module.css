@@ -1,0 +1,104 @@
+/* Desktop Navigation */
+.desktopNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Mobile Navigation */
+.mobileNav {
+  display: none;
+  width: 100%;
+}
+
+.mobileNavHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.mobileMenuBtn {
+  background: none;
+  border: none;
+  color: var(--font-color-white);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.mobileMenuBtn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.mobileMenuOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 20000; /* Higher than header to ensure overlay appears above everything */
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  /* padding-top: 80px; */
+}
+
+.mobileMenuContent {
+  background: var(--background);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem;
+  width: 90%;
+  max-width: 200px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.mobileNavLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.mobileNavLinks > div {
+  width: 100%;
+}
+
+.mobileNavLinks .nav-link {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  text-align: left;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.mobileNavLinks .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-download-button {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+/* Responsive Design */
+@media (max-width: 780px) {
+  .desktopNav {
+    display: none;
+  }
+
+  .mobileNav {
+    display: block;
+  }
+}
+
+.navLinkContainer {
+  display: flex;
+  gap: 1rem;
+}
