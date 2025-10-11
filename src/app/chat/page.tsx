@@ -136,6 +136,7 @@ export default function Chat() {
           justifyContent: 'center',
           alignItems: 'center',
           color: '#d4d4d4',
+          padding: '1rem',
         }}
       >
         <form
@@ -251,6 +252,7 @@ export default function Chat() {
         background: '#1e1e1e',
         color: '#d4d4d4',
         position: 'relative',
+        padding: '1rem',
       }}
     >
       <div
@@ -312,7 +314,7 @@ export default function Chat() {
           width: '100vw',
           background: '#1e1e1e',
           boxShadow: '0 -2px 12px rgba(0,0,0,0.15)',
-          padding: '1rem 0',
+          padding: '1rem 0.5rem',
           zIndex: 10,
         }}
       >
