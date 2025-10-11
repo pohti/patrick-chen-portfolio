@@ -57,13 +57,12 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom-width: 1px;
   padding: 1rem;
   width: 100%;
-  position: fixed; /* Make header fixed */
+  position: fixed;
   top: 0;
   left: 0;
-  z-index: 100;
+  z-index: 10000; /* Increased to be above Leaflet map */
 }
 
 /* Desktop Navigation */
@@ -109,7 +108,7 @@ header {
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 2000;
+  z-index: 20000; /* Higher than header to ensure overlay appears above everything */
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -156,7 +155,7 @@ header {
 }
 
 /* Responsive Design */
-@media (max-width: 600px) {
+@media (max-width: 780px) {
   .desktop-nav {
     display: none;
   }
@@ -181,7 +180,6 @@ footer {
   display: flex;
   width: 100%;
   color: var(--font-color-white);
-  border-top: 1px solid var(--border);
   margin-top: auto;
   text-align: center;
   align-content: center;

@@ -11,7 +11,7 @@ import {
   CloseOutlined,
 } from '@ant-design/icons';
 
-export default function MobileHeader() {
+export default function MobileFriendlyNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
