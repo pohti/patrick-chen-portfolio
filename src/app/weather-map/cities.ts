@@ -15,6 +15,13 @@ export const majorCities: City[] = [
   { id: 'us_ch', name: 'Chicago', country: 'US', lat: 41.8781, lng: -87.6298 },
   { id: 'ca_to', name: 'Toronto', country: 'CA', lat: 43.6532, lng: -79.3832 },
   {
+    id: 'ca_va',
+    name: 'Vancouver',
+    country: 'CA',
+    lat: 49.2827,
+    lng: -123.1207,
+  },
+  {
     id: 'mx_mc',
     name: 'Mexico City',
     country: 'MX',
@@ -31,6 +38,7 @@ export const majorCities: City[] = [
 
   // Asia
   { id: 'jp_to', name: 'Tokyo', country: 'JP', lat: 35.6762, lng: 139.6503 },
+  { id: 'jp_os', name: 'Osaka', country: 'JP', lat: 34.6937, lng: 135.5023 },
   { id: 'cn_bj', name: 'Beijing', country: 'CN', lat: 39.9042, lng: 116.4074 },
   { id: 'cn_sh', name: 'Shanghai', country: 'CN', lat: 31.2304, lng: 121.4737 },
   { id: 'in_mu', name: 'Mumbai', country: 'IN', lat: 19.076, lng: 72.8777 },
@@ -61,6 +69,14 @@ export const majorCities: City[] = [
   // More Asia
   { id: 'in_de', name: 'Delhi', country: 'IN', lat: 28.7041, lng: 77.1025 },
   { id: 'th_bk', name: 'Bangkok', country: 'TH', lat: 13.7563, lng: 100.5018 },
+  {
+    id: 'th_cm',
+    name: 'Chiang Mai',
+    country: 'TH',
+    lat: 18.7883,
+    lng: 98.9853,
+  },
+  { id: 'mm_ya', name: 'Yangon', country: 'MM', lat: 16.8661, lng: 96.1951 },
   { id: 'sg_sg', name: 'Singapore', country: 'SG', lat: 1.3521, lng: 103.8198 },
   {
     id: 'hk_hk',
@@ -91,6 +107,20 @@ export const majorCities: City[] = [
     country: 'AU',
     lat: -37.8136,
     lng: 144.9631,
+  },
+  {
+    id: 'au_pe',
+    name: 'Perth',
+    country: 'AU',
+    lat: -31.9523,
+    lng: 115.8613,
+  },
+  {
+    id: 'au_ho',
+    name: 'Hobart',
+    country: 'AU',
+    lat: -42.8821,
+    lng: 147.3272,
   },
   {
     id: 'nz_au',
