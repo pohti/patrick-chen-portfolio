@@ -9,7 +9,7 @@ a.nav-link {
 }
 
 a.nav-link.active {
-  color: var(--font-color-white);
+  color: var(--font-color-secondary);
   border-color: var(--font-color-primary);
   background-color: var(--font-color-primary);
 }
