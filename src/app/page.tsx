@@ -1,9 +1,9 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import './styles.css';
 // import MyPic from '@/assets/images/me-pixar.png';
 import Image from 'next/image';
 import TechTags from './trading/(components)/TechTags';
+import styles from './BlinkingCursor.module.css';
 
 // TODO: flash out the content
 const textLines = ["I'm Patrick and I'm a Fullstack Developer."];
@@ -85,7 +85,7 @@ export default function Home() {
         <br />
         <span style={{ fontSize: '1.5rem', marginTop: '2rem' }}>
           <span>{displayed[0]}</span>
-          <span className="blinking-cursor">|</span>
+          <span className={styles.blinkingCursor}>|</span>
         </span>
 
         <br />
