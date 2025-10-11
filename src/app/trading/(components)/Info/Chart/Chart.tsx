@@ -3,7 +3,7 @@ import { createChart, ColorType, AreaSeries } from 'lightweight-charts';
 import { chartData } from '@/store/instrumentHistory';
 import { useEquityStore } from '@/store/equity';
 
-const MIN_CHART_HEIGHT = 300; // Minimum height for the chart
+const MIN_CHART_HEIGHT = 230; // Minimum height for the chart
 const MIN_CHART_WIDTH = 600; // Minimum width for the chart
 
 const FILTERS = [
@@ -38,6 +38,7 @@ const Chart = () => {
 
     const newWidth = width - padding;
     const newHeight = height - headerHeight - controlsHeight - padding;
+    console.log({ height, newHeight, headerHeight, controlsHeight, padding });
 
     // Ensure minimum dimensions
     setChartWidth(Math.max(newWidth, MIN_CHART_WIDTH));
