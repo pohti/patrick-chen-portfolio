@@ -280,7 +280,7 @@ export default function Chat() {
                 color: msg.role === 'user' ? '#fff' : '#d4d4d4',
                 borderRadius: '1rem',
                 padding: '0.75rem 1.25rem',
-                maxWidth: '70%',
+                maxWidth: '100%',
                 wordBreak: 'break-word',
                 fontSize: '1.1rem',
                 boxShadow:
