@@ -7,7 +7,7 @@
   --font-color-primary: #35a4cd;
   --font-color-secondary: #1b1b1b;
   --font-color-white: #d4d4d4;
-  --background: #1e1e1e;
+  --background: linear-gradient(135deg, #1e1e1e 0%, #171c25 50%, #141c28 100%);
   --border: #8d8d8d70;
   --bg-primary: #00425a;
   --bg-secondary: #00a1dc3b;
@@ -30,12 +30,7 @@ body {
 }
 
 html {
-  background: linear-gradient(
-    135deg,
-    var(--background) 0%,
-    #171c25 50%,
-    #141c28 100%
-  );
+  background: var(--background);
 }
 
 body {
@@ -51,6 +46,8 @@ footer {
   border-color: var(--border);
   border-style: solid;
   border-width: 0;
+
+  background: var(--background);
 }
 
 header {

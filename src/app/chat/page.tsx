@@ -224,7 +224,7 @@ export default function Chat() {
             <div
               style={{
                 color: '#ff4d4f',
-                background: '#23272a',
+                background: 'var(--background)',
                 border: '1px solid #ff4d4f',
                 borderRadius: '6px',
                 padding: '0.75rem 1rem',
@@ -249,7 +249,7 @@ export default function Chat() {
         minWidth: '100vw',
         display: 'flex',
         flexDirection: 'column',
-        background: '#1e1e1e',
+        background: 'var(--background)',
         color: '#d4d4d4',
         position: 'relative',
         padding: '1rem',
@@ -276,7 +276,8 @@ export default function Chat() {
           >
             <div
               style={{
-                background: msg.role === 'user' ? '#2a86a7' : '#1e1e1e',
+                background:
+                  msg.role === 'user' ? '#2a86a7' : 'var(--background)',
                 color: msg.role === 'user' ? '#fff' : '#d4d4d4',
                 borderRadius: '1rem',
                 padding: '0.75rem 1.25rem',
@@ -312,8 +313,8 @@ export default function Chat() {
           bottom: 0,
           left: 0,
           width: '100vw',
-          background: '#1e1e1e',
-          boxShadow: '0 -2px 12px rgba(0,0,0,0.15)',
+          background: 'var(--background)',
+          // boxShadow: '0 -2px 12px rgba(0,0,0,0.15)',
           padding: '1rem 0.5rem',
           zIndex: 10,
         }}
@@ -378,7 +379,7 @@ export default function Chat() {
           <div
             style={{
               color: '#ff4d4f',
-              background: '#23272a',
+              background: 'var(--background)',
               border: '1px solid #ff4d4f',
               borderRadius: '6px',
               padding: '0.75rem 1rem',
