@@ -60,10 +60,13 @@ export const majorCities: City[] = [
     lng: -58.396,
   },
   { id: 'pe_li', name: 'Lima', country: 'PE', lat: -12.0464, lng: -77.0428 },
+  { id: 'co_bo', name: 'Bogota', country: 'CO', lat: 4.711, lng: -74.0721 },
 
   // More Europe
   { id: 'nl_am', name: 'Amsterdam', country: 'NL', lat: 52.3676, lng: 4.9041 },
   { id: 'se_st', name: 'Stockholm', country: 'SE', lat: 59.3293, lng: 18.0686 },
+  { id: 'se_lu', name: 'Luleå', country: 'SE', lat: 65.5841, lng: 22.1547 },
+  { id: 'fi_he', name: 'Helsinki', country: 'FI', lat: 60.1699, lng: 24.9384 },
   { id: 'ru_mo', name: 'Moscow', country: 'RU', lat: 55.7558, lng: 37.6176 },
 
   // More Asia
@@ -85,18 +88,27 @@ export const majorCities: City[] = [
     lat: 22.3193,
     lng: 114.1694,
   },
+  { id: 'ru_ya', name: 'Yakutsk', country: 'RU', lat: 62.0355, lng: 129.6755 },
 
   // Middle East & Africa
   { id: 'ae_du', name: 'Dubai', country: 'AE', lat: 25.2048, lng: 55.2708 },
   { id: 'tr_is', name: 'Istanbul', country: 'TR', lat: 41.0082, lng: 28.9784 },
   { id: 'eg_ca', name: 'Cairo', country: 'EG', lat: 30.0444, lng: 31.2357 },
   { id: 'ng_la', name: 'Lagos', country: 'NG', lat: 6.5244, lng: 3.3792 },
+  { id: 'ke_na', name: 'Nairobi', country: 'KE', lat: -1.2921, lng: 36.8219 },
   {
     id: 'za_jo',
     name: 'Johannesburg',
     country: 'ZA',
     lat: -26.2041,
     lng: 28.0473,
+  },
+  {
+    id: 'za_ct',
+    name: 'Cape Town',
+    country: 'ZA',
+    lat: -33.9249,
+    lng: 18.4241,
   },
 
   // Oceania
@@ -128,5 +140,12 @@ export const majorCities: City[] = [
     country: 'NZ',
     lat: -36.8485,
     lng: 174.7633,
+  },
+  {
+    id: 'nz_in',
+    name: 'Invercargill',
+    country: 'NZ',
+    lat: -46.4132,
+    lng: 168.3538,
   },
 ];

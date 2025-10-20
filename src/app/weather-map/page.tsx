@@ -81,7 +81,7 @@ export default function WeatherMap() {
           <span style={{ fontSize: '16px' }}>ℹ️</span>
           <span>
             <strong>Demo Mode:</strong> Showing weather data for {cities.length}{' '}
-            major cities only. Search functionality is disabled due to API rate
+            cities only. Search functionality is disabled due to API rate
             limits.
           </span>
         </div>
