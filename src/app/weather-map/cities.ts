@@ -13,6 +13,13 @@ export const majorCities: City[] = [
     lng: -118.2437,
   },
   { id: 'us_ch', name: 'Chicago', country: 'US', lat: 41.8781, lng: -87.6298 },
+  {
+    id: 'us_an',
+    name: 'Anchorage',
+    country: 'US',
+    lat: 61.2181,
+    lng: -149.9003,
+  },
   { id: 'ca_to', name: 'Toronto', country: 'CA', lat: 43.6532, lng: -79.3832 },
   {
     id: 'ca_va',
@@ -39,6 +46,7 @@ export const majorCities: City[] = [
   // Asia
   { id: 'jp_to', name: 'Tokyo', country: 'JP', lat: 35.6762, lng: 139.6503 },
   { id: 'jp_os', name: 'Osaka', country: 'JP', lat: 34.6937, lng: 135.5023 },
+  { id: 'jp_sa', name: 'Sapporo', country: 'JP', lat: 43.0642, lng: 141.3469 },
   { id: 'cn_bj', name: 'Beijing', country: 'CN', lat: 39.9042, lng: 116.4074 },
   { id: 'cn_sh', name: 'Shanghai', country: 'CN', lat: 31.2304, lng: 121.4737 },
   { id: 'in_mu', name: 'Mumbai', country: 'IN', lat: 19.076, lng: 72.8777 },
