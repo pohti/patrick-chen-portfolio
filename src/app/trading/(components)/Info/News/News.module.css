@@ -16,3 +16,7 @@
   font-weight: bold;
   font-size: 1.2rem;
 }
+
+.ant-empty-description {
+  color: var(--font-color-white) !important;
+}

@@ -2,7 +2,6 @@
 import { useEquityStore } from '@/store/equity';
 import React from 'react';
 import { mockedNews } from './data';
-import { Empty } from 'antd';
 
 import NewsCard from './NewsCard';
 
@@ -21,7 +20,9 @@ const News = () => {
           <NewsCard key={newsItem.url} {...newsItem} />
         ))
       ) : (
-        <Empty description={`No news for ${currentEquity?.symbol}`} />
+        <div style={{ padding: '2rem', textAlign: 'center' }}>
+          <span>No news for {currentEquity?.symbol}</span>
+        </div>
       )}
     </div>
   );
