@@ -27,6 +27,14 @@ const EarningsCalendar = () => {
     return <div>Loading earnings calendar...</div>;
   }
 
+  if (!loading && earningsEvents.length === 0) {
+    return (
+      <div style={{ fontSize: '1.1rem' }}>
+        No earnings events found for {currentEquity?.symbol} in 2025.
+      </div>
+    );
+  }
+
   return (
     <div style={{ padding: '0.5rem' }}>
       <span style={{ fontSize: '1.1rem' }}>
