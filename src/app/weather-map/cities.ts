@@ -1,5 +1,3 @@
-// TODO: update this interface to contain more weather info
-
 import { type City } from './types';
 
 export const majorCities: City[] = [
@@ -79,6 +77,7 @@ export const majorCities: City[] = [
 
   // More Asia
   { id: 'in_de', name: 'Delhi', country: 'IN', lat: 28.7041, lng: 77.1025 },
+  { id: 'kz_as', name: 'Astana', country: 'KZ', lat: 51.1694, lng: 71.4491 },
   { id: 'th_bk', name: 'Bangkok', country: 'TH', lat: 13.7563, lng: 100.5018 },
   {
     id: 'th_cm',
@@ -100,6 +99,13 @@ export const majorCities: City[] = [
 
   // Middle East & Africa
   { id: 'ae_du', name: 'Dubai', country: 'AE', lat: 25.2048, lng: 55.2708 },
+  {
+    id: 'kw_kw',
+    name: 'Kuwait City',
+    country: 'KW',
+    lat: 29.3759,
+    lng: 47.9774,
+  },
   { id: 'tr_is', name: 'Istanbul', country: 'TR', lat: 41.0082, lng: 28.9784 },
   { id: 'eg_ca', name: 'Cairo', country: 'EG', lat: 30.0444, lng: 31.2357 },
   { id: 'ng_la', name: 'Lagos', country: 'NG', lat: 6.5244, lng: 3.3792 },
