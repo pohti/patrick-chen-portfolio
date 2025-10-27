@@ -14,6 +14,7 @@
     "@upstash/redis": "^1.35.5",
     "antd": "^5.27.4",
     "dotenv": "^17.2.3",
+    "finnhub": "^2.0.11",
     "leaflet": "^1.9.4",
     "lightweight-charts": "^5.0.9",
     "next": "15.5.4",

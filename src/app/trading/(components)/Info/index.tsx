@@ -6,6 +6,7 @@ import News from '@/app/trading/(components)/Info/News/News';
 import Analysis from './Analysis/Analysis';
 import Chart from './Chart/Chart';
 import Tab, { type TabItem } from '../CustomTab';
+import EarningsCalendar from './EarningsCalendar';
 
 const Info = () => {
   const items: TabItem[] = [
@@ -23,6 +24,11 @@ const Info = () => {
       key: 'analysis',
       label: 'Analysis',
       content: <Analysis />,
+    },
+    {
+      key: 'earnings-calendar',
+      label: 'Earnings Calendar',
+      content: <EarningsCalendar />,
     },
   ];
   return <Tab tabItems={items} />;
