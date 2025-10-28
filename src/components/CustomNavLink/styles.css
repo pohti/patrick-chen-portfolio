@@ -8,15 +8,21 @@ a.nav-link {
   border-color: transparent;
 }
 
-a.nav-link.active {
+a.nav-link.active,
+a.nav-link:hover {
+  color: var(--font-color-white);
+}
+
+/* with border */
+/* a.nav-link.active {
   color: var(--font-color-secondary);
   border-color: var(--font-color-primary);
   background-color: var(--font-color-primary);
-}
+} */
 
-a.nav-link:hover {
+/* a.nav-link:hover {
   border-color: var(--font-color-primary);
-}
+} */
 
 a.nav-link.disabled {
   color: var(--font-color-secondary);
