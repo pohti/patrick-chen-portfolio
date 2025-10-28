@@ -1,38 +1,63 @@
 'use client';
-import React, { useEffect, useState } from 'react';
-// import MyPic from '@/assets/images/me-pixar.png';
+import React, { ReactNode, useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import TechTags from './trading/(components)/TechTags';
 import styles from './BlinkingCursor.module.css';
+import { sleep } from '@/utils/time';
 
-// TODO: flash out the content
-const textLines = ["I'm Patrick and I'm a Fullstack Developer."];
+const createTypingArray = (
+  text: string,
+  colorRanges: { start: number; end: number; color: string }[] = []
+) => {
+  return text.split('').map((char, index) => {
+    const colorRange = colorRanges.find(
+      (range) => index >= range.start && index <= range.end
+    );
+    if (colorRange) {
+      return (
+        <span key={`char-${index}`} style={{ color: colorRange.color }}>
+          {char}
+        </span>
+      );
+    }
+    return char;
+  });
+};
+
+const toDisplay: ReactNode[] = createTypingArray(
+  "I'm Patrick and I'm a Software Engineer.",
+  [{ start: 22, end: 38, color: 'var(--font-color-primary)' }]
+);
 
 export default function Home() {
-  const [displayed, setDisplayed] = useState(['', '']);
-  const typingSpeed = 30; // ms per character
+  const [displayed, setDisplayed] = useState<ReactNode[]>([]);
+  const isTyping = useRef(false);
 
   useEffect(() => {
-    let line = 0,
-      char = 0;
-    function type() {
-      if (line < textLines.length) {
-        if (char < textLines[line].length) {
-          setDisplayed((prev) => {
-            const updated = [...prev];
-            updated[line] = textLines[line].slice(0, char + 1);
-            return updated;
-          });
-          char++;
-          setTimeout(type, typingSpeed);
-        } else {
-          line++;
-          char = 0;
-          setTimeout(type, typingSpeed * 5); // pause between lines
-        }
+    // Reset state on mount
+    setDisplayed([]);
+
+    // Prevent double execution in Strict Mode
+    if (isTyping.current) return;
+    isTyping.current = true;
+
+    let isCancelled = false;
+
+    async function type() {
+      for (const cur of toDisplay) {
+        if (isCancelled) break;
+        setDisplayed((prev) => [...prev, cur]);
+        await sleep(30);
       }
     }
+
     type();
+
+    // Cleanup function
+    return () => {
+      isCancelled = true;
+      isTyping.current = false; // Reset the ref on cleanup
+    };
   }, []);
 
   return (
@@ -84,18 +109,15 @@ export default function Home() {
         </div>
         <br />
         <span style={{ fontSize: '1.5rem', marginTop: '2rem' }}>
-          <span>{displayed[0]}</span>
+          <span>{displayed}</span>
           <span className={styles.blinkingCursor}>|</span>
         </span>
-
         <br />
-
         <p style={{ fontSize: '1.2rem' }}>
           {
             "I'm passionate about building products that solve real-world problems."
           }
         </p>
-
         <br />
         <p style={{ fontSize: '1.2rem', marginTop: '1rem' }}>
           I built this website using Next.js to showcase my frontend development
