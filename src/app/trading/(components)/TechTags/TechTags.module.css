@@ -1,0 +1,13 @@
+.techTag {
+  border: 1px solid var(--font-color-primary);
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 0.9rem;
+  color: var(--font-color-primary);
+}
+
+.techTag:hover {
+  background-color: var(--font-color-primary);
+  color: var(--background);
+  cursor: pointer;
+}

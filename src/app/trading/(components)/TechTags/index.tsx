@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tag } from 'antd';
+import styles from './TechTags.module.css';
 
 const technologies = [
   'Next.js',
@@ -26,7 +26,11 @@ const TechTags = () => {
       }}
     >
       {technologies.map((cur) => {
-        return <Tag key={cur}>{cur}</Tag>;
+        return (
+          <div key={cur} className={styles.techTag}>
+            {cur}
+          </div>
+        );
       })}
     </div>
   );
