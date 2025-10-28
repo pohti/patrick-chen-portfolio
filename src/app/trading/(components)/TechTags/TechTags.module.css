@@ -4,10 +4,11 @@
   padding: 5px;
   font-size: 0.9rem;
   color: var(--font-color-primary);
+  user-select: none;
 }
 
 .techTag:hover {
   background-color: var(--font-color-primary);
-  color: var(--background);
+  color: var(--font-color-secondary);
   cursor: pointer;
 }
